@@ -1,0 +1,31 @@
+- platform: rfxtrx
+  automatic_add: True
+  signal_repetitions: 2
+  devices:
+    0b1100000165250203000060:
+      name: strombrytare_1
+    0b110000015f656e03010f70:
+      name: strombrytare_2
+    0b11000000ea2bf210010f70:
+      name: strombrytare_3
+
+- platform: template
+  switches:
+    yale_lock:
+        value_template: "{{ is_state('lock.ytterdorren', 'locked') }}"
+        turn_on:
+          service: script.lock_door
+          entity_id: lock.ytterdorren
+        turn_off:
+          service: script.unlock_door
+          entity_id: lock.ytterdorren
+
+- platform: broadlink
+  host: 192.168.7.119
+  mac: '34:EA:34:40:84:CE'
+  friendly_name: RMMini3_källare
+  switches:
+    projector:
+      friendly_name: Projector
+      command_on: 'JgDYAAABJpQSNxI4ERUQFBEVEBUQFRA4ETgSFBE4ERQROBEUETgTEhEVEBQRFBITETgSExMTETgROBE4EjcSOBEUETgROBEUEQAFPgABJZQSOBE4ERUQFRAUERUQFBE4EjcSExI4ERUQOBEUETgSExITERURFBEUETgRFRAVEDgROBE4EjgSNxEVEDgROBMSEgAFPAABJpQSNxI3ExMRFRAUERQRFRA4ETgRFBI3EhQROBEUETgRFRAVEBUQFRAUEjcTEhITEjgROBE4ETgSNxMTETgROBEUEQANBQ=='
+      command_off: 'JgDYAAABJpQSNxI3EhMSFBEUEhMRFBI3ETgTEhM2EhMTNhIUETgRFBI3ExIRFBEUETgSExITEzcRFBE4ETgROBEUEjcSOBITEQAFPQABJpQROBI4ERQRFBEUERQRFRA4ETgSExI4ERMSOBEUETgRFBE4EhMTEhEUETgSFBEUETgRFBE4ETgSNxIUETgSNxITEQAFPQABJpQTNhE4ERQRFBIUERMSExI4ETgRFBE4EhMSNxITEjgRFBE4ERQRFBEUETgSExEUETkRFBE4ETgROBEUETgSOBEVEAANBQ=='

@@ -1,0 +1,4 @@
+- platform: unifi
+  username: !secret unifi_user
+  password: !secret unifi_password
+  verify_ssl: False

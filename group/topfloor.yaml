@@ -1,0 +1,13 @@
+topfloor:
+  name: Övervåningen
+  view: yes
+  entities:
+    - group.netatmo_topfloor
+
+netatmo_topfloor:
+  name: Klimat övervåningen
+  entities:
+    - sensor.netatmo_barnrummet_temperature
+    - sensor.netatmo_barnrummet_humidity
+    - sensor.netatmo_barnrummet_co2
+    - sensor.netatmo_barnrummet_noise

@@ -1,0 +1,24 @@
+- platform: kodi
+  host: peerhtpc
+  username: peer
+  password: !secret kodi_password
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: e0:69:95:53:23:67
+  turn_off_action:
+    service: media_player.kodi_call_method
+    data:
+      entity_id: media_player.kodi
+      method: System.Hibernate
+
+- platform: denonavr
+  host: marantz
+  name: Marantz sr5007
+  scan_interval: 30
+
+- platform: cast
+  host: 192.168.7.109
+
+- platform: cast
+  host: 192.168.7.101

@@ -1,0 +1,159 @@
+- alias: 'Uppdatering av home assistant finns'
+  trigger:
+    platform: state
+    entity_id: updater.updater
+  action:
+    service: notify.html5
+    data:
+      message: 'Ny version av HA finns'
+      target: "Pär"
+
+- alias: 'Glömde låsa dörren notis'
+  trigger:
+    - platform: state
+      entity_id: device_tracker.nexus_6p
+      from: 'home'
+      to: 'not_home'
+    - platform: state
+      entity_id: device_tracker.nexus_6p
+      from: 'home'
+      to: 'not_home'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: lock.ytterdorren
+        state: 'unlocked'
+      - condition: state
+        entity_id: device_tracker.honor_8
+        state: 'not_home'
+      - condition: state
+        entity_id: device_tracker.nexus_6p
+        state: 'not_home'
+  action:
+    - service: notify.html5
+      data_template:
+        message: 'Dörren är inte låst och ingen är hemma'
+        target: >
+          {% if trigger.entity_id == 'device_tracker.nexus_6p' %}
+          "Pär"
+          {% elif trigger.entity_id == 'device_tracker.honor_8' %}
+          "Malena"
+          {% endif %}
+        data:
+          tag: 'forgot-lock'
+          actions:
+            - action: 'lock_door'
+              title: 'Lås dörren'
+
+- alias: 'Välkommen hem notis'
+  trigger:
+    - platform: state
+      entity_id: device_tracker.nexus_6p
+      from: 'not_home'
+      to: 'home'
+  condition:
+    condition: state
+    entity_id: device_tracker.nexus_6p
+    state: 'not_home'
+    for:
+      minutes: 10
+  action:
+    - service: notify.html5
+      data:
+        message: 'Välkommen hem'
+        target: "Pär"
+        data:
+          tag: 'unlock-door'
+          actions:
+            - action: 'unlock_door'
+              title: 'Lås upp dörren'
+
+- alias: "Notifiera ifall dörren är upplåst när kodi spelar"
+  trigger:
+    - platform: state
+      entity_id: media_player.kodi
+      to: 'playing'
+  condition:
+    condition: state
+    entity_id: lock.ytterdorren
+    state: 'unlocked' 
+  action:
+    - service: notify.html5
+      data:
+        message: 'Dörren är upplåst. Du kanske vill låsa när du ska sitta i källaren'
+        target: "Pär"
+        data:
+          tag: 'forgot-lock'
+          actions:
+            - action: 'lock_door'
+              title: 'Lås dörren'
+
+- alias: "Brandlarmet notis"
+  trigger:
+    - platform: event
+      event_type: signal_received
+      event_data: {"entity_id": "sensor.brandvarnare_2_sensor_status"}
+  action:
+    - service: notify.html5
+      data:
+        message: 'Brandlarmet utlöst!'
+
+- alias: "Glömt klockan notis"
+  trigger:
+    - platform: state
+      entity_id: device_tracker.huawei_watch_2
+      to: 'home'
+  condition:
+    condition: state
+    entity_id: device_tracker.nexus_6p
+    state: 'not_home'
+  action:
+    service: notify.html5
+    data:
+      message: 'Du glömde klockan'
+      target: "Pär"
+
+- alias: "Rörelse i källaren"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.basement_entry
+      to: 'on'
+      from: 'off'
+  action:
+    service: notify.html5
+    data:
+      message: 'Rörelse upptäckt i källaringången'
+      target: "Pär"
+
+- alias: "Ny enhet hittad notis"
+  trigger:
+    platform: event
+    event_type: device_tracker_new_device
+  action:
+    - service: notify.html5
+      data:
+        message: 'Ny enhet spåras'
+        target: "Pär"
+
+- alias: "Kom ihåg matlåda notis"
+  trigger:
+    platform: state
+    entity_id: device_tracker.honor_8
+    from: 'home'
+    to: 'not home'
+  condition:
+    condition: time
+    after: '07:00:00'
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+    - service: notify.html5
+      data:
+        title: 'Matlåda'
+        message: 'Du har väl inte glömt matlåda?'
+        target: "Malena"

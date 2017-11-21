@@ -1,0 +1,127 @@
+homeassistant:
+  name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: 19
+  unit_system: metric
+  time_zone: Europe/Stockholm
+  customize: !include customizations.yaml
+
+frontend:
+config:
+
+http:
+  api_password: !secret api_password
+  base_url: peers.se:443
+
+updater:
+  include_used_components: true
+
+discovery:
+  ignore:
+    - samsung_tv
+
+conversation:
+history:
+logbook:
+sun:
+
+tts:
+  platform: google
+
+wake_on_lan:
+
+netatmo:
+  api_key: !secret netatmo_api
+  secret_key: !secret netatmo_api_secret
+  username: !secret netatmo_user
+  password: !secret netatmo_password
+  discovery: False
+
+verisure:
+  username: !secret verisure_user
+  password: !secret verisure_password
+  alarm: 0
+  hygrometers: 0
+  smartplugs: 0
+  thermometers: 0
+  mouse: 0
+  door_window: 0
+  code_digits: 6
+
+logger:
+  default: warning
+  logs:
+    homeassistant.components.rfxtrx: debug
+
+mqtt:
+  broker: localhost
+
+rfxtrx:
+  device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
+  debug: True
+
+influxdb:
+  default_measurement: state
+  component_config_glob:
+    'sensor.*temperature':
+      override_measurement: 'temperature'
+    'sensor.*humidity':
+      override_measurement: 'humidity'
+    'sensor.*co2':
+      override_measurement: 'co2'
+    'sensor.*noise':
+      override_measurement: 'noise_level'
+  include:
+    entities:
+      - sensor.netatmo_utomhus_humidity
+      - sensor.netatmo_utomhus_temperature
+      - sensor.netatmo_badrum_kallare_temperature
+      - sensor.netatmo_badrum_kallare_humidity
+      - sensor.netatmo_badrum_kallare_co2
+      - sensor.netatmo_barnrummet_temperature
+      - sensor.netatmo_barnrummet_humidity
+      - sensor.netatmo_barnrummet_co2
+      - sensor.netatmo_barnrummet_noise
+      - binary_sensor.samsung_tv
+      - binary_sensor.basement_entry
+      - media_player.vardagsrummet
+
+  tags_attributes:
+    - friendly_name
+
+panel_iframe:
+  grafana:
+    title: 'Statistik'
+    icon: mdi:elevation-rise
+    url: 'http://192.168.7.7:3000/dashboard/db/home-assistant?orgId=1&theme=light'
+
+zwave:
+  usb_path: /dev/serial/by-id/usb-0658_0200-if00
+  debug: True
+  device_config:
+    sensor.dimmer_1_alarm_level:
+      ignored: true
+    sensor.dimmer_1_heat:
+      ignored: true
+    sensor.dimmer_1_alarm_type:
+      ignored: true
+
+camera:
+  - platform: mjpeg
+    name: 'Källaringång'
+    mjpeg_url: http://192.168.7.20/video.cgi
+    still_image_url: http://192.168.7.20/image.jpg
+    username: !secret basement_cam_user
+    password: !secret basement_cam_pass
+
+group: !include_dir_merge_named group/
+automation: !include_dir_merge_list automation/
+media_player: !include media_players.yaml
+binary_sensor: !include binary_sensors.yaml
+sensor: !include sensors.yaml
+device_tracker: !include device_trackers.yaml
+switch: !include switches.yaml
+notify: !include notifiers.yaml
+script: !include scripts.yaml
+light: !include lights.yaml

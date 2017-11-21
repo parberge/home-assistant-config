@@ -1,0 +1,25 @@
+- platform: command_line
+  name: ps4
+  command: ps4_sensor.py ps4
+  device_class: connectivity
+  scan_interval: 5
+
+- platform: command_line
+  name: samsung_tv
+  command: "(ping -c2 -W2 -w4 samsungtv > /dev/null 2>&1 && echo ON) || echo OFF"
+  device_class: connectivity
+  scan_interval: 5
+
+- platform: template
+  sensors:
+    brandlarmet:
+        friendly_name: Brandlarm
+        value_template: "{{ is_state('sensor.brandvarnare_2_sensor_status', 'Panic') }}"
+        device_class: smoke
+        delay_off:
+          seconds: 30
+
+- platform: mqtt
+  name: basement_entry
+  state_topic: "emqtt/noreplypeers.se"
+  device_class: motion

@@ -1,0 +1,43 @@
+- alias: 'lock notify action'
+  trigger:
+    - platform: event
+      event_type: html5_notification.clicked
+      event_data:
+        action: lock_door
+  action:
+    - service: script.lock_door
+      entity_id: lock.ytterdorren
+
+- alias: 'Lås upp notis action'
+  trigger:
+    - platform: event
+      event_type: html5_notification.clicked
+      event_data:
+        action: unlock_door 
+  action:
+    - service: script.unlock_door
+      entity_id: lock.ytterdorren
+
+- alias: "Släck lampor ute när solen går upp"
+  trigger:
+    platform: sun
+    event: sunrise
+  action:
+    - service: light.turn_off
+      entity_id: light.lampa_ytterdorren
+    - service: switch.turn_off
+      entity_id: switch.strombrytare_1
+    - service: switch.turn_off
+      entity_id: switch.strombrytare_2
+
+- alias: "Tänd lampor ute när solen går ned"
+  trigger:
+    platform: sun
+    event: sunset
+  action:
+    - service: light.turn_on
+      entity_id: light.lampa_ytterdorren
+    - service: switch.turn_on
+      entity_id: switch.strombrytare_1
+    - service: switch.turn_on
+      entity_id: switch.strombrytare_2

@@ -1,0 +1,114 @@
+- alias: 'Marantz auto on'
+  trigger:
+    - platform: state
+      entity_id: media_player.kodi
+      from: 'off'
+      to: 'idle'
+    - platform: state
+      entity_id: media_player.kallaren
+      to: 'playing'
+    - platform: state
+      entity_id: binary_sensor.ps4
+      from: 'off'
+      to: 'on'
+  action:
+    - service: media_player.turn_on
+      entity_id: media_player.marantz_sr5007
+    - service: media_player.select_source
+      data_template:
+        entity_id: media_player.marantz_sr5007
+        source: >
+          {% if trigger.entity_id == 'media_player.kodi' %}
+          MEDIA PLAYER
+          {% elif trigger.entity_id == 'media_player.kallaren' %}
+          CBL/SAT
+          {% elif trigger.entity_id == 'binary_sensor.ps4' %}
+          GAME
+          {% endif %}
+    - service: switch.turn_on
+      entity_id: switch.projector
+
+- alias: 'Marantz auto off'
+  trigger:
+    - platform: state
+      entity_id: media_player.kodi
+      to: 'off'
+      for:
+        minutes: 3
+    - platform: state
+      entity_id: media_player.kallaren
+      to: 'off'
+      for:
+        minutes: 1
+    - platform: state
+      entity_id: binary_sensor.ps4
+      to: 'off'
+      for:
+        minutes: 1
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: media_player.kodi
+        state: 'off'
+      - condition: state
+        entity_id: media_player.kallaren
+        state: 'off'
+      - condition: state
+        entity_id: binary_sensor.ps4
+        state: 'off'
+  action:
+    - service: homeassistant.turn_off
+      entity_id: media_player.marantz_sr5007
+    - service: switch.turn_off
+      entity_id: switch.projector
+
+- alias: "Pausa kodi när någon låser upp dörren"
+  trigger:
+    - platform: state
+      entity_id: lock.ytterdorren
+      from: 'locked'
+      to: 'unlocked'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: media_player.kodi
+        state: 'playing'
+  action:
+    - service: media_player.media_play_pause
+      entity_id: media_player.kodi
+    - delay:
+        seconds: 5
+    - service: notify.kodi
+      data:
+        message: "Pausar för dörren låstes upp"
+        data:
+          icon: "warning"
+          displaytime: 10000
+
+- alias: "Tänd lampa när kodi pausar eller är inaktiv"
+  trigger:
+    - platform: state
+      entity_id: media_player.kodi
+      to: 'paused'
+    - platform: state
+      entity_id: media_player.kodi
+      to: 'idle'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.dimmer_1_level
+        brightness: 120
+        transition: 5
+
+- alias: "Släck lampa när kodi spelar"
+  trigger:
+    - platform: state
+      entity_id: media_player.kodi
+      to: 'playing'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.dimmer_1_level
+        transition: 5

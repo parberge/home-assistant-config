@@ -1,0 +1,45 @@
+- platform: netatmo
+  station: !secret netatmo_station
+  modules:
+    Utomhus:
+      - temperature
+      - humidity
+    Badrum källare:
+      - temperature
+      - humidity
+      - co2
+    Barnrummet:
+      - temperature
+      - humidity
+      - co2
+      - noise
+
+- platform: rfxtrx
+  devices:
+    0820031eb5a3000670:
+      name: brandvarnare_2
+      fire_event: True
+
+- platform: cert_expiry
+  host: peers.se
+
+- platform: wunderground
+  api_key: !secret wunderground_api_key
+  monitored_conditions:
+    - temp_high_record_c
+    - temp_high_1d_c
+    - temp_c
+    - temp_low_1d_c
+    - temp_low_record_c
+    - precip_1d
+    - precip_1d_mm
+    - wind_kph
+    - wind_1d_kph
+    - alerts
+    - UV
+
+- platform: template
+  sensors:
+    ir_gw_basement:
+      friendly_name: 'IR-brygga'
+      value_template: "{{ 'Online' if is_state('device_tracker.ir_gw_1', 'home') else 'Offline' }}"

@@ -1,0 +1,15 @@
+- name: Pushover
+  platform: pushover
+  api_key: !secret hass_pushover_api_key
+  user_key: !secret pushover_user_key
+
+- name: html5
+  platform: html5
+  gcm_api_key: !secret google_server_key
+  gcm_sender_id: !secret google_sender_id
+
+- name: kodi
+  platform: kodi
+  host: peerhtpc
+  username: peer
+  password: !secret kodi_password

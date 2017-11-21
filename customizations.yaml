@@ -1,0 +1,76 @@
+group.all_automations:
+  hidden: false
+
+sensor.netatmo_barnrummet_temperature:
+  friendly_name: 'Barnrummet Temp'
+sensor.netatmo_barnrummet_humidity:
+  friendly_name: 'Barnrummet luftfuktighet'
+sensor.netatmo_barnrummet_noise:
+  friendly_name: 'Barnrummet ljudnivå'
+sensor.netatmo_barnrummet_co2:
+  friendly_name: 'Barnrummet CO2'
+
+sensor.netatmo_badrum_kallare_temperature:
+  friendly_name: 'Badrum källare Temp'
+sensor.netatmo_badrum_kallare_humidity:
+  friendly_name: 'Badrum källare luftfuktighet'
+sensor.netatmo_badrum_kallare_co2:
+  friendly_name: 'Badrum källare CO2'
+
+sensor.netatmo_utomhus_temperature:
+  friendly_name: 'Utomhus Temp'
+sensor.netatmo_utomhus_humidity:
+  friendly_name: 'Utomhus luftfuktighet'
+
+switch.yale_lock:
+  friendly_name: 'Låset ytterdörren'
+  icon: mdi:lock
+
+switch.projector:
+  icon: mdi:projector
+
+binary_sensor.samsung_tv:
+  friendly_name: 'Samsung TV'
+  icon: mdi:television
+
+binary_sensor.ps4:
+  icon: mdi:playstation
+
+switch.strombrytare_1:
+  friendly_name: 'Strömbrytare belysning baksida'
+  icon: mdi:lightbulb
+
+switch.strombrytare_2:
+  friendly_name: 'Strömbrytare belysning framsida'
+  icon: mdi:lightbulb
+
+switch.strombrytare_3:
+  friendly_name: 'Strömbrytare läslampa soffan'
+  icon: mdi:lightbulb
+
+sensor.pws_precip_1d:
+  friendly_name: 'Sannolikhet för regn'
+
+sensor.pws_temp_high_1d_c:
+  friendly_name: 'Högsta temperatur idag'
+
+sensor.pws_alerts:
+  friendly_name: 'Vädervarningar'
+
+sensor.pws_precip_1d_mm:
+  friendly_name: 'Regnintensitet'
+
+sensor.pws_temp_low_1d_c:
+  friendly_name: 'Lägsta temperatur idag'
+
+sensor.pws_wind_1d_kph:
+  friendly_name: 'Genomsnitt vindstyrka idag'
+
+sensor.pws_wind_kph:
+  friendly_name: 'Vindstyrka'
+
+sun.sun:
+  friendly_name: Solståndet
+
+light.dimmer_1_level:
+  friendly_name: 'Dimmer källare 1'

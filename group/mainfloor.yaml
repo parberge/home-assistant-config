@@ -1,0 +1,30 @@
+mainfloor:
+  name: bottenvåningen
+  view: yes
+  entities:
+    - group.mainfloor_livingroom
+    - group.front_door
+    - group.main_floor_outside_lights
+    - switch.strombrytare_3
+
+mainfloor_livingroom:
+  name: Vardagsrummet
+  entities:
+    - media_player.vardagsrummet
+    - binary_sensor.samsung_tv
+
+front_door:
+  name: Ytterdörren
+  control: hidden
+  icon: mdi:glassdoor
+  entities:
+    - switch.yale_lock
+    - light.lampa_ytterdorren
+
+main_floor_outside_lights:
+  name: Belysning utomhus
+  icon: mdi:lightbulb
+  entities:
+    - light.lampa_ytterdorren
+    - switch.strombrytare_1
+    - switch.strombrytare_2

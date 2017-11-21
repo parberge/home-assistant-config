@@ -1,0 +1,33 @@
+basement:
+  name: Källaren
+  view: yes
+  entities:
+    - group.home_theatre
+    - automation.marantz_auto_on
+    - automation.marantz_auto_off
+    - group.netatmo_basement
+    - switch.projector
+    - group.lights_basement
+    - sensor.ir_gw_basement
+    - binary_sensor.basement_entry
+    - camera.kallaringang
+
+home_theatre:
+  name: Mediaspelare
+  entities:
+    - media_player.kodi
+    - binary_sensor.ps4
+    - media_player.marantz_sr5007
+    - media_player.kallaren
+
+lights_basement:
+  name: Belysning
+  entities:
+    - light.dimmer_1_level
+
+netatmo_basement:
+  name: Klimat källaren
+  entities:
+    - sensor.netatmo_badrum_kallare_temperature
+    - sensor.netatmo_badrum_kallare_humidity
+    - sensor.netatmo_badrum_kallare_co2

@@ -1,0 +1,13 @@
+lock_door:
+  sequence:
+    - service: lock.lock
+      data_template:
+        entity_id: lock.ytterdorren
+        code: !secret verisure_door_pin
+
+unlock_door:
+  sequence:
+    - service: lock.unlock
+      data_template:
+        entity_id: lock.ytterdorren
+        code: !secret verisure_door_pin
