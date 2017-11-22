@@ -1,6 +1,6 @@
 - platform: command_line
   name: ps4
-  command: ps4_sensor.py ps4
+  command: ~/ps4_sensor.py ps4
   device_class: connectivity
   scan_interval: 5
 
