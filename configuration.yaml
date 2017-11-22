@@ -12,7 +12,9 @@ config:
 
 http:
   api_password: !secret api_password
-  base_url: peers.se:443
+  ssl_certificate: /home/homeassistant/.homeassistant/fullchain.pem
+  ssl_key: /home/homeassistant/.homeassistant/privkey.pem
+  base_url: peers.se:433
 
 updater:
   include_used_components: true
@@ -125,3 +127,4 @@ switch: !include switches.yaml
 notify: !include notifiers.yaml
 script: !include scripts.yaml
 light: !include lights.yaml
+input_boolean: !include input_boolean.yaml
