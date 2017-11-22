@@ -139,12 +139,12 @@
 - alias: "Kom ihåg matlåda notis"
   trigger:
     platform: state
-    entity_id: device_tracker.honor_8
-    from: 'home'
-    to: 'not home'
+    entity_id: lock.ytterdorren
+    to: 'unlocked'
   condition:
     condition: time
     after: '07:00:00'
+    before: '09:00:00'
     weekday:
       - mon
       - tue
@@ -157,3 +157,13 @@
         title: 'Matlåda'
         message: 'Du har väl inte glömt matlåda?'
         target: "Malena"
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.food_notify
+
+- alias: "Sätt på matlåda notisen"
+  trigger:
+    - platform: time
+      at: '10:00:00'
+  action:
+    service: homeassistant.turn_on
+    entity_id: input_boolean.food_notify
