@@ -15,6 +15,7 @@ default_view:
     - group.lights
     - camera.kallaringang
     - binary_sensor.basement_entry
+    - group.misc
 
 device_tracker:
   name: Enheter
@@ -51,6 +52,10 @@ lights:
     - light.lampa_ytterdorren
     - light.dimmer_1_level
 
+misc:
+  name: Generellt
+  entities:
+    - switch.strombrytare_4
 
 weather_overview:
   name: Väder översikt
