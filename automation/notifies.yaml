@@ -142,15 +142,20 @@
     entity_id: lock.ytterdorren
     to: 'unlocked'
   condition:
-    condition: time
-    after: '07:00:00'
-    before: '09:00:00'
-    weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    condition: and
+    conditions:
+      - condition: time
+        after: '07:00:00'
+        before: '09:00:00'
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+      - condition: state
+        entity_id: input_boolean.food_notify
+        state: 'on'
   action:
     - service: notify.html5
       data:
