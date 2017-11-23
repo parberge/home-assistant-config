@@ -48,6 +48,10 @@ switch.strombrytare_3:
   friendly_name: 'Strömbrytare läslampa soffan'
   icon: mdi:lightbulb
 
+switch.strombrytare_4:
+  friendly_name: 'Strömbrytare laddare cykel'
+  icon: mdi:battery-charging
+
 sensor.pws_precip_1d:
   friendly_name: 'Sannolikhet för regn'
 
