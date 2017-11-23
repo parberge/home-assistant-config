@@ -12,8 +12,6 @@ config:
 
 http:
   api_password: !secret api_password
-  ssl_certificate: /home/homeassistant/.homeassistant/fullchain.pem
-  ssl_key: /home/homeassistant/.homeassistant/privkey.pem
   base_url: peers.se:433
 
 updater:
@@ -55,6 +53,7 @@ logger:
   default: warning
   logs:
     homeassistant.components.rfxtrx: debug
+    homeassistant.components.sensor.netatmo: debug
 
 mqtt:
   broker: localhost
