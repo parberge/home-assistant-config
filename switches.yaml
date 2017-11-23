@@ -8,6 +8,8 @@
       name: strombrytare_2
     0b11000000ea2bf210010f70:
       name: strombrytare_3
+    0b11000281bc0cfe06010f70:
+      name: strombrytare_4
 
 - platform: template
   switches:
