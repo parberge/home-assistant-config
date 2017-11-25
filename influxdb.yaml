@@ -1,0 +1,28 @@
+---
+default_measurement: state
+component_config_glob:
+  'sensor.*temperature':
+    override_measurement: 'temperature'
+  'sensor.*humidity':
+    override_measurement: 'humidity'
+  'sensor.*co2':
+    override_measurement: 'co2'
+  'sensor.*noise':
+    override_measurement: 'noise_level'
+include:
+  entities:
+    - sensor.netatmo_utomhus_humidity
+    - sensor.netatmo_utomhus_temperature
+    - sensor.netatmo_badrum_kallare_temperature
+    - sensor.netatmo_badrum_kallare_humidity
+    - sensor.netatmo_badrum_kallare_co2
+    - sensor.netatmo_barnrummet_temperature
+    - sensor.netatmo_barnrummet_humidity
+    - sensor.netatmo_barnrummet_co2
+    - sensor.netatmo_barnrummet_noise
+    - binary_sensor.samsung_tv
+    - binary_sensor.basement_entry
+    - media_player.vardagsrummet
+
+tags_attributes:
+  - friendly_name
