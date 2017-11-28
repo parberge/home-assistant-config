@@ -78,6 +78,8 @@ zwave:
       ignored: true
     sensor.dimmer_1_alarm_type:
       ignored: true
+    sensor.dimmer_1_exporting:
+      ignored: true
 
 camera:
   - platform: mjpeg
