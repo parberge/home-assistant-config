@@ -43,3 +43,9 @@
     ir_gw_basement:
       friendly_name: 'IR-brygga'
       value_template: "{{ 'Online' if is_state('device_tracker.ir_gw_1', 'home') else 'Offline' }}"
+    kamera_kallare:
+      friendly_name: 'Kamera källare'
+      value_template: "{{ 'Online' if is_state('device_tracker.kamera_kallare', 'home') else 'Offline' }}"
+    netatmopersonalweatherstatio:
+      friendly_name: 'Netatmo väderstation'
+      value_template: "{{ 'Online' if is_state('device_tracker.netatmopersonalweatherstatio', 'home') else 'Offline' }}"
