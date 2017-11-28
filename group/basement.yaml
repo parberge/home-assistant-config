@@ -9,6 +9,7 @@ basement:
     - switch.projector
     - group.lights_basement
     - sensor.ir_gw_basement
+    - sensor.kamera_kallare
     - binary_sensor.basement_entry
     - camera.kallaringang
 

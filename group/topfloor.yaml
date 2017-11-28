@@ -3,6 +3,7 @@ topfloor:
   view: yes
   entities:
     - group.netatmo_topfloor
+    - sensor.netatmopersonalweatherstatio
 
 netatmo_topfloor:
   name: Klimat övervåningen
