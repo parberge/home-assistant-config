@@ -9,6 +9,8 @@ component_config_glob:
     override_measurement: 'co2'
   'sensor.*noise':
     override_measurement: 'noise_level'
+  'sensor.*rain':
+    override_measurement: 'mm'
 include:
   entities:
     - sensor.netatmo_utomhus_humidity
@@ -20,6 +22,10 @@ include:
     - sensor.netatmo_barnrummet_humidity
     - sensor.netatmo_barnrummet_co2
     - sensor.netatmo_barnrummet_noise
+    - sensor.netatmo_vardagsrummet_temperature
+    - sensor.netatmo_vardagsrummet_humidity
+    - sensor.netatmo_vardagsrummet_co2
+    - sensor.netatmo_regnmatare_rain
     - binary_sensor.samsung_tv
     - binary_sensor.basement_entry
     - media_player.vardagsrummet
