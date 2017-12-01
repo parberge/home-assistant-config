@@ -8,11 +8,19 @@
       - temperature
       - humidity
       - co2
+    Regnmätare:
+      - rain
+      - sum_rain_1
+      - sum_rain_24
     Barnrummet:
       - temperature
       - humidity
       - co2
       - noise
+    Vardagsrummet:
+      - temperature
+      - humidity
+      - co2
 
 - platform: rfxtrx
   devices:
