@@ -6,12 +6,9 @@ basement:
     - automation.marantz_auto_on
     - automation.marantz_auto_off
     - group.netatmo_basement
-    - switch.projector
     - group.lights_basement
     - sensor.ir_gw_basement
-    - sensor.kamera_kallare
-    - binary_sensor.basement_entry
-    - camera.kallaringang
+    - group.basement_entry
 
 home_theatre:
   name: Mediaspelare
@@ -20,11 +17,18 @@ home_theatre:
     - binary_sensor.ps4
     - media_player.marantz_sr5007
     - media_player.kallaren
+    - switch.projector
 
 lights_basement:
   name: Belysning
   entities:
     - light.dimmer_1_level
+
+basement_entry:
+  name: Källaringång
+  entities:
+    - camera.kallaringang
+    - binary_sensor.basement_entry
 
 netatmo_basement:
   name: Klimat källaren
