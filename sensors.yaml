@@ -4,14 +4,20 @@
     Utomhus:
       - temperature
       - humidity
+      - battery_vp
+      - rf_status
     Badrum källare:
       - temperature
       - humidity
       - co2
+      - battery_vp
+      - rf_status
     Regnmätare:
       - rain
       - sum_rain_1
       - sum_rain_24
+      - battery_vp
+      - rf_status
     Barnrummet:
       - temperature
       - humidity
@@ -21,6 +27,8 @@
       - temperature
       - humidity
       - co2
+      - battery_vp
+      - rf_status
 
 - platform: rfxtrx
   devices:
