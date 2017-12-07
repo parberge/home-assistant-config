@@ -12,7 +12,7 @@ config:
 
 http:
   api_password: !secret api_password
-  base_url: peers.se:433
+  base_url: ha.peers.se:433
 
 updater:
   include_used_components: true
@@ -52,8 +52,8 @@ verisure:
 logger:
   default: warning
   logs:
-    homeassistant.components.rfxtrx: debug
-    homeassistant.components.sensor.netatmo: debug
+    homeassistant.components.rfxtrx: warning
+    homeassistant.components.sensor.netatmo: warning
 
 mqtt:
   broker: localhost
@@ -79,6 +79,12 @@ zwave:
     sensor.dimmer_1_alarm_type:
       ignored: true
     sensor.dimmer_1_exporting:
+      ignored: true
+    sensor.dimmer_1_system:
+      ignored: true
+    sensor.dimmer_1_power_management:
+      ignored: true
+    sensor.dimmer_1_sourcenodeid:
       ignored: true
 
 camera:
