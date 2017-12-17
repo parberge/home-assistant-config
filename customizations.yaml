@@ -55,12 +55,16 @@ switch.strombrytare_2:
   icon: mdi:lightbulb
 
 switch.strombrytare_3:
-  friendly_name: 'Strömbrytare läslampa soffan'
+  friendly_name: 'Strömbrytare julbelysning'
   icon: mdi:lightbulb
 
 switch.strombrytare_4:
   friendly_name: 'Strömbrytare laddare cykel'
   icon: mdi:battery-charging
+
+switch.strombrytare_5:
+  friendly_name: 'Strömbrytare belysning fönster övervåning'
+  icon: mdi:lightbulb
 
 sensor.pws_precip_1d:
   friendly_name: 'Sannolikhet för regn'

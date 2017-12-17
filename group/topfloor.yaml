@@ -4,6 +4,7 @@ topfloor:
   entities:
     - group.netatmo_topfloor
     - sensor.netatmopersonalweatherstatio
+    - group.top_floor_lights
 
 netatmo_topfloor:
   name: Klimat övervåningen
@@ -12,3 +13,8 @@ netatmo_topfloor:
     - sensor.netatmo_barnrummet_humidity
     - sensor.netatmo_barnrummet_co2
     - sensor.netatmo_barnrummet_noise
+
+top_floor_lights:
+  name: Belysning
+  entities:
+    - switch.strombrytare_5

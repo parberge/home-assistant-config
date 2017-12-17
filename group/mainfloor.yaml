@@ -5,7 +5,7 @@ mainfloor:
     - group.mainfloor_livingroom
     - group.front_door
     - group.main_floor_outside_lights
-    - switch.strombrytare_3
+    - group.main_floor_lights
 
 mainfloor_livingroom:
   name: Vardagsrummet
@@ -28,3 +28,9 @@ main_floor_outside_lights:
     - light.lampa_ytterdorren
     - switch.strombrytare_1
     - switch.strombrytare_2
+
+main_floor_lights:
+  name: Belysing inomhus
+  icon: mdi:lightbulb
+  entities:
+    - switch.strombrytare_3
