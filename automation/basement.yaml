@@ -88,14 +88,11 @@
           icon: "warning"
           displaytime: 10000
 
-- alias: "Tänd lampa när kodi pausar eller är inaktiv"
+- alias: "Tänd lampa när kodi pausar"
   trigger:
     - platform: state
       entity_id: media_player.kodi
       to: 'paused'
-    - platform: state
-      entity_id: media_player.kodi
-      to: 'idle'
   action:
     - service: light.turn_on
       data:
@@ -129,3 +126,35 @@
   action:
     - service: switch.turn_off
       entity_id: switch.strombrytare_4
+
+- alias: "Starta hembio"
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.the_button
+      scene_id: 1
+      scene_data: 7680
+  action:
+    - service: media_player.turn_on
+      entity_id: media_player.kodi
+    - service: media_player.turn_on
+      entity_id: media_player.marantz_sr5007
+    - service: switch.turn_on
+      entity_id: switch.projector
+
+- alias: "Stäng av hembio"
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.the_button
+      scene_id: 1
+      scene_data: 7860
+  action:
+    - service: media_player.turn_off
+      entity_id: media_player.marantz_sr5007
+    - service: media_player.turn_off
+      entity_id: media_player.kodi
+    - service: switch.turn_off
+      entity_id: switch.projector
