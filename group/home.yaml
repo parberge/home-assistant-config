@@ -12,7 +12,8 @@ default_view:
     - group.humidity
     - group.co2
     - sensor.netatmo_barnrummet_noise
-    - group.lights
+    - group.indoor_lights
+    - group.outdoor_lights
     - camera.kallaringang
     - binary_sensor.basement_entry
     - group.misc
@@ -52,14 +53,19 @@ co2:
     - sensor.netatmo_badrum_kallare_co2
     - sensor.netatmo_vardagsrummet_co2
 
-lights:
-  name: Belysning
+indoor_lights:
+  name: Belysning inomhus
+  entities:
+    - light.dimmer_1_level
+    - switch.strombrytare_3
+    - switch.strombrytare_5
+
+outdoor_lights:
+  name: Belysning utomhus
   entities:
     - switch.strombrytare_1
     - switch.strombrytare_2
-    - switch.strombrytare_3
     - light.lampa_ytterdorren
-    - light.dimmer_1_level
 
 misc:
   name: Generellt
