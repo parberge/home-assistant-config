@@ -34,3 +34,4 @@ main_floor_lights:
   icon: mdi:lightbulb
   entities:
     - switch.strombrytare_3
+    - light.dimmer_2_level
