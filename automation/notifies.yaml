@@ -3,10 +3,9 @@
     platform: state
     entity_id: updater.updater
   action:
-    service: notify.html5
+    service: notify.pushover
     data:
       message: 'Ny version av HA finns'
-      target: "Pär"
 
 - alias: 'Glömde låsa dörren notis'
   trigger:
@@ -36,9 +35,9 @@
         message: 'Dörren är inte låst och ingen är hemma'
         target: >
           {% if trigger.entity_id == 'device_tracker.nexus_6p' %}
-          "Pär"
+          Pär
           {% elif trigger.entity_id == 'device_tracker.honor_8' %}
-          "Malena"
+          Malena
           {% endif %}
         data:
           tag: 'forgot-lock'
@@ -98,21 +97,9 @@
     - service: notify.html5
       data:
         message: 'Brandlarmet utlöst!'
-
-- alias: "Glömt klockan notis"
-  trigger:
-    - platform: state
-      entity_id: device_tracker.huawei_watch_2
-      to: 'home'
-  condition:
-    condition: state
-    entity_id: device_tracker.nexus_6p
-    state: 'not_home'
-  action:
-    service: notify.html5
-    data:
-      message: 'Du glömde klockan'
-      target: "Pär"
+    - service: notify.pushover
+      data:
+        message: 'Brandlarmet utlöst!'
 
 - alias: "Rörelse i källaren"
   trigger:
@@ -120,21 +107,23 @@
       entity_id: binary_sensor.basement_entry
       to: 'on'
       from: 'off'
+  condition:
+    condition: state
+    entity_id: group.device_tracker
+    state: 'not_home'
   action:
-    service: notify.html5
+    service: notify.pushover
     data:
       message: 'Rörelse upptäckt i källaringången'
-      target: "Pär"
 
 - alias: "Ny enhet hittad notis"
   trigger:
     platform: event
     event_type: device_tracker_new_device
   action:
-    - service: notify.html5
+    - service: notify.pushover
       data:
         message: 'Ny enhet spåras'
-        target: "Pär"
 
 - alias: "Kom ihåg matlåda notis"
   trigger:
