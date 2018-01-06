@@ -93,5 +93,8 @@ sun.sun:
 light.dimmer_1_level:
   friendly_name: 'Dimmer källare 1'
 
+light.dimmer_2_level:
+  friendly_name: 'Dimmer Hall'
+
 binary_sensor.basement_entry:
   friendly_name: 'Rörelsesensor källare'
