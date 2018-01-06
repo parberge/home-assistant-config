@@ -52,7 +52,8 @@ verisure:
 logger:
   default: warning
   logs:
-    homeassistant.components.rfxtrx: warning
+    homeassistant.components.rfxtrx: debug
+    homeassistant.components.zwave: warning
     homeassistant.components.sensor.netatmo: warning
 
 mqtt:
@@ -66,25 +67,25 @@ panel_iframe:
   grafana:
     title: 'Statistik'
     icon: mdi:elevation-rise
-    url: 'http://192.168.7.7:3000/dashboard/db/home-assistant?orgId=1&theme=light'
+    url: 'https://graph.peers.se/dashboard/db/home-assistant?orgId=1&theme=light'
 
 zwave:
   usb_path: /dev/serial/by-id/usb-0658_0200-if00
   debug: True
-  device_config:
-    sensor.dimmer_1_alarm_level:
+  device_config_glob:
+    "sensor.dimmer_*_alarm_level":
       ignored: true
-    sensor.dimmer_1_heat:
+    "sensor.dimmer_*_heat":
       ignored: true
-    sensor.dimmer_1_alarm_type:
+    "sensor.dimmer_*_alarm_type":
       ignored: true
-    sensor.dimmer_1_exporting:
+    "sensor.dimmer_*_exporting":
       ignored: true
-    sensor.dimmer_1_system:
+    "sensor.dimmer_*_system":
       ignored: true
-    sensor.dimmer_1_power_management:
+    "sensor.dimmer_*_power_management":
       ignored: true
-    sensor.dimmer_1_sourcenodeid:
+    "sensor.dimmer_*_sourcenodeid":
       ignored: true
 
 camera:
