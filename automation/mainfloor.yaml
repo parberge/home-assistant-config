@@ -1,0 +1,11 @@
+- alias: "Tänd hallen när dörren blir upplåst"
+  trigger:
+    - platform: state
+      entity_id: lock.ytterdorren
+      from: 'locked'
+      to: 'unlocked'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.dimmer_2_level
+        brightness: 120
