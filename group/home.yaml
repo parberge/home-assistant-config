@@ -2,7 +2,6 @@ default_view:
   view: yes
   icon: mdi:home
   entities:
-    - group.all_automations
     - group.front_door
     - group.device_tracker
     - sensor.ssl_certificate_expiry
