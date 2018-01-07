@@ -158,3 +158,23 @@
       entity_id: media_player.kodi
     - service: switch.turn_off
       entity_id: switch.projector
+
+- alias: "Pausa/starta uppspelning med knapp"
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.the_button
+      scene_id: 1
+      scene_data: 7800
+  action:
+    - service: media_player.media_play_pause
+      entity_id: media_player.kodi
+    - delay:
+        seconds: 5
+    - service: notify.kodi
+      data:
+        message: "Aktiverad av röda knappen"
+        data:
+          icon: "info"
+          displaytime: 10000
