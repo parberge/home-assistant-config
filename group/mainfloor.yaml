@@ -33,5 +33,4 @@ main_floor_lights:
   name: Belysing inomhus
   icon: mdi:lightbulb
   entities:
-    - switch.strombrytare_3
     - light.dimmer_2_level

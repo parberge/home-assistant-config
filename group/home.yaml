@@ -56,7 +56,7 @@ indoor_lights:
   name: Belysning inomhus
   entities:
     - light.dimmer_1_level
-    - switch.strombrytare_3
+    - light.dimmer_2_level
     - switch.strombrytare_5
 
 outdoor_lights:
