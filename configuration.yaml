@@ -96,6 +96,12 @@ camera:
     username: !secret basement_cam_user
     password: !secret basement_cam_pass
 
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api_key
+    allowed_chat_ids:
+      - !secret telegram_chat_id
+
 influxdb: !include influxdb.yaml
 group: !include_dir_merge_named group/
 automation: !include_dir_merge_list automation/
