@@ -13,10 +13,6 @@
       entity_id: device_tracker.nexus_6p
       from: 'home'
       to: 'not_home'
-    - platform: state
-      entity_id: device_tracker.nexus_6p
-      from: 'home'
-      to: 'not_home'
   condition:
     condition: and
     conditions:
@@ -33,12 +29,7 @@
     - service: notify.html5
       data_template:
         message: 'Dörren är inte låst och ingen är hemma'
-        target: >
-          {% if trigger.entity_id == 'device_tracker.nexus_6p' %}
-          Pär
-          {% elif trigger.entity_id == 'device_tracker.honor_8' %}
-          Malena
-          {% endif %}
+        target: "Pär telefon"
         data:
           tag: 'forgot-lock'
           actions:
@@ -61,7 +52,7 @@
     - service: notify.html5
       data:
         message: 'Välkommen hem'
-        target: "Pär"
+        target: "Pär telefon"
         data:
           tag: 'unlock-door'
           actions:
@@ -81,7 +72,7 @@
     - service: notify.html5
       data:
         message: 'Dörren är upplåst. Du kanske vill låsa när du ska sitta i källaren'
-        target: "Pär"
+        target: "Pär telefon"
         data:
           tag: 'forgot-lock'
           actions:
@@ -130,16 +121,21 @@
     platform: time
     at: '07:30:00'
   condition:
-    condition: time
-    weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    condition: and
+    conditions:
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+      - condition: state
+        entity_id: group.device_tracker
+        state: 'home'
   action:
     - service: notify.html5
       data:
         title: 'Matlåda'
-        message: 'Du har väl inte glömt matlåda?'
-        target: "Malena"
+        message: 'Du glömmer väl inte  matlåda?'
+        target: ["Malena telefon", "Pär telefon"]
