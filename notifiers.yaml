@@ -13,3 +13,7 @@
   host: peerhtpc
   username: peer
   password: !secret kodi_password
+
+- name: telegram
+  platform: telegram
+  chat_id: !secret telegram_chat_id
