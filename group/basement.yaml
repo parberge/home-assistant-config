@@ -3,11 +3,10 @@ basement:
   view: yes
   entities:
     - group.home_theatre
-    - automation.marantz_auto_on
-    - automation.marantz_auto_off
     - group.netatmo_basement
     - group.lights_basement
     - sensor.ir_gw_basement
+    - sensor.kamera_kallare
     - group.basement_entry
 
 home_theatre:

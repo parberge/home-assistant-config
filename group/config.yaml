@@ -2,3 +2,13 @@ config:
   view: yes
   entities:
     - group.all_automations
+    - group.battery_status
+
+
+battery_status:
+  name: Batteristatus
+  entities:
+    - sensor.netatmo_badrum_kallare_battery
+    - sensor.netatmo_vardagsrummet_battery
+    - sensor.netatmo_utomhus_battery
+    - sensor.netatmo_regnmatare_battery
