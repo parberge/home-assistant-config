@@ -91,6 +91,9 @@
     - service: notify.pushover
       data:
         message: 'Brandlarmet utlöst!'
+    - service: notify.telegram
+      data:
+        message: "Verkar som brandlarmet har utlösts klockan {{ now().strftime('%H:%M') }}!"
 
 - alias: "Rörelse i källaren"
   trigger:
@@ -134,8 +137,20 @@
         entity_id: group.device_tracker
         state: 'home'
   action:
-    - service: notify.html5
+    - service: notify.telegram
       data:
-        title: 'Matlåda'
-        message: 'Du glömmer väl inte  matlåda?'
-        target: ["Malena telefon", "Pär telefon"]
+        title: 'God morgon'
+        message: |
+          Ännu en härlig dag att se fram emot. Glöm inte matlåda idag!
+          Vädret idag: {{ states('sensor.pws_weather_1d_metric') }}
+
+- alias: "Enhet offline"
+  trigger:
+    platform: state
+    entity_id: sensor.kamera_kallare
+    to: 'Offline'
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Varning'
+        message: "Kameran i källaren är offline"
