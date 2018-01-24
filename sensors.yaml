@@ -53,6 +53,7 @@
     - wind_1d_kph
     - alerts
     - UV
+    - weather_1d_metric
 
 - platform: template
   sensors:
