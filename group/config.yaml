@@ -3,6 +3,7 @@ config:
   entities:
     - group.all_automations
     - group.battery_status
+    - input_boolean.guest_mode
 
 
 battery_status:
