@@ -1,3 +1,6 @@
+guest_mode:
+    name: Gästläge
+    initial: 'off'
 food_notify:
     name: Malena matlåda
     initial: 'on'
