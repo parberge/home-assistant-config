@@ -113,3 +113,4 @@ switch: !include switches.yaml
 notify: !include notifiers.yaml
 script: !include scripts.yaml
 light: !include lights.yaml
+input_boolean: !include input_boolean.yaml
