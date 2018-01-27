@@ -20,15 +20,12 @@
         entity_id: lock.ytterdorren
         state: 'unlocked'
       - condition: state
-        entity_id: device_tracker.honor_8
-        state: 'not_home'
-      - condition: state
-        entity_id: device_tracker.nexus_6p
+        entity_id: group.device_tracker
         state: 'not_home'
   action:
     - service: notify.html5
       data_template:
-        message: 'Dörren är inte låst och ingen är hemma'
+        message: 'Dörren är upplåst och ingen är hemma'
         target: "Pär telefon"
         data:
           tag: 'forgot-lock'
@@ -100,11 +97,15 @@
     - platform: state
       entity_id: binary_sensor.basement_entry
       to: 'on'
-      from: 'off'
   condition:
-    condition: state
-    entity_id: group.device_tracker
-    state: 'not_home'
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.device_tracker
+        state: 'not_home'
+      - condition: state
+        entity_id: input_boolean.guest_mode
+        state: 'off'
   action:
     service: notify.pushover
     data:
@@ -142,7 +143,7 @@
         title: 'God morgon'
         message: |
           Ännu en härlig dag att se fram emot. Glöm inte matlåda idag!
-          Vädret idag: {{ states('sensor.pws_weather_1d_metric') }}
+          Vädret ser ut att bli: {{ states('sensor.pws_weather_1d_metric') }}
 
 - alias: "Enhet offline"
   trigger:
@@ -154,3 +155,41 @@
       data:
         title: 'Varning'
         message: "Kameran i källaren är offline"
+
+- alias: 'Tänd lampor'
+  trigger:
+    platform: time
+    at: '06:00:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+      - condition: state
+        entity_id: device_tracker.nexus_6p
+        state: 'home'
+  action:
+    - service: notify.html5
+      data:
+        message: 'Tänd lampor?'
+        target: "Pär telefon"
+        data:
+          tag: 'light1'
+          actions:
+            - action: 'light_indoor'
+              title: 'Ja'
+
+- alias: 'Enheter byter status'
+  trigger:
+    platform: state
+    entity_id: group.battery_status
+  action:
+    - service: notify.telegram
+      data_template:
+        title: 'Batteristatus'
+        message: '{{ trigger.entity_id }} batterinivå gick från{{ trigger.from_state.state }} till {{ trigger.to_state.state }}'

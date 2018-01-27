@@ -41,3 +41,17 @@
       entity_id: switch.strombrytare_1
     - service: switch.turn_on
       entity_id: switch.strombrytare_2
+
+- alias: 'Tänd lampor inomhus notis action'
+  trigger:
+    - platform: event
+      event_type: html5_notification.clicked
+      event_data:
+        action: light_indoor
+  action:
+    - service: switch.turn_on
+      entity_id: switch.strombrytare_5
+    - service: light.turn_on
+      data:
+        entity_id: light.dimmer_2_level
+        brightness: 120
