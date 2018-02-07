@@ -10,7 +10,7 @@
     service: media_player.kodi_call_method
     data:
       entity_id: media_player.kodi
-      method: System.Hibernate
+      method: System.Shutdown
 
 - platform: denonavr
   host: marantz
