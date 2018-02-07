@@ -63,6 +63,13 @@
     kamera_kallare:
       friendly_name: 'Kamera källare'
       value_template: "{{ 'Online' if is_state('device_tracker.kamera_kallare', 'home') else 'Offline' }}"
-    netatmopersonalweatherstatio:
-      friendly_name: 'Netatmo väderstation'
-      value_template: "{{ 'Online' if is_state('device_tracker.netatmopersonalweatherstatio', 'home') else 'Offline' }}"
+
+- platform: transmission
+  host: localhost
+  username: !secret transmission_user
+  password: !secret transmission_password
+  monitored_variables:
+    - 'current_status'
+    - 'download_speed'
+    - 'upload_speed'
+    - 'active_torrents'
