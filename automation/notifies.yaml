@@ -39,12 +39,6 @@
       entity_id: device_tracker.nexus_6p
       from: 'not_home'
       to: 'home'
-  condition:
-    condition: state
-    entity_id: device_tracker.nexus_6p
-    state: 'not_home'
-    for:
-      minutes: 10
   action:
     - service: notify.html5
       data:
@@ -183,13 +177,3 @@
           actions:
             - action: 'light_indoor'
               title: 'Ja'
-
-- alias: 'Enheter byter status'
-  trigger:
-    platform: state
-    entity_id: group.battery_status
-  action:
-    - service: notify.telegram
-      data_template:
-        title: 'Batteristatus'
-        message: '{{ trigger.entity_id }} batterinivå gick från{{ trigger.from_state.state }} till {{ trigger.to_state.state }}'
