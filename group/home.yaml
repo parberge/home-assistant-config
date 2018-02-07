@@ -17,6 +17,7 @@ default_view:
     - binary_sensor.basement_entry
     - group.misc
     - group.rain
+    - group.transmission
 
 device_tracker:
   name: Enheter
@@ -86,3 +87,11 @@ weather_overview:
     - sensor.pws_alerts
     - sensor.pws_uv
     - sun.sun
+
+transmission:
+    name: Transmission
+    entities:
+    - sensor.transmission_active_torrents
+    - sensor.transmission_down_speed
+    - sensor.transmission_status
+    - sensor.transmission_up_speed
