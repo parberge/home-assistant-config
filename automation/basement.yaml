@@ -152,12 +152,17 @@
       scene_id: 1
       scene_data: 7860
   action:
+    - service: switch.turn_off
+      entity_id: switch.projector
+    - service: light.turn_on
+      data:
+        entity_id: light.dimmer_1_level
+        transition: 5
+        brightness: 120
     - service: media_player.turn_off
       entity_id: media_player.marantz_sr5007
     - service: media_player.turn_off
       entity_id: media_player.kodi
-    - service: switch.turn_off
-      entity_id: switch.projector
 
 - alias: "Pausa/starta uppspelning med knapp"
   trigger:
