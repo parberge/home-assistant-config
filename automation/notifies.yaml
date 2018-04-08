@@ -114,7 +114,7 @@
       data:
         message: 'Ny enhet spåras'
 
-- alias: "Kom ihåg matlåda notis"
+- alias: "morgon notis"
   trigger:
     platform: time
     at: '07:30:00'
@@ -137,7 +137,11 @@
         title: 'God morgon'
         message: |
           Ännu en härlig dag att se fram emot. Glöm inte matlåda idag!
-          Vädret ser ut att bli: {{ states('sensor.pws_weather_1d_metric') }}
+          Vädret ser ut att bli:
+          {{ states('sensor.pws_weather_1d_metric') }}
+          {% if states.sensor.netatmo_regnmatare_sum_rain_24|int > 0 %}
+          Det har regnat {{ states.sensor.netatmo_regnmatare_sum_rain_24.state_with_unit }} sedan midnatt
+          {% endif %}
 
 - alias: "Enhet offline"
   trigger:
@@ -177,3 +181,49 @@
           actions:
             - action: 'light_indoor'
               title: 'Ja'
+
+- alias: 'Batteristatus på netatmo'
+  trigger:
+    platform: state
+    entity_id: sensor.netatmo_vardagsrummet_battery, sensor.netatmo_badrum_kallare_battery, sensor.netatmo_utomhus_battery, sensor.netatmo_regnmatare_battery
+    to: 'Low'
+  action:
+    - service: notify.telegram
+      data_template:
+        title: 'Varning'
+        message: 'Sensor {{ trigger.to_state.attributes.friendly_name }} har lågt batteri'
+
+- alias: 'baksida dörr notis'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.sensor
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.device_tracker
+        state: 'not_home'
+      - condition: state
+        entity_id: input_boolean.guest_mode
+        state: 'off'
+  action:
+    - service: notify.telegram
+      data_template:
+        title: 'Varning'
+        message: 'Baksida dörr öppnades och ingen av er är hemma vad jag kan se'
+
+- alias: 'Baksida dörr öppen'
+  trigger:
+    platform: state
+    entity_id: group.device_tracker
+    to: 'not_home'
+  condition:
+    - condition: state
+      entity_id: binary_sensor.sensor
+      state: 'on'
+  action:
+    - service: notify.telegram
+      data_template:
+        title: 'Varning'
+        message: 'Baksida dörr fortfarande öppen, men ingen av er är hemma längre'
