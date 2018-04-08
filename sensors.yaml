@@ -63,6 +63,14 @@
     kamera_kallare:
       friendly_name: 'Kamera källare'
       value_template: "{{ 'Online' if is_state('device_tracker.kamera_kallare', 'home') else 'Offline' }}"
+    baksida_dorr:
+      friendly_name: 'Baksida dörr status'
+      value_template: >-
+          {% if is_state('binary_sensor.sensor', 'on') %}
+            Öppen
+          {% else %}
+            Stängd
+          {% endif %}
 
 - platform: transmission
   host: localhost
