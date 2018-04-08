@@ -3,9 +3,9 @@ mainfloor:
   view: yes
   entities:
     - group.mainfloor_livingroom
-    - group.front_door
     - group.main_floor_outside_lights
     - group.main_floor_lights
+    - group.doors
 
 mainfloor_livingroom:
   name: Vardagsrummet
@@ -13,13 +13,13 @@ mainfloor_livingroom:
     - media_player.vardagsrummet
     - binary_sensor.samsung_tv
 
-front_door:
-  name: Ytterdörren
+doors:
+  name: Dörrar
   control: hidden
   icon: mdi:glassdoor
   entities:
+    - sensor.baksida_dorr
     - switch.yale_lock
-    - light.lampa_ytterdorren
 
 main_floor_outside_lights:
   name: Belysning utomhus
