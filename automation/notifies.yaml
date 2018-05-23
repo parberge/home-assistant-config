@@ -33,23 +33,6 @@
             - action: 'lock_door'
               title: 'Lås dörren'
 
-- alias: 'Välkommen hem notis'
-  trigger:
-    - platform: state
-      entity_id: device_tracker.nexus_6p
-      from: 'not_home'
-      to: 'home'
-  action:
-    - service: notify.html5
-      data:
-        message: 'Välkommen hem'
-        target: "Pär telefon"
-        data:
-          tag: 'unlock-door'
-          actions:
-            - action: 'unlock_door'
-              title: 'Lås upp dörren'
-
 - alias: "Notifiera ifall dörren är upplåst när kodi spelar"
   trigger:
     - platform: state
