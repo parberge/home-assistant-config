@@ -16,9 +16,3 @@
   host: marantz
   name: Marantz sr5007
   scan_interval: 30
-
-- platform: cast
-  host: 192.168.7.109
-
-- platform: cast
-  host: 192.168.7.101

@@ -10,6 +10,9 @@ homeassistant:
 frontend:
 config:
 
+recorder:
+  purge_keep_days: 10
+
 http:
   api_password: !secret api_password
   base_url: ha.peers.se:433
@@ -114,3 +117,4 @@ notify: !include notifiers.yaml
 script: !include scripts.yaml
 light: !include lights.yaml
 input_boolean: !include input_boolean.yaml
+cast: !include google_casts.yaml
