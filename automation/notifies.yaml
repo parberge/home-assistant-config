@@ -10,7 +10,7 @@
 - alias: 'Glömde låsa dörren notis'
   trigger:
     - platform: state
-      entity_id: device_tracker.nexus_6p
+      entity_id: device_tracker.par_telefon
       from: 'home'
       to: 'not_home'
   condition:
@@ -152,7 +152,7 @@
           - thu
           - fri
       - condition: state
-        entity_id: device_tracker.nexus_6p
+        entity_id: device_tracker.par_telefon
         state: 'home'
   action:
     - service: notify.html5

@@ -23,7 +23,7 @@ device_tracker:
   name: Enheter
   entities:
     - device_tracker.honor_8
-    - device_tracker.nexus_6p
+    - device_tracker.par_telefon
 
 rain:
   name: Regndata
