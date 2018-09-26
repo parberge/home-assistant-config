@@ -94,6 +94,3 @@ light.dimmer_2_level:
 
 binary_sensor.basement_entry:
   friendly_name: 'Rörelsesensor källare'
-
-light.yeelight_rgb_34ce008cf695:
-  friendly_name: 'Lampa yttedörr'
