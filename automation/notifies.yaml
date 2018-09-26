@@ -210,3 +210,14 @@
       data_template:
         title: 'Varning'
         message: 'Baksida dörr fortfarande öppen, men ingen av er är hemma längre'
+
+- alias: 'Lampa offline'
+  trigger:
+    platform: state
+    entity_id: light.lampa_ytterdorren
+    to: 'unavailable'
+  action:
+    - service: notify.telegram
+      data_template:
+        title: 'Varning'
+        message: "{{ trigger.to_state.attributes.friendly_name }} är otillgänglig. Någon kanske trycke på knappen?"
