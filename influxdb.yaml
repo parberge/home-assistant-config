@@ -1,4 +1,5 @@
 ---
+host: !secret influxdb_host
 default_measurement: state
 component_config_glob:
   'sensor.*temperature':
