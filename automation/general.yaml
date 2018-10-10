@@ -30,7 +30,7 @@
     - service: switch.turn_off
       entity_id: switch.strombrytare_2
 
-- alias: "Tänd lampor ute när solen går ned"
+- alias: "Tänd lampor när solen går ned"
   trigger:
     platform: sun
     event: sunset
@@ -41,6 +41,8 @@
       entity_id: switch.strombrytare_1
     - service: switch.turn_on
       entity_id: switch.strombrytare_2
+    - service: switch.turn_on
+      entity_id: switch.strombrytare_5
 
 - alias: 'Tänd lampor inomhus notis action'
   trigger:
