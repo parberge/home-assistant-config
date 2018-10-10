@@ -119,10 +119,10 @@
       data:
         title: 'God morgon'
         message: |
-          Ännu en härlig dag att se fram emot. Glöm inte matlåda idag!
+          Ännu en härlig dag att se fram emot.
           Vädret ser ut att bli:
           {{ states('sensor.pws_weather_1d_metric') }}
-          {% if states.sensor.netatmo_regnmatare_sum_rain_24|int > 0 %}
+          {% if states.sensor.netatmo_regnmatare_sum_rain_24.state|float > 0 %}
           Det har regnat {{ states.sensor.netatmo_regnmatare_sum_rain_24.state_with_unit }} sedan midnatt
           {% endif %}
 
