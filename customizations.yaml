@@ -39,10 +39,6 @@ switch.yale_lock:
 switch.projector:
   icon: mdi:projector
 
-binary_sensor.samsung_tv:
-  friendly_name: 'Samsung TV'
-  icon: mdi:television
-
 binary_sensor.ps4:
   icon: mdi:playstation
 

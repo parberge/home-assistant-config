@@ -11,7 +11,6 @@ mainfloor_livingroom:
   name: Vardagsrummet
   entities:
     - media_player.vardagsrummet
-    - binary_sensor.samsung_tv
 
 doors:
   name: Dörrar

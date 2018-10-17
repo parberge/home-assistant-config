@@ -27,7 +27,6 @@ include:
     - sensor.netatmo_vardagsrummet_humidity
     - sensor.netatmo_vardagsrummet_co2
     - sensor.netatmo_regnmatare_rain
-    - binary_sensor.samsung_tv
     - binary_sensor.basement_entry
     - media_player.vardagsrummet
 

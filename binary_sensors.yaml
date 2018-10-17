@@ -4,12 +4,6 @@
   device_class: connectivity
   scan_interval: 5
 
-- platform: command_line
-  name: samsung_tv
-  command: "(ping -c2 -W2 -w4 samsungtv > /dev/null 2>&1 && echo ON) || echo OFF"
-  device_class: connectivity
-  scan_interval: 5
-
 - platform: template
   sensors:
     brandlarmet:
