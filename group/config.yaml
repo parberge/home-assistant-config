@@ -4,6 +4,7 @@ config:
     - group.all_automations
     - group.battery_status
     - input_boolean.guest_mode
+    - input_boolean.par_sleeping
 
 
 battery_status:
