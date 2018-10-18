@@ -4,3 +4,6 @@ guest_mode:
 food_notify:
     name: Malena matlåda
     initial: 'on'
+par_sleeping:
+    name: Pär sover
+    initial: 'off'
