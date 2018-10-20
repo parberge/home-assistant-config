@@ -178,15 +178,6 @@
     entity_id: input_boolean.par_sleeping
     to: 'off'
   action:
-    - service: notify.html5
-      data:
-        message: 'God morgon. Tänd lampor?'
-        target: "Pär telefon"
-        data:
-          tag: 'light1'
-          actions:
-            - action: 'light_indoor'
-              title: 'Ja'
     - service: notify.telegram
       data:
         title: 'God morgon'
@@ -197,3 +188,16 @@
           {% if states.sensor.netatmo_regnmatare_sum_rain_24.state|float > 0 %}
           Det har regnat {{ states.sensor.netatmo_regnmatare_sum_rain_24.state_with_unit }} sedan midnatt
           {% endif %}
+
+    - service: telegram_bot.send_message
+      data_template:
+        title: 'Lampor'
+        message: 'Vill ni ha lite lampor tända eftersom det är mörkt ute?'
+        disable_notification: true
+        inline_keyboard:
+          - "Ja:/yes"
+          - "Nej:/nej"
+    - condition: or
+      conditions:
+      - condition: sun
+        before: sunrise
