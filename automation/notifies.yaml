@@ -162,15 +162,14 @@
     entity_id: input_boolean.par_sleeping
     to: 'on'
   action:
-    - service: notify.html5
-      data:
-        message: 'Sov gott! Släck lampor?'
-        target: "Pär telefon"
-        data:
-          tag: 'light2'
-          actions:
-            - action: 'light_indoor_off'
-              title: 'Ja'
+    - service: telegram_bot.send_message
+      data_template:
+        title: 'Lampor'
+        message: 'Släcka alla lampor inomhus?'
+        disable_notification: true
+        inline_keyboard:
+          - "Ja:/yes_sleep"
+          - "Nej:/no_sleep"
 
 - alias: 'God morgon'
   trigger:
