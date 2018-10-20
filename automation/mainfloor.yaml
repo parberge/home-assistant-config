@@ -9,3 +9,9 @@
       data:
         entity_id: light.dimmer_2_level
         brightness: 120
+    - service: script.flash_door_light
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: light.lampa_ytterdorren
+          state: 'on'
