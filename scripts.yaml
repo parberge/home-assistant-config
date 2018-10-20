@@ -11,3 +11,17 @@ unlock_door:
       data_template:
         entity_id: lock.ytterdorren
         code: !secret verisure_door_pin
+
+
+flash_door_light:
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.lampa_ytterdorren
+        color_name: "green"
+    - delay:
+        seconds: 2
+    - service: light.turn_on
+      data:
+        entity_id: light.lampa_ytterdorren
+        color_name: "white"
