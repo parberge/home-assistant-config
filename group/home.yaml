@@ -3,7 +3,6 @@ default_view:
   icon: mdi:home
   entities:
     - group.front_door
-    - group.device_tracker
     - sensor.ssl_certificate_expiry
     - binary_sensor.brandlarmet
     - group.weather_overview
@@ -18,6 +17,8 @@ default_view:
     - group.misc
     - group.rain
     - group.transmission
+    - device_tracker.honor_8
+    - device_tracker.par_telefon
 
 device_tracker:
   name: Enheter
