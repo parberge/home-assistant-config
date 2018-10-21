@@ -15,6 +15,9 @@ unlock_door:
 
 flash_door_light:
   sequence:
+    - condition: state
+      entity_id: light.lampa_ytterdorren
+      state: 'on'
     - service: light.turn_on
       data:
         entity_id: light.lampa_ytterdorren
