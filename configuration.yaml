@@ -101,6 +101,7 @@ telegram_bot:
     api_key: !secret telegram_api_key
     allowed_chat_ids:
       - !secret telegram_chat_id
+      - !secret telegram_par_chat_id
 
 influxdb: !include influxdb.yaml
 group: !include_dir_merge_named group/
