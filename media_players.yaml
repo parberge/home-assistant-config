@@ -11,6 +11,8 @@
     data:
       entity_id: media_player.kodi
       method: System.Shutdown
+  enable_websocket: 'false'
+  timeout: 7
 
 - platform: denonavr
   host: marantz
