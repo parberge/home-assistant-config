@@ -15,7 +15,6 @@ default_view:
     - camera.kallaringang
     - binary_sensor.basement_entry
     - group.misc
-    - group.rain
     - group.transmission
     - device_tracker.honor_8
     - device_tracker.par_telefon
@@ -25,11 +24,6 @@ device_tracker:
   entities:
     - device_tracker.honor_8
     - device_tracker.par_telefon
-
-rain:
-  name: Regndata
-  entities:
-    - sensor.netatmo_regnmatare_rain
 
 humidity:
   name: Luftfuktighet
@@ -88,6 +82,7 @@ weather_overview:
     - sensor.pws_alerts
     - sensor.pws_uv
     - sun.sun
+    - sensor.netatmo_regnmatare_rain_24
 
 transmission:
     name: Transmission
