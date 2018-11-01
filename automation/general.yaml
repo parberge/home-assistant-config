@@ -6,7 +6,6 @@
         action: lock_door
   action:
     - service: script.lock_door
-      entity_id: lock.ytterdorren
 
 - alias: 'Lås upp notis action'
   trigger:
@@ -16,7 +15,6 @@
         action: unlock_door 
   action:
     - service: script.unlock_door
-      entity_id: lock.ytterdorren
 
 - alias: "Släck lampor när solen går upp"
   trigger:
@@ -151,7 +149,7 @@
     platform: event
     event_type: telegram_callback
     event_data:
-      data: '/sleep_yes'
+      data: '/yes_sleep'
   action:
     - service: telegram_bot.answer_callback_query
       data_template:
