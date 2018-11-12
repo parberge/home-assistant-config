@@ -184,6 +184,7 @@
           Ännu en härlig dag att se fram emot.
           Vädret ser ut att bli:
           {{ states('sensor.pws_weather_1d_metric') }}
+          Förväntad lägsta temp: {{ states('sensor.pws_temp_low_1d_c') }}
           {% if states.sensor.netatmo_regnmatare_sum_rain_24.state|float > 0 %}
           Det har regnat {{ states.sensor.netatmo_regnmatare_sum_rain_24.state_with_unit }} sedan midnatt
           {% endif %}

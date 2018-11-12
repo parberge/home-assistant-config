@@ -9,4 +9,24 @@
       data:
         entity_id: light.dimmer_2_level
         brightness: 120
-    - service: script.flash_door_light
+
+- alias: 'Glömde låsa dörren notis'
+  trigger:
+    - platform: state
+      entity_id: group.device_tracker
+      from: 'home'
+      to: 'not_home'
+      for:
+        minutes: 10
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: lock.ytterdorren
+        state: 'unlocked'
+  action:
+    - service: script.lock_door
+    - service: notify.telegram
+      data_template:
+        title: 'Dörren låst'
+        message: 'Jag låste dörren för ni är inte hemma längre'
