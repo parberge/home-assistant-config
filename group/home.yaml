@@ -54,6 +54,8 @@ indoor_lights:
     - light.dimmer_1_level
     - light.dimmer_2_level
     - switch.strombrytare_5
+    - switch.strombrytare_3
+    
 
 outdoor_lights:
   name: Belysning utomhus
@@ -66,6 +68,7 @@ misc:
   name: Generellt
   entities:
     - switch.strombrytare_4
+    - boolean.all_asleep
 
 weather_overview:
   name: Väder översikt
