@@ -68,7 +68,7 @@ misc:
   name: Generellt
   entities:
     - switch.strombrytare_4
-    - boolean.all_asleep
+    - input_boolean.all_asleep
 
 weather_overview:
   name: Väder översikt
