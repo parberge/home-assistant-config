@@ -43,34 +43,8 @@
       entity_id: switch.strombrytare_2
     - service: switch.turn_on
       entity_id: switch.strombrytare_5
-
-- alias: 'Tänd lampor inomhus notis action'
-  trigger:
-    - platform: event
-      event_type: html5_notification.clicked
-      event_data:
-        action: light_indoor
-  action:
     - service: switch.turn_on
-      entity_id: switch.strombrytare_5
-    - service: light.turn_on
-      data:
-        entity_id: light.dimmer_2_level
-        brightness: 120
-
-- alias: 'Släck lampor inomhus notis action'
-  trigger:
-    - platform: event
-      event_type: html5_notification.clicked
-      event_data:
-        action: light_indoor_off
-  action:
-    - service: switch.turn_off
-      entity_id: switch.strombrytare_5
-    - service: light.turn_off
-      entity_id: light.dimmer_1_level
-    - service: light.turn_off
-      entity_id: light.dimmer_2_level
+      entity_id: switch.strombrytare_3
 
 
 - alias: 'Telegram response no'
@@ -116,6 +90,8 @@
         message: "Okej, tänder lampor"
     - service: switch.turn_on
       entity_id: switch.strombrytare_5
+    - service: switch.turn_off
+      entity_id: switch.strombrytare_3
     - service: light.turn_on
       data:
         entity_id: light.dimmer_2_level
@@ -163,5 +139,15 @@
     - service: notify.telegram
       data:
         message: "Okej, släcker lampor"
+    - service: homeassistant.turn_off
+      entity_id: group.indoor_lights
+
+
+- alias: 'Sov gott'
+  trigger:
+    platform: state
+    entity_id: input_boolean.all_asleep
+    to: 'on'
+  action:
     - service: homeassistant.turn_off
       entity_id: group.indoor_lights

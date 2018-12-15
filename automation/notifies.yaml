@@ -156,25 +156,11 @@
         title: 'Varning'
         message: "{{ trigger.to_state.attributes.friendly_name }} är otillgänglig. Någon kanske trycke på knappen?"
 
-- alias: 'Sov gott'
-  trigger:
-    platform: state
-    entity_id: input_boolean.par_sleeping
-    to: 'on'
-  action:
-    - service: telegram_bot.send_message
-      data_template:
-        title: 'Lampor'
-        message: 'Släcka alla lampor inomhus?'
-        disable_notification: true
-        inline_keyboard:
-          - "Ja:/yes_sleep"
-          - "Nej:/no_sleep"
 
 - alias: 'God morgon'
   trigger:
     platform: state
-    entity_id: input_boolean.par_sleeping
+    entity_id: input_boolean.all_asleep
     to: 'off'
   action:
     - service: notify.telegram
@@ -188,16 +174,11 @@
           {% if states.sensor.netatmo_regnmatare_sum_rain_24.state|float > 0 %}
           Det har regnat {{ states.sensor.netatmo_regnmatare_sum_rain_24.state_with_unit }} sedan midnatt
           {% endif %}
-
-    - service: telegram_bot.send_message
-      data_template:
-        title: 'Lampor'
-        message: 'Vill ni ha lite lampor tända eftersom det är mörkt ute?'
-        disable_notification: true
-        inline_keyboard:
-          - "Ja:/yes"
-          - "Nej:/nej"
-    - condition: or
-      conditions:
-      - condition: sun
-        before: sunrise
+    - service: switch.turn_on
+      entity_id: switch.strombrytare_5
+    - service: switch.turn_off
+      entity_id: switch.strombrytare_3
+    - service: light.turn_on
+      data:
+        entity_id: light.dimmer_2_level
+        brightness: 120
