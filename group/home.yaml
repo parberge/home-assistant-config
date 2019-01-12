@@ -5,10 +5,6 @@ default_view:
     - group.front_door
     - sensor.ssl_certificate_expiry
     - binary_sensor.brandlarmet
-    - group.weather_overview
-    - group.temp
-    - group.humidity
-    - group.co2
     - sensor.netatmo_barnrummet_noise
     - group.indoor_lights
     - group.outdoor_lights
@@ -25,29 +21,6 @@ device_tracker:
     - device_tracker.honor_8
     - device_tracker.par_telefon
 
-humidity:
-  name: Luftfuktighet
-  entities:
-    - sensor.netatmo_barnrummet_humidity
-    - sensor.netatmo_badrum_kallare_humidity
-    - sensor.netatmo_utomhus_humidity
-    - sensor.netatmo_vardagsrummet_humidity
-
-temp:
-  name: Temperaturer
-  entities:
-    - sensor.netatmo_barnrummet_temperature
-    - sensor.netatmo_badrum_kallare_temperature
-    - sensor.netatmo_utomhus_temperature
-    - sensor.netatmo_vardagsrummet_temperature
-
-co2:
-  name: Koldioxid
-  entities:
-    - sensor.netatmo_barnrummet_co2
-    - sensor.netatmo_badrum_kallare_co2
-    - sensor.netatmo_vardagsrummet_co2
-
 indoor_lights:
   name: Belysning inomhus
   entities:
@@ -55,7 +28,6 @@ indoor_lights:
     - light.dimmer_2_level
     - switch.strombrytare_5
     - switch.strombrytare_3
-    
 
 outdoor_lights:
   name: Belysning utomhus
@@ -69,23 +41,6 @@ misc:
   entities:
     - switch.strombrytare_4
     - input_boolean.all_asleep
-
-weather_overview:
-  name: Väder översikt
-  entities:
-    - sensor.pws_weather_1d_metric
-    - sensor.pws_temp_high_record_c
-    - sensor.pws_temp_high_1d_c
-    - sensor.pws_temp_low_1d_c
-    - sensor.pws_temp_low_record_c
-    - sensor.pws_precip_1d
-    - sensor.pws_precip_1d_mm
-    - sensor.pws_wind_kph
-    - sensor.pws_wind_1d_kph
-    - sensor.pws_alerts
-    - sensor.pws_uv
-    - sun.sun
-    - sensor.netatmo_regnmatare_rain_24
 
 transmission:
     name: Transmission
