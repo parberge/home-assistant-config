@@ -43,9 +43,6 @@
       entity_id: switch.strombrytare_2
     - service: switch.turn_on
       entity_id: switch.strombrytare_5
-    - service: switch.turn_on
-      entity_id: switch.strombrytare_3
-
 
 - alias: 'Telegram response no'
   hide_entity: true
@@ -90,8 +87,6 @@
         message: "Okej, tänder lampor"
     - service: switch.turn_on
       entity_id: switch.strombrytare_5
-    - service: switch.turn_off
-      entity_id: switch.strombrytare_3
     - service: light.turn_on
       data:
         entity_id: light.dimmer_2_level
