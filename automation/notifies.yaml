@@ -176,7 +176,7 @@
           {% endif %}
     - service: switch.turn_on
       entity_id: switch.strombrytare_5
-    - service: switch.turn_off
+    - service: switch.turn_on
       entity_id: switch.strombrytare_3
     - service: light.turn_on
       data:
