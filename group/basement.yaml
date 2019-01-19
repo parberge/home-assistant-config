@@ -8,6 +8,7 @@ basement:
     - sensor.ir_gw_basement
     - sensor.kamera_kallare
     - group.basement_entry
+    - binary_sensor.washing_machine
 
 home_theatre:
   name: Mediaspelare

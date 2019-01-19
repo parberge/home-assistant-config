@@ -5,6 +5,7 @@ default_view:
     - group.front_door
     - sensor.ssl_certificate_expiry
     - binary_sensor.brandlarmet
+    - binary_sensor.washing_machine
     - sensor.netatmo_barnrummet_noise
     - group.indoor_lights
     - group.outdoor_lights
