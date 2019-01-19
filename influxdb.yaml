@@ -29,6 +29,7 @@ include:
     - sensor.netatmo_regnmatare_rain
     - binary_sensor.basement_entry
     - media_player.vardagsrummet
+    - sensor.washing_machine_switch_power
 
 tags_attributes:
   - friendly_name
