@@ -180,3 +180,15 @@
       data:
         entity_id: light.dimmer_2_level
         brightness: 120
+
+
+- alias: "Tvätten klar"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.washing_machine
+    to: 'off'
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Tvätten'
+        message: "tvätten är klar!"
