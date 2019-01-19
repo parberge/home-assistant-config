@@ -137,7 +137,6 @@
     - service: homeassistant.turn_off
       entity_id: group.indoor_lights
 
-
 - alias: 'Sov gott'
   trigger:
     platform: state
@@ -146,3 +145,15 @@
   action:
     - service: homeassistant.turn_off
       entity_id: group.indoor_lights
+
+- alias: "Reset smoke alarm"
+  trigger:
+    platform: state
+    entity_id: sensor.brandvarnare_2_sensor_status
+    to: 'on'
+    for:
+      minutes: 5
+  action:
+    - service: homeassistant.turn_off
+      entity_id: binary_sensor.brandlarmet
+
