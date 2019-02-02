@@ -5,6 +5,7 @@ topfloor:
     - group.netatmo_topfloor
     - sensor.netatmopersonalweatherstatio
     - group.top_floor_lights
+    - group.top_floor_misc
 
 netatmo_topfloor:
   name: Klimat övervåningen
@@ -18,3 +19,8 @@ top_floor_lights:
   name: Belysning
   entities:
     - switch.strombrytare_5
+
+top_floor_misc:
+  name: Övrigt
+  entities:
+    - switch.strombrytare_3
