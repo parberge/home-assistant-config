@@ -50,6 +50,10 @@ switch.strombrytare_2:
   friendly_name: 'Strömbrytare belysning framsida'
   icon: mdi:lightbulb
 
+switch.strombrytare_3:
+  friendly_name: 'Strömbrytare luftfuktare övervåning'
+  icon: mdi:lightbulb
+
 switch.strombrytare_4:
   friendly_name: 'Strömbrytare laddare cykel'
   icon: mdi:battery-charging
