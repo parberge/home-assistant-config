@@ -1,0 +1,29 @@
+- alias: "Starta luftfuktaren i barnrummet"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.netatmo_barnrummet_humidity
+    below: 40
+    for:
+      minutes: 10
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Startar luftfuktaren'
+        message: |
+          Luftfuktigheten i barnrummet är nu: {{ states('sensor.netatmo_barnrummet_humidity') }}.
+    - service: switch.turn_on
+      entity_id: switch.strombrytare_3
+
+- alias: "Stoppa luftfuktaren i barnrummet"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.netatmo_barnrummet_humidity
+    above: 50
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Stoppar luftfuktaren'
+        message: |
+          Luftfuktigheten i barnrummet är nu: {{ states('sensor.netatmo_barnrummet_humidity') }}.
+    - service: switch.turn_off
+      entity_id: switch.strombrytare_3
