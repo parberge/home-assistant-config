@@ -29,7 +29,7 @@ main_floor_outside_lights:
     - switch.strombrytare_2
 
 main_floor_lights:
-  name: Belysing inomhus
+  name: Belysning entréplan
   icon: mdi:lightbulb
   entities:
     - light.dimmer_2_level
