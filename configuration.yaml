@@ -87,6 +87,8 @@ zwave:
       ignored: true
     "sensor.dimmer_*_sourcenodeid":
       ignored: true
+    "sensor.baksidadorr_*":
+      ignored: true
 
 camera:
   - platform: mjpeg
