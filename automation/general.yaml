@@ -44,13 +44,13 @@
     - service: switch.turn_on
       entity_id: switch.strombrytare_5
 
-- alias: 'Telegram response no'
+- alias: 'Telegram washing response done'
   hide_entity: true
   trigger:
     platform: event
     event_type: telegram_callback
     event_data:
-      data: '/nej'
+      data: '/washing_done'
   action:
     - service: telegram_bot.answer_callback_query
       data_template:
@@ -63,15 +63,15 @@
         inline_keyboard: []
     - service: notify.telegram
       data:
-        message: "Okej, tänder inga lampor"
+        message: "Ok, vad bra."
 
-- alias: 'Telegram response yes'
+- alias: 'Telegram washing responser reminder'
   hide_entity: true
   trigger:
     platform: event
     event_type: telegram_callback
     event_data:
-      data: '/yes'
+      data: '/washing_reminder'
   action:
     - service: telegram_bot.answer_callback_query
       data_template:
@@ -84,14 +84,7 @@
         inline_keyboard: []
     - service: notify.telegram
       data:
-        message: "Okej, tänder lampor"
-    - service: switch.turn_on
-      entity_id: switch.strombrytare_5
-    - service: light.turn_on
-      data:
-        entity_id: light.dimmer_2_level
-        brightness: 120
-
+        message: "Ursäkta, men jag kan inte göra detta än."
 
 - alias: 'Telegram response sleep no'
   hide_entity: true

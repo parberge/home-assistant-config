@@ -87,7 +87,7 @@
 - alias: 'baksida dörr notis'
   trigger:
     platform: state
-    entity_id: binary_sensor.sensor
+    entity_id: binary_sensor.baksidadorr_sensor
     to: 'on'
   condition:
     condition: and
@@ -111,7 +111,7 @@
     to: 'not_home'
   condition:
     - condition: state
-      entity_id: binary_sensor.sensor
+      entity_id: binary_sensor.baksidadorr_sensor
       state: 'on'
   action:
     - service: notify.telegram
@@ -161,6 +161,9 @@
     entity_id: binary_sensor.washing_machine
     to: 'off'
   action:
-    - service: notify.telegram
-      data:
+    - service: telegram_bot.send_message
+      data_template:
         message: "tvätten är klar!"
+        inline_keyboard:
+          - "Den är fixad:/washing_done"
+          - "Påminn mig senare:/washing_reminder"
