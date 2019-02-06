@@ -84,7 +84,9 @@
         inline_keyboard: []
     - service: notify.telegram
       data:
-        message: "Ursäkta, men jag kan inte göra detta än."
+        message: "Okej, påminner igen om 20 min"
+    - service: timer.start
+      entity_id: timer.laundry_reminder
 
 - alias: 'Telegram response sleep no'
   hide_entity: true
@@ -150,3 +152,12 @@
     - service: homeassistant.turn_off
       entity_id: binary_sensor.brandlarmet
 
+- alias: "tvätten påminnelse"
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.laundry_reminder
+  action:
+    - service: automation.trigger
+      entity_id: automation.tvatten_klar

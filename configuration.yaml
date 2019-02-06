@@ -118,3 +118,4 @@ script: !include scripts.yaml
 light: !include lights.yaml
 input_boolean: !include input_boolean.yaml
 cast: !include google_casts.yaml
+timer: !include timers.yaml
