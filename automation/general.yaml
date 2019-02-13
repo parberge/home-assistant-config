@@ -88,51 +88,7 @@
     - service: timer.start
       entity_id: timer.laundry_reminder
 
-- alias: 'Telegram response sleep no'
-  hide_entity: true
-  trigger:
-    platform: event
-    event_type: telegram_callback
-    event_data:
-      data: '/no_sleep'
-  action:
-    - service: telegram_bot.answer_callback_query
-      data_template:
-        callback_query_id: '{{ trigger.event.data.id }}'
-        message: 'OK'
-    - service: telegram_bot.edit_replymarkup
-      data_template:
-        message_id: '{{ trigger.event.data.message.message_id }}'
-        chat_id: '{{ trigger.event.data.chat_id }}'
-        inline_keyboard: []
-    - service: notify.telegram
-      data:
-        message: "Okej, släcker inga lampor"
-
-- alias: 'Telegram response sleep yes'
-  hide_entity: true
-  trigger:
-    platform: event
-    event_type: telegram_callback
-    event_data:
-      data: '/yes_sleep'
-  action:
-    - service: telegram_bot.answer_callback_query
-      data_template:
-        callback_query_id: '{{ trigger.event.data.id }}'
-        message: 'OK'
-    - service: telegram_bot.edit_replymarkup
-      data_template:
-        message_id: '{{ trigger.event.data.message.message_id }}'
-        chat_id: '{{ trigger.event.data.chat_id }}'
-        inline_keyboard: []
-    - service: notify.telegram
-      data:
-        message: "Okej, släcker lampor"
-    - service: homeassistant.turn_off
-      entity_id: group.indoor_lights
-
-- alias: 'Sov gott'
+- alias: 'Aktivera sovläge'
   trigger:
     platform: state
     entity_id: input_boolean.all_asleep
