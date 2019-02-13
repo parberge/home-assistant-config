@@ -117,3 +117,15 @@
   action:
     - service: automation.trigger
       entity_id: automation.tvatten_klar
+
+- alias: 'Släcker lampor'
+  trigger:
+    - platform: state
+      entity_id: group.device_tracker
+      from: 'home'
+      to: 'not_home'
+      for:
+        minutes: 20
+  action:
+    - service: light.turn_off
+      entity_id: light.dimmer_1_level, light.dimmer_2_level
