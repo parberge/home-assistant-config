@@ -100,16 +100,16 @@
         brightness: 120
         transition: 5
 
-- alias: "Släck lampa när kodi spelar"
+- alias: "Släck lampa när projector är igång"
   trigger:
     - platform: state
-      entity_id: media_player.kodi
-      to: 'playing'
+      entity_id: switch.projector
+      to: 'on'
   action:
     - service: light.turn_off
       data:
         entity_id: light.dimmer_1_level
-        transition: 5
+        transition: 120
 
 - alias: "Starta hembio"
   trigger:
