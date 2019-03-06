@@ -62,27 +62,6 @@ switch.strombrytare_5:
   friendly_name: 'Strömbrytare belysning fönster övervåning'
   icon: mdi:lightbulb
 
-sensor.pws_precip_1d:
-  friendly_name: 'Sannolikhet för regn'
-
-sensor.pws_temp_high_1d_c:
-  friendly_name: 'Högsta temperatur idag'
-
-sensor.pws_alerts:
-  friendly_name: 'Vädervarningar'
-
-sensor.pws_precip_1d_mm:
-  friendly_name: 'Regnintensitet'
-
-sensor.pws_temp_low_1d_c:
-  friendly_name: 'Lägsta temperatur idag'
-
-sensor.pws_wind_1d_kph:
-  friendly_name: 'Genomsnitt vindstyrka idag'
-
-sensor.pws_wind_kph:
-  friendly_name: 'Vindstyrka'
-
 sun.sun:
   friendly_name: Solståndet
 
