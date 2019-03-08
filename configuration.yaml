@@ -105,6 +105,18 @@ telegram_bot:
       - !secret telegram_chat_id
       - !secret telegram_par_chat_id
 
+
+transmission:
+  host: localhost
+  username: !secret transmission_user
+  password: !secret transmission_password
+  monitored_conditions:
+    - 'current_status'
+    - 'download_speed'
+    - 'upload_speed'
+    - 'active_torrents'
+
+
 influxdb: !include influxdb.yaml
 group: !include_dir_merge_named group/
 automation: !include_dir_merge_list automation/
@@ -117,5 +129,4 @@ notify: !include notifiers.yaml
 script: !include scripts.yaml
 light: !include lights.yaml
 input_boolean: !include input_boolean.yaml
-cast: !include google_casts.yaml
 timer: !include timers.yaml

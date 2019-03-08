@@ -55,13 +55,3 @@
           {% else %}
             Stängd
           {% endif %}
-
-- platform: transmission
-  host: localhost
-  username: !secret transmission_user
-  password: !secret transmission_password
-  monitored_variables:
-    - 'current_status'
-    - 'download_speed'
-    - 'upload_speed'
-    - 'active_torrents'
