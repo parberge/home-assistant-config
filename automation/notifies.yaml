@@ -144,7 +144,7 @@
           Ännu en härlig dag att se fram emot.
           Prognos just nu:
           {{ states.weather.smhi_home.state }}
-          Temperaturen just nu:  {{ {{ states.sensor.netatmo_utomhus_temperature.state_with_unit }} }} 
+          Temperaturen just nu:  {{ states.sensor.netatmo_utomhus_temperature.state_with_unit }}
           {% if states.sensor.netatmo_regnmatare_sum_rain_24.state|float > 0 %}
           Det har regnat {{ states.sensor.netatmo_regnmatare_sum_rain_24.state_with_unit }} sedan midnatt
           {% endif %}
