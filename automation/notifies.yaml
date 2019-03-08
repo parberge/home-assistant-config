@@ -60,6 +60,7 @@
   action:
     - service: notify.telegram
       data:
+        target: !secret telegram_par_chat_id
         message: 'Ny enhet spåras'
 
 - alias: "Enhet offline"
@@ -70,6 +71,7 @@
   action:
     - service: notify.telegram
       data:
+        target: !secret telegram_par_chat_id
         title: 'Varning'
         message: "Kameran i källaren är offline"
 
@@ -81,6 +83,7 @@
   action:
     - service: notify.telegram
       data_template:
+        target: !secret telegram_par_chat_id
         title: 'Varning'
         message: 'Sensor {{ trigger.to_state.attributes.friendly_name }} har lågt batteri'
 
@@ -127,6 +130,7 @@
   action:
     - service: notify.telegram
       data_template:
+        target: !secret telegram_par_chat_id
         title: 'Varning'
         message: "{{ trigger.to_state.attributes.friendly_name }} är otillgänglig. Någon kanske trycke på knappen?"
 
