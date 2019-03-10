@@ -17,3 +17,23 @@
   action:
     - service: switch.turn_off
       entity_id: switch.strombrytare_3
+
+- alias: "Tänd nattljus i barnens rum"
+  trigger:
+    platform: time
+    at: '22:00:00'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.light_2
+        color_name: red
+        brightness: 50
+
+- alias: "Släck nattljus i barnens rum"
+  trigger:
+    platform: time
+    at: '07:00:00'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.light_2
