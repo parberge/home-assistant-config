@@ -28,7 +28,7 @@
     - service: switch.turn_off
       entity_id: switch.strombrytare_2
     - service: switch.turn_off
-      entity_id: switch.strombrytare_5
+      entity_id: switch.ikea_switch_2
 
 - alias: "Tänd lampor när solen går ned"
   trigger:
@@ -42,7 +42,7 @@
     - service: switch.turn_on
       entity_id: switch.strombrytare_2
     - service: switch.turn_on
-      entity_id: switch.strombrytare_5
+      entity_id: switch.ikea_switch_2
 
 - alias: 'Telegram washing response done'
   hide_entity: true

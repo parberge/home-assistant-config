@@ -58,10 +58,6 @@ switch.strombrytare_4:
   friendly_name: 'Strömbrytare laddare cykel'
   icon: mdi:battery-charging
 
-switch.strombrytare_5:
-  friendly_name: 'Strömbrytare belysning fönster övervåning'
-  icon: mdi:lightbulb
-
 sun.sun:
   friendly_name: Solståndet
 

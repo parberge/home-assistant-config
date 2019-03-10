@@ -153,7 +153,7 @@
           Det har regnat {{ states.sensor.netatmo_regnmatare_sum_rain_24.state_with_unit }} sedan midnatt
           {% endif %}
     - service: switch.turn_on
-      entity_id: switch.strombrytare_5
+      entity_id: switch.ikea_switch_2
     - service: light.turn_on
       data:
         entity_id: light.dimmer_2_level

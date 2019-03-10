@@ -6,7 +6,7 @@ indoor_lights:
   entities:
     - light.dimmer_1_level
     - light.dimmer_2_level
-    - switch.strombrytare_5
+    - switch.ikea_switch_2
 
 device_tracker:
   name: Enheter
