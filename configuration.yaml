@@ -12,6 +12,9 @@ config:
 
 recorder:
   purge_keep_days: 10
+  exclude:
+    domains:
+      - automation
 
 http:
   base_url: !secret base_url
@@ -52,7 +55,7 @@ verisure:
 logger:
   default: warning
   logs:
-    homeassistant.components.rfxtrx: debug
+    homeassistant.components.rfxtrx: warning
     homeassistant.components.zwave: warning
     homeassistant.components.sensor.netatmo: warning
 
