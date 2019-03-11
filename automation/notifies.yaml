@@ -127,6 +127,8 @@
     platform: state
     entity_id: light.lampa_ytterdorren
     to: 'unavailable'
+    for:
+      minutes: 10
   action:
     - service: notify.telegram
       data_template:
