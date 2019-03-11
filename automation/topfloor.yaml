@@ -1,14 +1,14 @@
 - alias: "Starta luftfuktaren i barnrummet"
   trigger:
-    platform: numeric_state
-    entity_id: sensor.netatmo_barnrummet_humidity
-    below: 40
-    for:
-      minutes: 10
+    platform: time_pattern
+    minutes: 5
   condition:
     - condition: time
       after: '18:00:00'
       before: '07:00:00'
+    - condition: numeric_state
+      entity_id: sensor.netatmo_barnrummet_humidity
+      below: 40
   action:
     - service: switch.turn_on
       entity_id: switch.ikea_switch_1
@@ -19,7 +19,7 @@
       entity_id: sensor.netatmo_barnrummet_humidity
       above: 50
     - platform: time
-      at: '09:00:00'
+      at: '07:00:00'
   action:
     - service: switch.turn_off
       entity_id: switch.ikea_switch_1
