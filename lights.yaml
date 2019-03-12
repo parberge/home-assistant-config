@@ -3,7 +3,7 @@
 
 - platform: yeelight
   devices:
-    192.168.7.117:
+    192.168.8.101:
       name: Lampa ytterdörren
       transition: 1000
       use_music_mode: False
