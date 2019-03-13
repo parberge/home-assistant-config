@@ -145,11 +145,15 @@
   action:
     - service: notify.telegram
       data:
-        title: 'God morgon'
+        title: 'God morgon!'
         message: |
           Ännu en härlig dag att se fram emot.
           Prognos just nu:
           {{ states.weather.smhi_home.state }}
+          Förväntad mängd regn:
+          {{ states.weather.smhi_home.attributes.forecast[0].precipitation }} mm
+          Förväntad lägsta temperatur idag:
+          {{ states.weather.smhi_home.attributes.forecast[0].templow }} grader
           Temperaturen just nu:  {{ states.sensor.netatmo_utomhus_temperature.state_with_unit }}
           {% if states.sensor.netatmo_regnmatare_sum_rain_24.state|float > 0 %}
           Det har regnat {{ states.sensor.netatmo_regnmatare_sum_rain_24.state_with_unit }} sedan midnatt
@@ -171,5 +175,4 @@
       data_template:
         message: "tvätten är klar!"
         inline_keyboard:
-          - "Den är fixad:/washing_done"
           - "Påminn mig senare:/washing_reminder"
