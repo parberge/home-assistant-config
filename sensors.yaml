@@ -50,7 +50,7 @@
     baksida_dorr:
       friendly_name: 'Baksida dörr status'
       value_template: >-
-          {% if is_state('binary_sensor.sensor', 'on') %}
+          {% if is_state('binary_sensor.baksidadorr_sensor', 'on') %}
             Öppen
           {% else %}
             Stängd

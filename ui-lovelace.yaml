@@ -91,7 +91,7 @@ views:
         title: Belysing inomhus
         type: entities
       - entities:
-          - entity: binary_sensor.baksidadorr_sensor
+          - entity: sensor.baksida_dorr
           - entity: switch.yale_lock
         show_header_toggle: false
         title: Dörrar
