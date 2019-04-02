@@ -100,8 +100,8 @@ zwave:
 camera:
   - platform: mjpeg
     name: 'Källaringång'
-    mjpeg_url: http://192.168.7.20/video.cgi
-    still_image_url: http://192.168.7.20/image.jpg
+    mjpeg_url: !secret camera_basement_mjpeg_url
+    still_image_url: !secret camera_basement_image_url
     username: !secret basement_cam_user
     password: !secret basement_cam_pass
 
