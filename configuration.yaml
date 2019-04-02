@@ -17,6 +17,9 @@ recorder:
     domains:
       - automation
 
+lovelace:
+  mode: yaml
+
 http:
   base_url: !secret base_url
 

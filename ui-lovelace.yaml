@@ -1,0 +1,180 @@
+title: Home
+views:
+  - badges: []
+    cards:
+      - entity: weather.smhi_home
+        name: Prognos
+        type: weather-forecast
+      - entities:
+          - entity: input_boolean.all_asleep
+            icon: 'mdi:sleep'
+            name: Dags att sova?
+            tap_action:
+              action: toggle
+        type: glance
+      - entities:
+          - entity: device_tracker.par_telefon
+          - entity: device_tracker.honor_8
+        show_header_toggle: false
+        title: Människor
+        type: entities
+      - entities:
+          - entity: light.dimmer_1_level
+          - entity: light.dimmer_2_level
+          - entity: switch.ikea_switch_2
+        show_header_toggle: true
+        title: Lampor inomhus
+        type: entities
+      - entities:
+          - switch.strombrytare_1
+          - switch.strombrytare_2
+          - light.lampa_ytterdorren
+        title: Belysning utomhus
+        type: entities
+      - entities:
+          - entity: switch.strombrytare_4
+          - entity: switch.ikea_switch_1
+        show_header_toggle: false
+        title: Generellt
+        type: entities
+      - entities:
+          - sensor.netatmo_utomhus_humidity
+          - sensor.netatmo_utomhus_temperature
+        type: history-graph
+    icon: 'mdi:home'
+    path: home
+    title: Hem
+  - badges: []
+    cards:
+      - cards:
+          - entity: switch.ikea_switch_2
+            hold_action:
+              action: more-info
+            icon: 'mdi:lightbulb'
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: switch.ikea_switch_1
+            hold_action:
+              action: more-info
+            tap_action:
+              action: toggle
+            type: entity-button
+        type: horizontal-stack
+      - entity: light.light_2
+        name: Nattlampa barnrummet
+        type: light
+      - entities:
+          - entity: automation.aktivera_sovlage
+          - entity: automation.tand_nattljus_i_barnens_rum
+          - entity: automation.starta_luftfuktaren_i_barnrummet
+          - entity: automation.stoppa_luftfuktaren_i_barnrummet
+        show_header_toggle: false
+        title: Automationer övervåningen
+        type: entities
+      - entities:
+          - sensor.netatmo_barnrummet_humidity
+          - sensor.netatmo_barnrummet_temperature
+        type: history-graph
+    path: topfloor
+    title: Övervåningen
+  - badges: []
+    cards:
+      - entities:
+          - light.lampa_ytterdorren
+          - switch.strombrytare_1
+          - switch.strombrytare_2
+        title: Belysning utomhus
+        type: entities
+      - entities:
+          - light.dimmer_2_level
+        title: Belysing inomhus
+        type: entities
+      - entities:
+          - entity: binary_sensor.baksidadorr_sensor
+          - entity: switch.yale_lock
+        show_header_toggle: false
+        title: Dörrar
+        type: entities
+      - card:
+          entities:
+            - media_player.vardagsrummet
+          type: entities
+        conditions:
+          - entity: media_player.vardagsrummet
+            state: playing
+        type: conditional
+      - entities:
+          - sensor.netatmo_vardagsrummet_humidity
+          - sensor.netatmo_vardagsrummet_temperature
+        type: history-graph
+      - entities:
+          - entity: automation.baksida_dorr_notis
+          - entity: automation.baksida_dorr_oppen
+          - entity: automation.glomde_lasa_dorren_notis
+        show_header_toggle: false
+        title: Automationer bottenvåning
+        type: entities
+    path: mainfloor
+    title: bottenvåningen
+  - badges:
+      - sensor.ir_gw_basement
+      - sensor.kamera_kallare
+      - binary_sensor.ps4
+      - binary_sensor.basement_entry
+    cards:
+      - entity: switch.projector
+        hold_action:
+          action: more-info
+        tap_action:
+          action: toggle
+        type: entity-button
+      - cards:
+          - entity: media_player.kallaren
+            type: media-control
+          - entity: media_player.marantz_sr5007
+            type: media-control
+          - entity: media_player.kodi
+            type: media-control
+        type: vertical-stack
+      - entities:
+          - light.dimmer_1_level
+        title: Belysning
+        type: entities
+      - camera_image: camera.kallaringang
+        entities: []
+        type: picture-glance
+      - entities:
+          - sensor.netatmo_badrum_kallare_humidity
+          - sensor.netatmo_badrum_kallare_temperature
+        type: history-graph
+    path: basement
+    title: Källaren
+  - badges: []
+    cards:
+      - cards:
+          - entities:
+              - entity: sensor.transmission_active_torrents
+              - entity: sensor.transmission_status
+            type: entities
+          - entities:
+              - sensor.transmission_down_speed
+              - sensor.transmission_up_speed
+            type: history-graph
+        name: Transmission
+        type: vertical-stack
+      - entities:
+          - sensor.netatmo_badrum_kallare_battery
+          - sensor.netatmo_vardagsrummet_battery
+          - sensor.netatmo_utomhus_battery
+          - sensor.netatmo_regnmatare_battery
+        show_header_toggle: false
+        title: Batteristatus
+        type: entities
+      - entities:
+          - input_boolean.guest_mode
+        show_header_toggle: false
+        title: Gästläge
+        type: entities
+    path: misc
+    title: Misc
