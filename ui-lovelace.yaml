@@ -75,6 +75,7 @@ views:
       - entities:
           - sensor.netatmo_barnrummet_humidity
           - sensor.netatmo_barnrummet_temperature
+          - sensor.netatmo_barnrummet_co2
         type: history-graph
     path: topfloor
     title: Övervåningen
@@ -107,6 +108,7 @@ views:
       - entities:
           - sensor.netatmo_vardagsrummet_humidity
           - sensor.netatmo_vardagsrummet_temperature
+          - sensor.netatmo_vardagsrummet_co2
         type: history-graph
       - entities:
           - entity: automation.baksida_dorr_notis
@@ -147,6 +149,7 @@ views:
       - entities:
           - sensor.netatmo_badrum_kallare_humidity
           - sensor.netatmo_badrum_kallare_temperature
+          - sensor.netatmo_badrum_kallare_co2
         type: history-graph
     path: basement
     title: Källaren
