@@ -111,6 +111,7 @@ telegram_bot:
     allowed_chat_ids:
       - !secret telegram_chat_id
       - !secret telegram_par_chat_id
+      - !secret telegram_malena_chat_id
 
 
 transmission:
