@@ -1,0 +1,11 @@
+- platform: mjpeg
+  name: 'Källaringång'
+  mjpeg_url: !secret camera_basement_mjpeg_url
+  still_image_url: !secret camera_basement_image_url
+  username: !secret basement_cam_user
+  password: !secret basement_cam_pass
+
+- platform: uvc
+  nvr: !secret nvr_ip
+  key: !secret nvr_camera_key
+  password: !secret nvr_camera_password
