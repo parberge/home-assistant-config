@@ -51,6 +51,7 @@
   action:
     service: notify.telegram
     data:
+      target: !secret telegram_par_chat_id
       message: 'Rörelse upptäckt i källaringången'
 
 - alias: "Ny enhet hittad notis"
@@ -59,9 +60,9 @@
     event_type: device_tracker_new_device
   action:
     - service: notify.telegram
-      data:
+      data_template:
         target: !secret telegram_par_chat_id
-        message: 'Ny enhet spåras'
+        message: "Ny enhet spåras: {{ trigger.event.data }}"
 
 - alias: "Enhet offline"
   trigger:
