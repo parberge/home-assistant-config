@@ -23,3 +23,8 @@
   name: basement_entry
   state_topic: "emqtt/noreplypeers.se"
   device_class: motion
+
+- platform: mqtt
+  name: mainfloor
+  state_topic: "emqtt/camera_mainfloorno.where"
+  device_class: motion
