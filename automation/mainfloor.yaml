@@ -30,3 +30,23 @@
       data_template:
         title: 'Dörren låst'
         message: 'Jag låste dörren för ni är inte hemma längre'
+
+- alias: "Rörelse bottenvåningen"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.mainfloor
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.device_tracker
+        state: 'not_home'
+      - condition: state
+        entity_id: input_boolean.guest_mode
+        state: 'off'
+  action:
+    service: notify.telegram
+    data:
+      target: !secret telegram_par_chat_id
+      message: "Rörelse upptäckt på bottenvåningen klockan {{ now().strftime('%H:%M') }}"
