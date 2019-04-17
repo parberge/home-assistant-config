@@ -1,6 +1,3 @@
-group.all_automations:
-  hidden: false
-
 sensor.netatmo_barnrummet_temperature:
   friendly_name: 'Barnrummet Temp'
 sensor.netatmo_barnrummet_humidity:
