@@ -20,3 +20,9 @@ outdoor_lights:
     - switch.strombrytare_1
     - switch.strombrytare_2
     - light.lampa_ytterdorren
+
+vacation_toggle:
+  entities:
+    - automation.telegram_washing_responser_reminder
+    - automation.tand_nattljus_i_barnens_rum
+    - automation.starta_luftfuktaren_i_barnrummet

@@ -108,3 +108,33 @@
   action:
     - service: light.turn_off
       entity_id: light.dimmer_1_level, light.dimmer_2_level
+
+- alias: 'Aktivera semesterläge'
+  trigger:
+    platform: state
+    entity_id: input_boolean.vacation_mode
+    to: 'on'
+  action:
+    - service: homeassistant.turn_off
+      entity_id: group.vacation_toggle
+    - service: notify.telegram
+      data_template:
+        message: |
+          Semesterläge aktiverat!
+          Glöm inte:
+            * Slänga sopor
+            * Låsa källardörren ordentligt
+            * Stänga fönster
+            * Ta med packningen :)
+
+- alias: 'Deaktivera semesterläge'
+  trigger:
+    platform: state
+    entity_id: input_boolean.vacation_mode
+    to: 'off'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: group.vacation_toggle
+    - service: notify.telegram
+      data_template:
+        message: "Semesterläge deaktiverat!"

@@ -1,9 +1,9 @@
 guest_mode:
     name: Gästläge
     initial: 'off'
-food_notify:
-    name: Malena matlåda
-    initial: 'on'
 all_asleep:
     name: God natt
     initial: 'off'
+vacation_mode:
+    name: Semesterläge
+    

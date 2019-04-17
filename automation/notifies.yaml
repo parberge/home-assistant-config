@@ -110,9 +110,12 @@
 
 - alias: 'Baksida dörr öppen'
   trigger:
-    platform: state
-    entity_id: group.device_tracker
-    to: 'not_home'
+    - platform: state
+      entity_id: group.device_tracker
+      to: 'not_home'
+    - platform: state
+      entity_id: input_boolean.vacation_mode
+      to: 'on'
   condition:
     - condition: state
       entity_id: binary_sensor.baksidadorr_sensor
@@ -121,7 +124,7 @@
     - service: notify.telegram
       data_template:
         title: 'Varning'
-        message: 'Baksida dörr fortfarande öppen, men ingen av er är hemma längre'
+        message: 'Baksida dörr fortfarande öppen'
 
 - alias: 'Lampa offline'
   trigger:
