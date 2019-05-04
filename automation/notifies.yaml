@@ -105,6 +105,7 @@
   action:
     - service: notify.telegram
       data_template:
+        target: !secret telegram_par_chat_id
         title: 'Varning'
         message: 'Baksida dörr öppnades och ingen av er är hemma vad jag kan se'
 
@@ -123,6 +124,7 @@
   action:
     - service: notify.telegram
       data_template:
+        target: !secret telegram_par_chat_id
         title: 'Varning'
         message: 'Baksida dörr fortfarande öppen'
 

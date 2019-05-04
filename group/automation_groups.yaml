@@ -13,6 +13,7 @@ device_tracker:
   entities:
     - device_tracker.honor_8
     - device_tracker.par_telefon
+    - device_tracker.nexus_6p
 
 outdoor_lights:
   name: Belysning utomhus
