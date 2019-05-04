@@ -3,10 +3,11 @@
   api_key: !secret hass_pushover_api_key
   user_key: !secret pushover_user_key
 
-- name: html5
-  platform: html5
-  gcm_api_key: !secret google_server_key
-  gcm_sender_id: !secret google_sender_id
+- platform: html5
+  name: html5
+  vapid_pub_key: !secret vapid_pub_key
+  vapid_prv_key: !secret vapid_prv_key
+  vapid_email: !secret vapid_email
 
 - name: kodi
   platform: kodi
