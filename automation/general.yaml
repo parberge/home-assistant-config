@@ -1,21 +1,3 @@
-- alias: 'lock notify action'
-  trigger:
-    - platform: event
-      event_type: html5_notification.clicked
-      event_data:
-        action: lock_door
-  action:
-    - service: script.lock_door
-
-- alias: 'Lås upp notis action'
-  trigger:
-    - platform: event
-      event_type: html5_notification.clicked
-      event_data:
-        action: unlock_door 
-  action:
-    - service: script.unlock_door
-
 - alias: "Släck lampor när solen går upp"
   trigger:
     platform: sun
