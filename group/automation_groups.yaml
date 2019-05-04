@@ -5,7 +5,6 @@ indoor_lights:
   name: Belysning inomhus
   entities:
     - light.dimmer_1_level
-    - light.dimmer_2_level
     - switch.ikea_switch_2
 
 device_tracker:

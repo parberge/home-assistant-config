@@ -89,7 +89,7 @@
         minutes: 20
   action:
     - service: light.turn_off
-      entity_id: light.dimmer_1_level, light.dimmer_2_level
+      entity_id: light.dimmer_1_level
 
 - alias: 'Aktivera semesterläge'
   trigger:

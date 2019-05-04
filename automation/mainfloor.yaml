@@ -1,15 +1,3 @@
-- alias: "Tänd hallen när dörren blir upplåst"
-  trigger:
-    - platform: state
-      entity_id: lock.ytterdorren
-      from: 'locked'
-      to: 'unlocked'
-  action:
-    - service: light.turn_on
-      data:
-        entity_id: light.dimmer_2_level
-        brightness: 120
-
 - alias: 'Glömde låsa dörren notis'
   trigger:
     - platform: state
@@ -34,7 +22,7 @@
 - alias: "Rörelse bottenvåningen"
   trigger:
     - platform: state
-      entity_id: binary_sensor.mainfloor
+      entity_id: binary_sensor.mainfloor, binary_sensor.tradfri_motion_sensor
       to: 'on'
   condition:
     condition: and
@@ -50,3 +38,25 @@
     data:
       target: !secret telegram_par_chat_id
       message: "Rörelse upptäckt på bottenvåningen klockan {{ now().strftime('%H:%M') }}"
+
+- alias: "Tänd lampor hallen"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.tradfri_motion_sensor
+      to: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.dimmer_2_level
+        brightness: 120
+
+- alias: "Släck lampor hallen"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.tradfri_motion_sensor
+      to: 'off'
+      for:
+        minutes: 5
+  action:
+    - service: light.turn_off
+      entity_id: light.dimmer_2_level
