@@ -120,3 +120,15 @@
     - service: notify.telegram
       data_template:
         message: "Semesterläge deaktiverat!"
+
+- alias: 'Toggle sleep mode'
+  initial_state: 'on'
+  trigger:
+    platform: event
+    event_type: deconz_event
+    event_data:
+      id: tradfri_remote_control
+      event: 1002
+  action:
+    service: input_boolean.toggle
+    entity_id: input_boolean.all_asleep
