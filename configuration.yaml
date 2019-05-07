@@ -54,12 +54,18 @@ verisure:
   door_window: 0
   code_digits: 6
 
+google_assistant:
+  project_id: !secret google_project_id
+  api_key: !secret google_api_key
+  
 logger:
   default: warning
-  logs:
-    homeassistant.components.rfxtrx: warning
-    homeassistant.components.zwave: warning
-    homeassistant.components.sensor.netatmo: warning
+  #logs:
+    #homeassistant.components.rfxtrx: debug
+    #homeassistant.components.zwave: debug
+    #homeassistant.components.sensor.netatmo: debug
+    #pydeconz: debug
+    #homeassistant.components.deconz: debug
 
 mqtt:
   broker: localhost
@@ -67,12 +73,6 @@ mqtt:
 rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
   debug: True
-
-panel_iframe:
-  grafana:
-    title: 'Statistik'
-    icon: mdi:elevation-rise
-    url: 'https://graph.peers.se/dashboard/db/home-assistant?orgId=1&theme=light'
 
 zwave:
   usb_path: /dev/serial/by-id/usb-0658_0200-if00
