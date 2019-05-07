@@ -22,7 +22,7 @@
 - alias: "Rörelse bottenvåningen"
   trigger:
     - platform: state
-      entity_id: binary_sensor.mainfloor, binary_sensor.tradfri_motion_sensor
+      entity_id: binary_sensor.mainfloor_movement
       to: 'on'
   condition:
     condition: and
