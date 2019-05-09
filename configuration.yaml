@@ -53,11 +53,18 @@ verisure:
   mouse: 0
   door_window: 0
   code_digits: 6
+  default_lock_code: !secret verisure_door_pin
 
 google_assistant:
   project_id: !secret google_project_id
   api_key: !secret google_api_key
-  
+  secure_devices_pin: !secret google_secure_device_pin
+  exposed_domains:
+    - switch
+    - light
+    - lock
+    - media_player
+
 logger:
   default: warning
   #logs:
