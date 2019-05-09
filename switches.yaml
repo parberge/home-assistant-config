@@ -9,17 +9,6 @@
     0b11000281bc0cfe06010f70:
       name: strombrytare_4
 
-- platform: template
-  switches:
-    yale_lock:
-        value_template: "{{ is_state('lock.ytterdorren', 'locked') }}"
-        turn_on:
-          service: script.lock_door
-          entity_id: lock.ytterdorren
-        turn_off:
-          service: script.unlock_door
-          entity_id: lock.ytterdorren
-
 - platform: broadlink
   host: 192.168.7.119
   mac: '34:EA:34:40:84:CE'

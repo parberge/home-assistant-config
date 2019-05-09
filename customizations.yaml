@@ -29,10 +29,6 @@ sensor.netatmo_utomhus_humidity:
 sensor.netatmo_regnmatare_rain:
   friendly_name: 'Mängd Regn'
 
-switch.yale_lock:
-  friendly_name: 'Låset ytterdörren'
-  icon: mdi:lock
-
 switch.projector:
   icon: mdi:projector
 
