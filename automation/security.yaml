@@ -1,0 +1,84 @@
+- alias: 'Arm alarm when no one home'
+  trigger:
+    - platform: state
+      entity_id: group.family
+      to: not_home
+      for:
+        minutes: 10
+  condition: 
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: disarmed
+  action:
+    - service: alarm_control_panel.alarm_arm_away
+      entity_id: alarm_control_panel.ha_alarm
+    - service: notify.telegram
+      data:
+        target: !secret telegram_par_chat_id
+        title: 'Aktiverar larmet'
+        message: "Ingen hemma sedan 10 minuter tillbaka klockan {{ now().strftime('%H:%M') }}"
+
+- alias: 'Disarm when home'
+  trigger:
+    - platform: state
+      entity_id: group.family
+      to: home
+  condition: 
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: armed_away
+  action:
+    - service: alarm_control_panel.alarm_arm_home
+      entity_id: alarm_control_panel.ha_alarm
+    - service: notify.telegram
+      data:
+        target: !secret telegram_par_chat_id
+        title: 'Deaktiverar larmet'
+        message: "Deaktiverat av att någon är hemma klockan  {{ now().strftime('%H:%M') }}"
+
+- alias: 'Set movement to off in basement'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.basement_entry
+      to: 'on'
+      for:
+        minutes: 5
+  action:
+    service: mqtt.publish
+    data:
+        topic: 'emqtt/noreplypeers.se'
+        payload: 'OFF'
+
+- alias: 'Trigger alarm while armed away'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.baksidadorr_sensor
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.mainfloor
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.basement_entry
+      to: 'on'
+    - platform: state
+      entity_id: lock.ytterdorren
+      to: 'unlocked'
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: armed_away
+  action:
+    service: alarm_control_panel.alarm_trigger
+    entity_id: alarm_control_panel.ha_alarm
+
+- alias: 'Send notification when alarm triggered'
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: 'triggered'
+  action:
+    - service: notify.telegram
+      data:
+        target: !secret telegram_par_chat_id
+        title: "ALARM!"
+        message: "Larmet utlöst! Klockan {{ now().strftime('%H:%M') }}"
