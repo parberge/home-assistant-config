@@ -130,6 +130,10 @@ yeelight:
       use_music_mode: False
       save_on_change: False
 
+
+alarm_control_panel:
+  - platform: manual
+  
 influxdb: !include influxdb.yaml
 group: !include_dir_merge_named group/
 automation: !include_dir_merge_list automation/
