@@ -1,45 +1,3 @@
-- alias: 'Glömde låsa dörren notis'
-  trigger:
-    - platform: state
-      entity_id: group.device_tracker
-      from: 'home'
-      to: 'not_home'
-      for:
-        minutes: 5
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: lock.ytterdorren
-        state: 'unlocked'
-  action:
-    - service: lock.lock
-      entity_id: lock.ytterdorren
-    - service: notify.telegram
-      data_template:
-        title: 'Dörren låst'
-        message: 'Jag låste dörren för ni är inte hemma längre'
-
-- alias: "Rörelse bottenvåningen"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.mainfloor_movement
-      to: 'on'
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: group.device_tracker
-        state: 'not_home'
-      - condition: state
-        entity_id: input_boolean.guest_mode
-        state: 'off'
-  action:
-    service: notify.telegram
-    data:
-      target: !secret telegram_par_chat_id
-      message: "Rörelse upptäckt på bottenvåningen klockan {{ now().strftime('%H:%M') }}"
-
 - alias: "Tänd lampor hallen"
   trigger:
     - platform: state
@@ -57,7 +15,7 @@
       entity_id: binary_sensor.tradfri_motion_sensor
       to: 'off'
       for:
-        minutes: 5
+        minutes: 2
   action:
     - service: light.turn_off
       entity_id: light.dimmer_2_level

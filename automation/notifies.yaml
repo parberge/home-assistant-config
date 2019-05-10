@@ -14,26 +14,6 @@
       data:
         message: "Verkar som brandlarmet har utlösts klockan {{ now().strftime('%H:%M') }}!"
 
-- alias: "Rörelse i källaren"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.basement_entry
-      to: 'on'
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: group.device_tracker
-        state: 'not_home'
-      - condition: state
-        entity_id: input_boolean.guest_mode
-        state: 'off'
-  action:
-    service: notify.telegram
-    data:
-      target: !secret telegram_par_chat_id
-      message: 'Rörelse upptäckt i källaringången'
-
 - alias: "Ny enhet hittad notis"
   trigger:
     platform: event
@@ -68,31 +48,10 @@
         title: 'Varning'
         message: 'Sensor {{ trigger.to_state.attributes.friendly_name }} har lågt batteri'
 
-- alias: 'baksida dörr notis'
-  trigger:
-    platform: state
-    entity_id: binary_sensor.baksidadorr_sensor
-    to: 'on'
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: group.device_tracker
-        state: 'not_home'
-      - condition: state
-        entity_id: input_boolean.guest_mode
-        state: 'off'
-  action:
-    - service: notify.telegram
-      data_template:
-        target: !secret telegram_par_chat_id
-        title: 'Varning'
-        message: 'Baksida dörr öppnades och ingen av er är hemma vad jag kan se'
-
 - alias: 'Baksida dörr öppen'
   trigger:
     - platform: state
-      entity_id: group.device_tracker
+      entity_id: group.family
       to: 'not_home'
     - platform: state
       entity_id: input_boolean.vacation_mode
@@ -121,7 +80,6 @@
         target: !secret telegram_par_chat_id
         title: 'Varning'
         message: "{{ trigger.to_state.attributes.friendly_name }} är otillgänglig. Någon kanske trycke på knappen?"
-
 
 - alias: 'God morgon'
   trigger:
