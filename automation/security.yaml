@@ -1,14 +1,19 @@
-- alias: 'Arm alarm when no one home'
+- alias: 'Aktivera larmet när ingen är hemma'
   trigger:
     - platform: state
       entity_id: group.family
       to: not_home
       for:
         minutes: 10
-  condition: 
-    - condition: state
-      entity_id: alarm_control_panel.ha_alarm
-      state: disarmed
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: disarmed
+      - condition: state
+        entity_id: input_boolean.guest_mode
+        state: 'off'
   action:
     - service: alarm_control_panel.alarm_arm_away
       entity_id: alarm_control_panel.ha_alarm
@@ -18,7 +23,7 @@
         title: 'Aktiverar larmet'
         message: "Ingen hemma sedan 10 minuter tillbaka klockan {{ now().strftime('%H:%M') }}"
 
-- alias: 'Disarm when home'
+- alias: 'Deaktivera larmet när någon är hemma'
   trigger:
     - platform: state
       entity_id: group.family
@@ -36,7 +41,7 @@
         title: 'Deaktiverar larmet'
         message: "Deaktiverat av att någon är hemma klockan  {{ now().strftime('%H:%M') }}"
 
-- alias: 'Set movement to off in basement'
+- alias: 'Sätt rörelse till av i källaren'
   trigger:
     - platform: state
       entity_id: binary_sensor.basement_entry
@@ -49,7 +54,7 @@
         topic: 'emqtt/noreplypeers.se'
         payload: 'OFF'
 
-- alias: 'Trigger alarm while armed away'
+- alias: 'Trigga larmet när det är larmat'
   trigger:
     - platform: state
       entity_id: binary_sensor.baksidadorr_sensor
@@ -71,7 +76,7 @@
     service: alarm_control_panel.alarm_trigger
     entity_id: alarm_control_panel.ha_alarm
 
-- alias: 'Send notification when alarm triggered'
+- alias: 'Skicka notis när larmet triggas'
   trigger:
     - platform: state
       entity_id: alarm_control_panel.ha_alarm
@@ -82,3 +87,24 @@
         target: !secret telegram_par_chat_id
         title: "ALARM!"
         message: "Larmet utlöst! Klockan {{ now().strftime('%H:%M') }}"
+
+- alias: 'Lås dörren automatiskt'
+  trigger:
+    - platform: state
+      entity_id: group.family
+      to: 'not_home'
+      for:
+        minutes: 5
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: lock.ytterdorren
+        state: 'unlocked'
+  action:
+    - service: lock.lock
+      entity_id: lock.ytterdorren
+    - service: notify.telegram
+      data_template:
+        title: 'Dörren låst'
+        message: 'Jag låste dörren för ni är inte hemma längre'
