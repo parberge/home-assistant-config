@@ -82,11 +82,10 @@
 - alias: 'Släcker lampor'
   trigger:
     - platform: state
-      entity_id: group.device_tracker
-      from: 'home'
+      entity_id: group.family
       to: 'not_home'
       for:
-        minutes: 20
+        minutes: 5
   action:
     - service: light.turn_off
       entity_id: light.dimmer_1_level
