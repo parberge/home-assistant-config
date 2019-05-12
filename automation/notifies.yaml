@@ -56,6 +56,9 @@
     - platform: state
       entity_id: input_boolean.vacation_mode
       to: 'on'
+    - platform: state
+      entity_id: input_boolean.all_asleep
+      to: 'on'
   condition:
     - condition: state
       entity_id: binary_sensor.baksidadorr_sensor
