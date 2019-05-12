@@ -1,10 +1,13 @@
-- alias: 'Aktivera larmet när ingen är hemma'
+- alias: 'Aktivera larmet'
   trigger:
     - platform: state
       entity_id: group.family
       to: not_home
       for:
         minutes: 10
+    - platform: state
+      entity_id: input_boolean.all_asleep
+      to: 'on'
   condition:
     condition: and
     conditions:
@@ -18,16 +21,19 @@
     - service: alarm_control_panel.alarm_arm_away
       entity_id: alarm_control_panel.ha_alarm
     - service: notify.telegram
-      data:
+      data_template:
         target: !secret telegram_par_chat_id
         title: 'Aktiverar larmet'
-        message: "Ingen hemma sedan 10 minuter tillbaka klockan {{ now().strftime('%H:%M') }}"
+        message: "Larmet aktiverades {{ now().strftime('%H:%M') }} av {{ trigger.entity_id }}"
 
-- alias: 'Deaktivera larmet när någon är hemma'
+- alias: 'Deaktivera larmet'
   trigger:
     - platform: state
       entity_id: group.family
       to: home
+    - platform: state
+      entity_id: input_boolean.all_asleep
+      to: 'off'
   condition: 
     - condition: state
       entity_id: alarm_control_panel.ha_alarm
@@ -39,7 +45,7 @@
       data:
         target: !secret telegram_par_chat_id
         title: 'Deaktiverar larmet'
-        message: "Deaktiverat av att någon är hemma klockan  {{ now().strftime('%H:%M') }}"
+        message: "Deaktiverat klockan {{ now().strftime('%H:%M') }} av {{ triger.entity_id }}"
 
 - alias: 'Sätt rörelse till av i källaren'
   trigger:
