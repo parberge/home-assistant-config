@@ -57,6 +57,9 @@
   action:
     - service: homeassistant.turn_off
       entity_id: group.indoor_lights
+    - service: lock.lock
+      entity_id: lock.ytterdorren
+
 
 - alias: "Reset smoke alarm"
   trigger:
