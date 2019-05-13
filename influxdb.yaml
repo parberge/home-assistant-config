@@ -28,6 +28,7 @@ include:
     - sensor.netatmo_vardagsrummet_co2
     - sensor.netatmo_regnmatare_rain
     - binary_sensor.basement_entry
+    - binary_sensor.mainfloor_movement
     - media_player.vardagsrummet
     - sensor.washing_machine_switch_power
     - sensor.ssl_certificate_expiry  
