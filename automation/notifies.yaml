@@ -119,3 +119,21 @@
         message: "tvätten är klar!"
         inline_keyboard:
           - "Påminn mig senare:/washing_reminder"
+
+- alias: "Tvätten är fortfarande kvar"
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.washing_machine_switch_power
+    above: 0
+    below: 5
+    for:
+      minutes: 10
+  condition:
+    - condition: state
+      entity_id: binary_sensor.washing_machine
+      state: "off"
+  action:
+    - service: notify.telegram
+      data:
+        message: "Tvätten är fortfarande klar. Om den är urplockad har ni glömt stänga av maskinen"
+    
