@@ -24,7 +24,7 @@
       data_template:
         target: !secret telegram_par_chat_id
         title: 'Aktiverar larmet'
-        message: "Larmet aktiverades {{ now().strftime('%H:%M') }} av {{ trigger.entity_id }}"
+        message: "Larmet aktiverades {{ now().strftime('%H:%M') }} av `{{ trigger.entity_id }}`"
 
 - alias: 'Deaktivera larmet'
   trigger:
@@ -42,10 +42,10 @@
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.ha_alarm
     - service: notify.telegram
-      data:
+      data_template:
         target: !secret telegram_par_chat_id
         title: 'Deaktiverar larmet'
-        message: "Deaktiverat klockan {{ now().strftime('%H:%M') }} av {{ triger.entity_id }}"
+        message: "Deaktiverat klockan {{ now().strftime('%H:%M') }} av `{{ trigger.entity_id }}`"
 
 - alias: 'Sätt rörelse till av i källaren'
   trigger:
