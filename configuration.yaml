@@ -148,3 +148,4 @@ light: !include lights.yaml
 input_boolean: !include input_boolean.yaml
 timer: !include timers.yaml
 camera: !include cameras.yaml
+input_text: !include input_text.yaml

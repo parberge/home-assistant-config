@@ -79,8 +79,12 @@
       entity_id: alarm_control_panel.ha_alarm
       state: armed_away
   action:
-    service: alarm_control_panel.alarm_trigger
-    entity_id: alarm_control_panel.ha_alarm
+    - service: alarm_control_panel.alarm_trigger
+      entity_id: alarm_control_panel.ha_alarm
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.triggered_alarm_entities
+        value: "{{ trigger.entity_id }}"
 
 - alias: 'Skicka notis när larmet triggas'
   trigger:
@@ -89,10 +93,14 @@
       to: 'triggered'
   action:
     - service: notify.telegram
-      data:
+      data_template:
         target: !secret telegram_par_chat_id
         title: "ALARM!"
-        message: "Larmet utlöst! Klockan {{ now().strftime('%H:%M') }}"
+        message: "Larmet utlöst! Klockan {{ now().strftime('%H:%M') }}. Triggat av `{{ states('input_text.triggered_alarm_entities') }}`"
+    - service: input_text.set_value
+      data:
+        entity_id: input_text.triggered_alarm_entities
+        value: ''
 
 - alias: 'Lås dörren automatiskt'
   trigger:
