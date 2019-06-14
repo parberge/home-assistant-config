@@ -133,6 +133,7 @@ yeelight:
 
 alarm_control_panel:
   - platform: manual
+    pending_time: 120
   
 influxdb: !include influxdb.yaml
 group: !include_dir_merge_named group/

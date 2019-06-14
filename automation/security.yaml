@@ -34,10 +34,18 @@
     - platform: state
       entity_id: input_boolean.all_asleep
       to: 'off'
-  condition: 
-    - condition: state
-      entity_id: alarm_control_panel.ha_alarm
-      state: armed_away
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: armed_away
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: pending
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: triggering
   action:
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.ha_alarm
