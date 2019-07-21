@@ -19,6 +19,8 @@ family:
   entities:
     - device_tracker.honor_8
     - device_tracker.nexus_6p
+    - device_tracker.par_telefon
+
 
 outdoor_lights:
   name: Belysning utomhus
