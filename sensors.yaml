@@ -1,34 +1,11 @@
 - platform: netatmo
   station: !secret netatmo_station
   modules:
-    Utomhus:
-      - temperature
-      - humidity
-      - battery_vp
-      - rf_status
-    Badrum källare:
-      - temperature
-      - humidity
-      - co2
-      - battery_vp
-      - rf_status
-    Regnmätare:
-      - rain
-      - sum_rain_1
-      - sum_rain_24
-      - battery_vp
-      - rf_status
-    Barnrummet:
-      - temperature
-      - humidity
-      - co2
-      - noise
-    Vardagsrummet:
-      - temperature
-      - humidity
-      - co2
-      - battery_vp
-      - rf_status
+    - Utomhus
+    - Badrum källare
+    - Regnmätare
+    - Barnrummet
+    - Vardagsrummet
 
 - platform: rfxtrx
   devices:
