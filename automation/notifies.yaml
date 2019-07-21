@@ -127,7 +127,7 @@
     above: 0
     below: 5
     for:
-      minutes: 10
+      minutes: 30
   condition:
     - condition: state
       entity_id: binary_sensor.washing_machine
@@ -136,4 +136,20 @@
     - service: notify.telegram
       data:
         message: "Tvätten är fortfarande klar. Om den är urplockad har ni glömt stänga av maskinen"
-    
+
+- alias: 'Väg dig påminnelse'
+  trigger:
+    platform: state
+    entity_id: input_boolean.all_asleep
+    to: 'off'
+    for:
+      minutes: 10
+  condition:
+    - condition: state
+      entity_id: device_tracker.par_telefon
+      state: "home"
+  action:
+    - service: notify.telegram
+      data_template:
+        target: !secret telegram_par_chat_id
+        message: Glöm inte väga dig.
