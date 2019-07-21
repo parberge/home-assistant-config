@@ -7,13 +7,6 @@ indoor_lights:
     - light.dimmer_1_level
     - switch.ikea_switch_2
 
-device_tracker:
-  name: Enheter
-  entities:
-    - device_tracker.honor_8
-    - device_tracker.par_telefon
-    - device_tracker.nexus_6p
-
 family:
   name: Familjen
   entities:
