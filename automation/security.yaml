@@ -130,3 +130,22 @@
       data_template:
         title: 'Dörren låst'
         message: 'Jag låste dörren för ni är inte hemma längre'
+
+- alias: 'Glömt larma sector alarm'
+  trigger:
+    - platform: state
+      entity_id: group.family
+      to: 'not_home'
+      for:
+        minutes: 30
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: alarm_control_panel.sector_alarm_02818121
+        state: 'disarmed'
+  action:
+    - service: notify.telegram
+      data_template:
+        title: 'Glömt larma sector alarm'
+        message: 'Ingen är hemma, men ni har inte aktvierat sector'

@@ -130,11 +130,17 @@ yeelight:
       use_music_mode: False
       save_on_change: False
 
-
 alarm_control_panel:
   - platform: manual
     pending_time: 120
   
+sector_alarm:
+  email: !secret sector_alarm_email
+  password: !secret sector_alarm_password
+  alarm_id: !secret sector_alarm_id
+  thermometers: false
+  alarm_panel: true
+
 influxdb: !include influxdb.yaml
 group: !include_dir_merge_named group/
 automation: !include_dir_merge_list automation/
