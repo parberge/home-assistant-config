@@ -97,11 +97,11 @@
           Ännu en härlig dag att se fram emot.
           Prognos just nu:
           {{ states.weather.smhi_home.state }}
-          Förväntad mängd regn:
+          {% if states.weather.smhi_home.attributes.forecast[0].precipitation|float > 0 %}
+          Förväntad mängd regn idag:
           {{ states.weather.smhi_home.attributes.forecast[0].precipitation }} mm
-          Förväntad lägsta temperatur idag:
-          {{ states.weather.smhi_home.attributes.forecast[0].templow }} grader
-          Temperaturen just nu:  {{ states.sensor.netatmo_utomhus_temperature.state_with_unit }}
+          {% endif %}
+          Temperaturen just nu: {{ states.sensor.netatmo_utomhus_temperature.state_with_unit }}
           {% if states.sensor.netatmo_regnmatare_sum_rain_24.state|float > 0 %}
           Det har regnat {{ states.sensor.netatmo_regnmatare_sum_rain_24.state_with_unit }} sedan midnatt
           {% endif %}
@@ -153,3 +153,21 @@
       data_template:
         target: !secret telegram_par_chat_id
         message: Glöm inte väga dig.
+
+- alias: 'Dåligt väder'
+  trigger:
+    - platform: template
+      value_template: "{{ 'rain' in states.weather.smhi_home.attributes.forecast[1].condition }}"
+    - platform: template
+      value_template: "{{ 'snow' in states.weather.smhi_home.attributes.forecast[1].condition }}"     
+  condition:
+    - condition: state
+      entity_id: group.family
+      state: "home"
+  action:
+    - service: notify.telegram
+      data:
+        message: |
+          Tänkte bara upplysa er om eventuellt dåligt väder imorgon.
+          Prognos: {{ states.weather.smhi_home.attributes.forecast[1].condition }}
+          Mängd: {{ states.weather.smhi_home.attributes.forecast[1].precipitation }} mm
