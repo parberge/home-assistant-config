@@ -10,10 +10,8 @@ indoor_lights:
 family:
   name: Familjen
   entities:
-    - device_tracker.honor_8
-    - device_tracker.nexus_6p
+    - device_tracker.malena_telefon
     - device_tracker.par_telefon
-
 
 outdoor_lights:
   name: Belysning utomhus
