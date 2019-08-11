@@ -60,7 +60,6 @@
     - service: lock.lock
       entity_id: lock.ytterdorren
 
-
 - alias: "Reset smoke alarm"
   trigger:
     platform: state
