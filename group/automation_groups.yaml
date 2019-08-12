@@ -12,6 +12,7 @@ family:
   entities:
     - device_tracker.malena_telefon
     - device_tracker.par_telefon
+  icon: mdi:account-group
 
 outdoor_lights:
   name: Belysning utomhus
