@@ -147,7 +147,6 @@ automation: !include_dir_merge_list automation/
 media_player: !include media_players.yaml
 binary_sensor: !include binary_sensors.yaml
 sensor: !include sensors.yaml
-device_tracker: !include device_trackers.yaml
 switch: !include switches.yaml
 notify: !include notifiers.yaml
 script: !include scripts.yaml
