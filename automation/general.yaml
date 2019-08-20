@@ -14,8 +14,10 @@
 
 - alias: "Tänd lampor när solen går ned"
   trigger:
-    platform: sun
-    event: sunset
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: "{{ state.attributes.elevation }}"
+    below: -4.0
   action:
     - service: light.turn_on
       entity_id: light.lampa_ytterdorren
