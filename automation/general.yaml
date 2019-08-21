@@ -1,7 +1,9 @@
 - alias: "Släck lampor när solen går upp"
   trigger:
-    platform: sun
-    event: sunrise
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: "{{ state.attributes.elevation }}"
+    above: -2.0
   action:
     - service: light.turn_off
       entity_id: light.lampa_ytterdorren
@@ -17,7 +19,7 @@
     platform: numeric_state
     entity_id: sun.sun
     value_template: "{{ state.attributes.elevation }}"
-    below: -4.0
+    below: -2.0
   action:
     - service: light.turn_on
       entity_id: light.lampa_ytterdorren
