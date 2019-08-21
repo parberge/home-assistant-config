@@ -31,7 +31,9 @@ include:
     - binary_sensor.mainfloor_movement
     - media_player.vardagsrummet
     - sensor.washing_machine_switch_power
-    - sensor.ssl_certificate_expiry  
+    - sensor.ssl_certificate_expiry
+  domains:
+    - sun.sun
 
 tags_attributes:
   - friendly_name
