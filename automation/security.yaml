@@ -74,7 +74,7 @@
       entity_id: binary_sensor.baksidadorr_sensor
       to: 'on'
     - platform: state
-      entity_id: binary_sensor.mainfloor
+      entity_id: binary_sensor.mainfloor_movement
       to: 'on'
     - platform: state
       entity_id: binary_sensor.basement_entry
