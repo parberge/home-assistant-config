@@ -26,3 +26,10 @@ vacation_toggle:
     - automation.telegram_washing_responser_reminder
     - automation.tand_nattljus_i_barnens_rum
     - automation.starta_luftfuktaren_i_barnrummet
+
+guest_toggle:
+  entities:
+    - automation.aktivera_larmet
+    - automation.glomt_larma_sector_alarm
+    - automation.las_dorren_automatiskt
+    - automation.baksida_dorr_oppen

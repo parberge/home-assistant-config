@@ -137,3 +137,27 @@
   action:
     service: input_boolean.toggle
     entity_id: input_boolean.all_asleep
+
+- alias: 'Aktiverar gästläge'
+  trigger:
+    platform: state
+    entity_id: input_boolean.guest_mode
+    to: 'on'
+  action:
+    - service: homeassistant.turn_off
+      entity_id: group.guest_toggle
+    - service: notify.telegram
+      data:
+        message: "Gästläget aktiverat"
+
+- alias: 'Deaktivera gästläge'
+  trigger:
+    platform: state
+    entity_id: input_boolean.guest_mode
+    to: 'off'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: group.guest_toggle
+    - service: notify.telegram
+      data:
+        message: "Gästläget deaktiverat"
