@@ -35,18 +35,6 @@ switch.projector:
 binary_sensor.ps4:
   icon: mdi:playstation
 
-switch.strombrytare_1:
-  friendly_name: 'Strömbrytare belysning baksida'
-  icon: mdi:lightbulb
-
-switch.strombrytare_2:
-  friendly_name: 'Strömbrytare belysning framsida'
-  icon: mdi:lightbulb
-
-switch.strombrytare_4:
-  friendly_name: 'Strömbrytare laddare cykel'
-  icon: mdi:battery-charging
-
 sun.sun:
   friendly_name: Solståndet
 
@@ -58,3 +46,6 @@ light.dimmer_2_level:
 
 binary_sensor.basement_entry:
   friendly_name: 'Rörelsesensor källare'
+
+light.light_5:
+  friendly_name: 'Lampa källaringång'
