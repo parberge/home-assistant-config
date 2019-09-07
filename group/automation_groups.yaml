@@ -17,9 +17,9 @@ family:
 outdoor_lights:
   name: Belysning utomhus
   entities:
-    - switch.strombrytare_1
-    - switch.strombrytare_2
     - light.lampa_ytterdorren
+    - group.backside_lights
+    - light.light_5
 
 vacation_toggle:
   entities:
