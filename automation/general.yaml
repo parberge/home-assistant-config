@@ -6,11 +6,7 @@
     above: -2.0
   action:
     - service: light.turn_off
-      entity_id: light.lampa_ytterdorren
-    - service: switch.turn_off
-      entity_id: switch.strombrytare_1
-    - service: switch.turn_off
-      entity_id: switch.strombrytare_2
+      entity_id: group.outdoor_lights
     - service: switch.turn_off
       entity_id: switch.ikea_switch_2
 
@@ -22,11 +18,7 @@
     below: -2.0
   action:
     - service: light.turn_on
-      entity_id: light.lampa_ytterdorren
-    - service: switch.turn_on
-      entity_id: switch.strombrytare_1
-    - service: switch.turn_on
-      entity_id: switch.strombrytare_2
+      entity_id: group.outdoor_lights
     - service: switch.turn_on
       entity_id: switch.ikea_switch_2
 
