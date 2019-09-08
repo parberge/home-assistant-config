@@ -1,2 +1,16 @@
 - platform: rfxtrx
   automatic_add: True
+
+- platform: group
+  name: Baksida altan
+  entities:
+    - light.light_6
+    - light.light_7
+    - light.light_8
+
+- platform: group
+  name: Utomhusbelysning
+  entities:
+    - light.baksida_altan
+    - light.light_9
+    - light.light_5

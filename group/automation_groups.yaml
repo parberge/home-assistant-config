@@ -14,13 +14,6 @@ family:
     - device_tracker.par_telefon
   icon: mdi:account-group
 
-outdoor_lights:
-  name: Belysning utomhus
-  entities:
-    - light.light_9
-    - group.backside_lights
-    - light.light_5
-
 vacation_toggle:
   entities:
     - automation.telegram_washing_responser_reminder
@@ -33,11 +26,3 @@ guest_toggle:
     - automation.glomt_larma_sector_alarm
     - automation.las_dorren_automatiskt
     - automation.baksida_dorr_oppen
-
-backside_lights:
-  name: Belysning baksidan
-  icon: mdi:lightbulb
-  entities:
-    - light.light_6
-    - light.light_7
-    - light.light_8
