@@ -70,19 +70,6 @@
         title: 'Varning'
         message: 'Baksida dörr fortfarande öppen'
 
-- alias: 'Lampa offline'
-  trigger:
-    platform: state
-    entity_id: light.lampa_ytterdorren
-    to: 'unavailable'
-    for:
-      minutes: 10
-  action:
-    - service: notify.telegram
-      data_template:
-        target: !secret telegram_par_chat_id
-        title: 'Varning'
-        message: "{{ trigger.to_state.attributes.friendly_name }} är otillgänglig. Någon kanske trycke på knappen?"
 
 - alias: 'God morgon'
   trigger:
