@@ -12,12 +12,6 @@
         device_class: smoke
         delay_off:
           seconds: 30
-    washing_machine:
-        friendly_name: "Tvättmaskinen"
-        delay_off:
-          minutes: 1
-        value_template: >-
-          {{ states('sensor.washing_machine_switch_power')|float > 5 }}
 
 - platform: mqtt
   name: basement_entry

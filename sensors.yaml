@@ -27,8 +27,18 @@
     baksida_dorr:
       friendly_name: 'Baksida dörr status'
       value_template: >-
-          {% if is_state('binary_sensor.baksidadorr_sensor', 'on') %}
-            Öppen
-          {% else %}
-            Stängd
-          {% endif %}
+        {% if is_state('binary_sensor.baksidadorr_sensor', 'on') %}
+          Öppen
+        {% else %}
+          Stängd
+        {% endif %}
+    washing_machine_new:
+      friendly_name: "Tvättmaskinen_new"
+      value_template: >-
+        {% if states('sensor.washing_machine_switch_power')| float > 5 %}
+          On
+        {% elif states('sensor.washing_machine_switch_power')| float > 0.0 %}
+          Standby
+        {% elif is_state('sensor.washing_machine_switch_power', '0.0') %}
+          Off
+        {% endif %}
