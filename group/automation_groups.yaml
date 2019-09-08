@@ -17,7 +17,7 @@ family:
 outdoor_lights:
   name: Belysning utomhus
   entities:
-    - light.lampa_ytterdorren
+    - light.light_9
     - group.backside_lights
     - light.light_5
 

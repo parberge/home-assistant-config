@@ -120,14 +120,6 @@ transmission:
     - 'upload_speed'
     - 'active_torrents'
 
-yeelight:
-  devices:
-    192.168.8.101:
-      name: Lampa ytterdörren
-      transition: 1000
-      use_music_mode: False
-      save_on_change: False
-
 alarm_control_panel:
   - platform: manual
     pending_time: 120

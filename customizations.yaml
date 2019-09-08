@@ -49,3 +49,6 @@ binary_sensor.basement_entry:
 
 light.light_5:
   friendly_name: 'Lampa källaringång'
+
+light.light_9:
+  friendly_name: 'Lampa ytterdörren'
