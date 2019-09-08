@@ -7,7 +7,7 @@
     data:
       mac: e0:69:95:53:23:67
   turn_off_action:
-    service: media_player.kodi_call_method
+    service: kodi.call_method
     data:
       entity_id: media_player.kodi
       method: System.Shutdown
