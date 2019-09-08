@@ -98,8 +98,9 @@
 - alias: "Tvätten klar"
   trigger:
     platform: state
-    entity_id: binary_sensor.washing_machine
-    to: 'off'
+    entity_id: sensor.washing_machine_new
+    from: 'on'
+    to: 'standby'
   action:
     - service: telegram_bot.send_message
       data_template:
@@ -109,16 +110,11 @@
 
 - alias: "Tvätten är fortfarande kvar"
   trigger:
-    platform: numeric_state
-    entity_id: sensor.washing_machine_switch_power
-    above: 0
-    below: 5
+    platform: state
+    entity_id: sensor.washing_machine_new
+    to: 'standby'
     for:
-      minutes: 30
-  condition:
-    - condition: state
-      entity_id: binary_sensor.washing_machine
-      state: "off"
+      hours: 1
   action:
     - service: notify.telegram
       data:
@@ -130,7 +126,7 @@
     entity_id: input_boolean.all_asleep
     to: 'off'
     for:
-      minutes: 10
+      minutes: 5
   condition:
     - condition: state
       entity_id: device_tracker.par_telefon
