@@ -32,13 +32,13 @@
         {% else %}
           Stängd
         {% endif %}
-    washing_machine_new:
-      friendly_name: "Tvättmaskinen_new"
+    washing_machine:
+      friendly_name: "Tvättmaskinen"
       value_template: >-
         {% if states('sensor.washing_machine_switch_power')| float > 5 %}
-          On
+          on
         {% elif states('sensor.washing_machine_switch_power')| float > 0.0 %}
-          Standby
+          standby
         {% elif is_state('sensor.washing_machine_switch_power', '0.0') %}
-          Off
+          off
         {% endif %}

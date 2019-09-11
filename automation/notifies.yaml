@@ -98,7 +98,7 @@
 - alias: "Tvätten klar"
   trigger:
     platform: state
-    entity_id: sensor.washing_machine_new
+    entity_id: sensor.washing_machine
     from: 'on'
     to: 'standby'
   action:
@@ -111,7 +111,7 @@
 - alias: "Tvätten är fortfarande kvar"
   trigger:
     platform: state
-    entity_id: sensor.washing_machine_new
+    entity_id: sensor.washing_machine
     to: 'standby'
     for:
       hours: 1
