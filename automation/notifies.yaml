@@ -139,10 +139,10 @@
 
 - alias: 'Dåligt väder'
   trigger:
-    - platform: template
-      value_template: "{{ 'rain' in states.weather.smhi_home.attributes.forecast[1].condition }}"
-    - platform: template
-      value_template: "{{ 'snow' in states.weather.smhi_home.attributes.forecast[1].condition }}"     
+    - platform: numeric_state
+      entity_id: weather.smhi_home
+      value_template: "{{ states.weather.smhi_home.attributes.forecast[1].precipitation|float }}"
+      above: 0.0
   condition:
     - condition: state
       entity_id: group.family
@@ -151,7 +151,7 @@
     - service: notify.telegram
       data:
         message: |
-          Tänkte bara upplysa er om eventuellt dåligt väder imorgon.
+          Tänkte bara upplysa er om eventuell nederbörd imorgon.
           Prognos: {{ states.weather.smhi_home.attributes.forecast[1].condition }}
           Mängd: {{ states.weather.smhi_home.attributes.forecast[1].precipitation }} mm
 
