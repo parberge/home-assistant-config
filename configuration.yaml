@@ -131,7 +131,12 @@ sector_alarm:
   thermometers: false
   alarm_panel: true
 
-
+withings:
+  client_id: !secret withings_client_id
+  client_secret: !secret withings_secret_id
+  profiles:
+    - parberge
+    - malena
 
 influxdb: !include influxdb.yaml
 group: !include_dir_merge_named group/
