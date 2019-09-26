@@ -14,3 +14,9 @@
     - light.baksida_altan
     - light.light_9
     - light.light_5
+
+- platform: group
+  name: Källartrappsbelysning
+  entities:
+    - light.light_10
+    - light.light_11
