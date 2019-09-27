@@ -6,6 +6,7 @@ indoor_lights:
   entities:
     - light.dimmer_1_level
     - switch.ikea_switch_2
+    - light.kallartrappsbelysning
 
 family:
   name: Familjen
