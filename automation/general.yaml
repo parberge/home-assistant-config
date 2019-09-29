@@ -9,6 +9,8 @@
       entity_id: light.utomhusbelysning
     - service: switch.turn_off
       entity_id: switch.ikea_switch_2
+    - service: light.turn_off
+      entity_id: light.light_12
 
 - alias: "Tänd lampor när solen går ned"
   trigger:
@@ -21,6 +23,10 @@
       entity_id: light.utomhusbelysning
     - service: switch.turn_on
       entity_id: switch.ikea_switch_2
+    - service: light.turn_on
+      entity_id: light.light_12
+      data:
+        brightness: 1
 
 - alias: 'Telegram washing responser reminder'
   hide_entity: true
