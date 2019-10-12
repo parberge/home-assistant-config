@@ -114,11 +114,7 @@ transmission:
   host: localhost
   username: !secret transmission_user
   password: !secret transmission_password
-  monitored_conditions:
-    - 'current_status'
-    - 'download_speed'
-    - 'upload_speed'
-    - 'active_torrents'
+
 
 alarm_control_panel:
   - platform: manual
