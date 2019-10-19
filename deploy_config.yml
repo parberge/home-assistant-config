@@ -1,0 +1,35 @@
+- hosts: home_assistant
+  remote_user: "{{ hass_remote_user|default('root') }}"
+
+  tasks:
+
+  - name: "Deploy home assistant group templates"
+    become: yes
+    template:
+      src: "{{ item.src }}"
+      dest: "/home/{{ home_assistant_user|default('homeassistant') }}/.homeassistant/group/{{ item.path }}"
+      owner: "{{ home_assistant_user|default('homeassistant') }}"
+      group: "{{ home_assistant_user|default('homeassistant') }}"
+      block_start_string: "{{ item.block_start | default('<%') }}"
+      block_end_string: "{{ item.block_end | default('%>') }}"
+      variable_start_string: "{{ item.variable_start | default('<<') }}"
+      variable_end_string: "{{ item.variable_end | default('>>') }}"
+    with_filetree: "group"
+    tags:
+      - hass_deploy_cfg
+      - hass_deploy_groups
+    notify:
+      - Check homeassistant config
+
+  handlers:
+    - name: Check homeassistant config
+      become: yes
+      command: 'docker exec home_assistant python -m homeassistant --script check_config -c /config'
+      register: hass_config_check
+      notify: Assert config
+
+    - name: Assert config
+      assert:
+        that:
+          - "'ERROR' not in hass_config_check.stdout"
+        msg: "Config check reported error"
