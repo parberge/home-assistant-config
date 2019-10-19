@@ -8,7 +8,7 @@
     become: yes
     template:
       src: "{{ item.src }}"
-      dest: "/home/{{ home_assistant_user|default('homeassistant') }}/.homeassistant/group/{{ item.path }}"
+      dest: "{{ home_assistant_cfg_dir }}/group/{{ item.path }}"
       owner: "{{ home_assistant_user|default('homeassistant') }}"
       group: "{{ home_assistant_user|default('homeassistant') }}"
       block_start_string: "{{ item.block_start | default('<%') }}"
@@ -26,7 +26,7 @@
     become: yes
     template:
       src: "{{ item.src }}"
-      dest: "/home/{{ home_assistant_user }}/.homeassistant/automation/{{ item.path }}"
+      dest: "{{ home_assistant_cfg_dir }}/automation/{{ item.path }}"
       owner: "{{ home_assistant_user }}"
       group: "{{ home_assistant_user }}"
       block_start_string: "{{ item.block_start | default('<%') }}"
@@ -44,7 +44,7 @@
     become: yes
     template:
       src: "{{ item }}"
-      dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item | basename }}"
+      dest: "{{ home_assistant_cfg_dir }}/{{ item | basename }}"
       owner: "{{ home_assistant_user }}"
       group: "{{ home_assistant_user }}"
       block_start_string: "{{ item.block_start | default('<%') }}"
@@ -69,6 +69,16 @@
     notify:
       - Check homeassistant config
     when: home_assistant_secrets_file is defined
+
+
+  - name: "Copy ps4 sensor script"
+    become: yes
+    copy:
+      src: ps4_sensor.py
+      dest: "{{ home_assistant_cfg_dir }}/ps4_sensor.py"
+      owner: "{{ home_assistant_user }}"
+      group: "{{ home_assistant_user }}"
+      mode: u+x
 
   handlers:
     - name: Check homeassistant config
