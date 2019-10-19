@@ -48,3 +48,13 @@
     - service: light.turn_off
       data:
         entity_id: light.light_2
+
+
+- alias: "Tänd tetris-lampan"
+  trigger:
+    platform: time
+    at: '07:00:00'
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.ikea_switch_2

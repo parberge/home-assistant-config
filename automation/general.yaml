@@ -8,7 +8,6 @@
     - service: light.turn_off
       entity_id: light.utomhusbelysning
     - service: switch.turn_off
-      entity_id: switch.ikea_switch_2
     - service: light.turn_off
       entity_id: light.light_12
 
