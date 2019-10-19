@@ -1,5 +1,6 @@
 - hosts: home_assistant
   remote_user: "{{ hass_remote_user|default('root') }}"
+  
 
   tasks:
 
@@ -21,10 +22,58 @@
     notify:
       - Check homeassistant config
 
+  - name: "Deploy home assistant automation templates"
+    become: yes
+    template:
+      src: "{{ item.src }}"
+      dest: "/home/{{ home_assistant_user }}/.homeassistant/automation/{{ item.path }}"
+      owner: "{{ home_assistant_user }}"
+      group: "{{ home_assistant_user }}"
+      block_start_string: "{{ item.block_start | default('<%') }}"
+      block_end_string: "{{ item.block_end | default('%>') }}"
+      variable_start_string: "{{ item.variable_start | default('<<') }}"
+      variable_end_string: "{{ item.variable_end | default('>>') }}"
+    with_filetree: "automation"
+    tags:
+      - hass_deploy_cfg
+      - hass_deploy_automations
+    notify:
+      - Check homeassistant config
+
+  - name: "Deploy home assistant customization and config templates"
+    become: yes
+    template:
+      src: "{{ item }}"
+      dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item | basename }}"
+      owner: "{{ home_assistant_user }}"
+      group: "{{ home_assistant_user }}"
+      block_start_string: "{{ item.block_start | default('<%') }}"
+      block_end_string: "{{ item.block_end | default('%>') }}"
+      variable_start_string: "{{ item.variable_start | default('<<') }}"
+      variable_end_string: "{{ item.variable_end | default('>>') }}"
+    with_fileglob: "*.yaml"
+    tags:
+      - hass_deploy_cfg
+    notify:
+      - Check homeassistant config
+
+  - name: "Deploy home assistant secrets template"
+    become: yes
+    template:
+      src: "secrets.yaml.j2"
+      dest: "{{ hass_secret_destination }}"
+    no_log: True
+    tags:
+      - hass_deploy_cfg
+      - hass_deploy_secrets
+    notify:
+      - Check homeassistant config
+    when: home_assistant_secrets_file is defined
+
   handlers:
     - name: Check homeassistant config
       become: yes
-      command: 'docker exec home_assistant python -m homeassistant --script check_config -c /config'
+      command: 'docker exec {{ hass_docker_name }} python -m homeassistant --script check_config -c /config'
       register: hass_config_check
       notify: Assert config
 
