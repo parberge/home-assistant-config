@@ -7,7 +7,6 @@
   action:
     - service: light.turn_off
       entity_id: light.utomhusbelysning
-    - service: switch.turn_off
     - service: light.turn_off
       entity_id: light.light_12
 
