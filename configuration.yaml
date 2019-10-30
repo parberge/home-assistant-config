@@ -65,7 +65,8 @@ google_assistant:
 
 logger:
   default: warning
-  #logs:
+  logs:
+    homeassistant.components.withings: critical
     #homeassistant.components.rfxtrx: debug
     #homeassistant.components.zwave: debug
     #homeassistant.components.sensor.netatmo: debug
