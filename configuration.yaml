@@ -39,7 +39,7 @@ netatmo:
   secret_key: !secret netatmo_api_secret
   username: !secret netatmo_user
   password: !secret netatmo_password
-  discovery: False
+  discovery: True
 
 verisure:
   username: !secret verisure_user
