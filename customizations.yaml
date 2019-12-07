@@ -1,34 +1,3 @@
-sensor.netatmo_barnrummet_temperature:
-  friendly_name: 'Barnrummet Temp'
-sensor.netatmo_barnrummet_humidity:
-  friendly_name: 'Barnrummet luftfuktighet'
-sensor.netatmo_barnrummet_noise:
-  friendly_name: 'Barnrummet ljudnivå'
-sensor.netatmo_barnrummet_co2:
-  friendly_name: 'Barnrummet CO2'
-
-sensor.netatmo_badrum_kallare_temperature:
-  friendly_name: 'Badrum källare Temp'
-sensor.netatmo_badrum_kallare_humidity:
-  friendly_name: 'Badrum källare luftfuktighet'
-sensor.netatmo_badrum_kallare_co2:
-  friendly_name: 'Badrum källare CO2'
-
-sensor.netatmo_vardagsrummet_temperature:
-  friendly_name: 'Vardagsrummet Temp'
-sensor.netatmo_vardagsrummet_humidity:
-  friendly_name: 'Vardagsrummet luftfuktighet'
-sensor.netatmo_vardagsrummet_co2:
-  friendly_name: 'Vardagsrummet CO2'
-
-sensor.netatmo_utomhus_temperature:
-  friendly_name: 'Utomhus Temp'
-sensor.netatmo_utomhus_humidity:
-  friendly_name: 'Utomhus luftfuktighet'
-
-sensor.netatmo_regnmatare_rain:
-  friendly_name: 'Mängd Regn'
-
 switch.projector:
   icon: mdi:projector
 

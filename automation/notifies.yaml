@@ -39,7 +39,7 @@
 - alias: 'Batteristatus på netatmo'
   trigger:
     platform: state
-    entity_id: sensor.netatmo_vardagsrummet_battery, sensor.netatmo_badrum_kallare_battery, sensor.netatmo_utomhus_battery, sensor.netatmo_regnmatare_battery
+    entity_id: sensor.netatmo_solleftegatan_80_vardagsrummet_battery, sensor.netatmo_solleftegatan_80_badrum_kallare_battery, sensor.netatmo_solleftegatan_80_utomhus_battery, sensor.netatmo_solleftegatan_80_regnmatare_battery
     to: 'Low'
   action:
     - service: notify.telegram
@@ -88,9 +88,9 @@
           Förväntad mängd regn idag:
           {{ states.weather.smhi_home.attributes.forecast[0].precipitation }} mm
           {% endif %}
-          Temperaturen just nu: {{ states.sensor.netatmo_utomhus_temperature.state_with_unit }}
-          {% if states.sensor.netatmo_regnmatare_sum_rain_24.state|float > 0 %}
-          Det har regnat {{ states.sensor.netatmo_regnmatare_sum_rain_24.state_with_unit }} sedan midnatt
+          Temperaturen just nu: {{ states.sensor.netatmo_solleftegatan_80_utomhus_temperature.state_with_unit }}
+          {% if states.sensor.netatmo_solleftegatan_80_regnmatare_sum_rain_24.state|float > 0 %}
+          Det har regnat {{ states.sensor.netatmo_solleftegatan_80_regnmatare_sum_rain_24.state_with_unit }} sedan midnatt
           {% endif %}
 
 - alias: "Tvätten klar"

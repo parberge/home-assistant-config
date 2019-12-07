@@ -1,12 +1,3 @@
-- platform: netatmo
-  station: !secret netatmo_station
-  modules:
-    - Utomhus
-    - Badrum källare
-    - Regnmätare
-    - Barnrummet
-    - Vardagsrummet
-
 - platform: rfxtrx
   devices:
     0820031eb5a3000670:
