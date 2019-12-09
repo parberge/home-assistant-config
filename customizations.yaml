@@ -1,9 +1,6 @@
 switch.projector:
   icon: mdi:projector
 
-binary_sensor.ps4:
-  icon: mdi:playstation
-
 sun.sun:
   friendly_name: Solståndet
 

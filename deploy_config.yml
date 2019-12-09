@@ -70,16 +70,6 @@
       - Check homeassistant config
     when: home_assistant_secrets_file is defined
 
-
-  - name: "Copy ps4 sensor script"
-    become: yes
-    copy:
-      src: ps4_sensor.py
-      dest: "{{ home_assistant_cfg_dir }}/ps4_sensor.py"
-      owner: "{{ home_assistant_user }}"
-      group: "{{ home_assistant_user }}"
-      mode: u+x
-
   handlers:
     - name: Check homeassistant config
       become: yes

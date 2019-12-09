@@ -9,9 +9,8 @@
       entity_id: media_player.kallaren
       to: 'playing'
     - platform: state
-      entity_id: binary_sensor.ps4
-      from: 'off'
-      to: 'on'
+      entity_id: media_player.playstation_4
+      to: 'idle'
   action:
     - service: media_player.turn_on
       entity_id: media_player.marantz_sr5007
@@ -23,7 +22,7 @@
           MEDIA PLAYER
           {% elif trigger.entity_id == 'media_player.kallaren' %}
           CBL/SAT
-          {% elif trigger.entity_id == 'binary_sensor.ps4' %}
+          {% elif trigger.entity_id == 'media_player.playstation_4' %}
           GAME
           {% endif %}
     - service: switch.turn_on
@@ -42,8 +41,8 @@
       for:
         minutes: 1
     - platform: state
-      entity_id: binary_sensor.ps4
-      to: 'off'
+      entity_id: media_player.playstation_4
+      to: 'standby'
       for:
         minutes: 1
   condition:
@@ -56,8 +55,8 @@
         entity_id: media_player.kallaren
         state: 'off'
       - condition: state
-        entity_id: binary_sensor.ps4
-        state: 'off'
+        entity_id: media_player.playstation_4
+        state: 'standby'
   action:
     - service: homeassistant.turn_off
       entity_id: media_player.marantz_sr5007
