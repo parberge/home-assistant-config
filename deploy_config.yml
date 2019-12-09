@@ -61,14 +61,13 @@
     become: yes
     template:
       src: "secrets.yaml.j2"
-      dest: "{{ hass_secret_destination }}"
+      dest: "{{ home_assistant_cfg_dir }}/secrets.yaml"
     no_log: True
     tags:
       - hass_deploy_cfg
       - hass_deploy_secrets
     notify:
       - Check homeassistant config
-    when: home_assistant_secrets_file is defined
 
   handlers:
     - name: Check homeassistant config
