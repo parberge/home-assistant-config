@@ -55,13 +55,13 @@ verisure:
 
 google_assistant:
   project_id: !secret google_project_id
-  api_key: !secret google_api_key
   secure_devices_pin: !secret google_secure_device_pin
   exposed_domains:
     - switch
     - light
     - lock
     - media_player
+    - input_boolean
 
 logger:
   default: warning
