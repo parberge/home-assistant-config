@@ -24,6 +24,5 @@ vacation_toggle:
 guest_toggle:
   entities:
     - automation.aktivera_larmet
-    - automation.glomt_larma_sector_alarm
     - automation.las_dorren_automatiskt
     - automation.baksida_dorr_oppen

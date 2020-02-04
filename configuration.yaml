@@ -121,12 +121,6 @@ alarm_control_panel:
   - platform: manual
     pending_time: 120
   
-sector_alarm:
-  email: !secret sector_alarm_email
-  password: !secret sector_alarm_password
-  alarm_id: !secret sector_alarm_id
-  thermometers: false
-  alarm_panel: true
 
 withings:
   client_id: !secret withings_client_id
