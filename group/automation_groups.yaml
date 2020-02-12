@@ -1,5 +1,4 @@
 automation_groups:
-  view: no
 
 indoor_lights:
   name: Belysning inomhus
