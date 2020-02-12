@@ -27,7 +27,6 @@
         brightness: 1
 
 - alias: 'Telegram washing responser reminder'
-  hide_entity: true
   trigger:
     platform: event
     event_type: telegram_callback
