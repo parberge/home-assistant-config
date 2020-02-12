@@ -35,11 +35,8 @@ tts:
   platform: google_translate
 
 netatmo:
-  api_key: !secret netatmo_api
-  secret_key: !secret netatmo_api_secret
-  username: !secret netatmo_user
-  password: !secret netatmo_password
-  discovery: True
+  client_id: !secret netatmo_api
+  client_secret: !secret netatmo_api_secret
 
 verisure:
   username: !secret verisure_user
@@ -67,6 +64,7 @@ logger:
   default: warning
   logs:
     homeassistant.components.withings: critical
+    #homeassistant.components.webhook: debug
     #homeassistant.components.rfxtrx: debug
     #homeassistant.components.zwave: debug
     #homeassistant.components.sensor.netatmo: debug
