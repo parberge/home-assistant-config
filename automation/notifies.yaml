@@ -182,3 +182,17 @@
         message: |
           Låg luftfuktighet i barnens rum:
           {{ states.sensor.netatmo_solleftegatan_80_barnrummet_humidity.state_with_unit }}
+
+
+- alias: "At work"
+  trigger:
+    platform: zone
+    entity_id: person.par
+    zone: zone.par_jobb
+    # Event is either enter or leave
+    event: enter # or "leave"
+  action:
+    - service: notify.telegram
+      data_template:
+        target: !secret telegram_par_chat_id
+        message: "At work, but I don't really have to tell you that, do I?"
