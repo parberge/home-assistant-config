@@ -30,6 +30,7 @@ history:
 logbook:
 sun:
 wake_on_lan:
+default_config:
 
 tts:
   platform: google_translate
@@ -99,7 +100,6 @@ zwave:
     "sensor.baksidadorr_*":
       ignored: true
 
-
 telegram_bot:
   - platform: polling
     api_key: !secret telegram_api_key
@@ -108,18 +108,15 @@ telegram_bot:
       - !secret telegram_par_chat_id
       - !secret telegram_malena_chat_id
 
-
 transmission:
   host: localhost
   username: !secret transmission_user
   password: !secret transmission_password
 
-
 alarm_control_panel:
   - platform: manual
     pending_time: 120
   
-
 withings:
   client_id: !secret withings_client_id
   client_secret: !secret withings_secret_id
