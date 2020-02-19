@@ -184,15 +184,17 @@
           {{ states.sensor.netatmo_solleftegatan_80_barnrummet_humidity.state_with_unit }}
 
 
-- alias: "At work"
+- alias: "leaving work"
   trigger:
     platform: zone
     entity_id: person.par
     zone: zone.par_jobb
-    # Event is either enter or leave
-    event: enter # or "leave"
+    event: leave
+  condition:
+      condition: time
+      after: '16:00'
   action:
     - service: notify.telegram
-      data_template:
-        target: !secret telegram_par_chat_id
-        message: "At work, but I don't really have to tell you that, do I?"
+      data:
+        message: |
+          Tänkte bara säga att Pär lämnade jobbet precis. Förmodligen är han på väg hem!
