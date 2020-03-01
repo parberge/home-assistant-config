@@ -32,3 +32,32 @@
     - service: switch.turn_on
       data:
         entity_id: switch.ikea_switch_2
+
+- alias: "Starta luftfuktaren i barnrummet"
+  trigger:
+    platform: time_pattern
+    minutes: 5
+  condition:
+    - condition: time
+      after: '18:00:00'
+      before: '07:00:00'
+    - condition: numeric_state
+      entity_id: sensor.netatmo_solleftegatan_80_barnrummet_humidity
+      below: 40
+    - condition: state
+      entity_id: input_boolean.kids_home
+      state: "on"
+  action:
+    - service: switch.turn_on
+      entity_id: switch.ikea_switch_1
+
+- alias: "Stoppa luftfuktaren i barnrummet"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.netatmo_solleftegatan_80_barnrummet_humidity
+      above: 50
+    - platform: time
+      at: '07:00:00'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.ikea_switch_1
