@@ -45,8 +45,8 @@
       entity_id: sensor.netatmo_solleftegatan_80_barnrummet_humidity
       below: 40
     - condition: state
-      entity_id: input_boolean.kids_home
-      state: "on"
+      entity_id: input_boolean.kids_away
+      state: "off"
   action:
     - service: switch.turn_on
       entity_id: switch.ikea_switch_1
