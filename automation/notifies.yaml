@@ -164,26 +164,6 @@
         target: !secret telegram_par_chat_id
         message: "New hass version available: {{ state_attr('binary_sensor.updater', 'newest_version') }}"
 
-
-- alias: "Låg luftfuktighet"
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.netatmo_solleftegatan_80_barnrummet_humidity
-      below: 40
-      for:
-        minutes: 10
-  condition:
-    - condition: state
-      entity_id: group.family
-      state: "home"
-  action:
-    - service: notify.telegram
-      data:
-        message: |
-          Låg luftfuktighet i barnens rum:
-          {{ states.sensor.netatmo_solleftegatan_80_barnrummet_humidity.state_with_unit }}
-
-
 - alias: "leaving work"
   trigger:
     platform: zone
