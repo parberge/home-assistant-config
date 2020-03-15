@@ -43,11 +43,11 @@
     minutes: 5
   condition:
     - condition: time
-      after: '18:00:00'
-      before: '07:00:00'
+      after: '17:00:00'
+      before: '05:00:00'
     - condition: numeric_state
       entity_id: sensor.netatmo_solleftegatan_80_barnrummet_humidity
-      below: 40
+      below: 45
     - condition: state
       entity_id: input_boolean.kids_away
       state: "off"
