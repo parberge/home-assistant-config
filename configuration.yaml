@@ -73,7 +73,7 @@ logger:
     #homeassistant.components.deconz: debug
 
 mqtt:
-  broker: localhost
+  broker: !secret mqtt_broker
 
 rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
