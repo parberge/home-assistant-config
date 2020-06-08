@@ -39,7 +39,7 @@
         state: armed_away
       - condition: state
         entity_id: alarm_control_panel.ha_alarm
-        state: pending
+        state: arming
       - condition: state
         entity_id: alarm_control_panel.ha_alarm
         state: triggering

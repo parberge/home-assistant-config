@@ -5,6 +5,7 @@ homeassistant:
   elevation: 19
   unit_system: metric
   time_zone: Europe/Stockholm
+  external_url: !secret base_url
   customize: !include customizations.yaml
   auth_mfa_modules:
     - type: totp
@@ -17,9 +18,6 @@ recorder:
   exclude:
     domains:
       - automation
-
-http:
-  base_url: !secret base_url
 
 updater:
   include_used_components: true
@@ -115,7 +113,6 @@ transmission:
 
 alarm_control_panel:
   - platform: manual
-    pending_time: 120
   
 withings:
   client_id: !secret withings_client_id
