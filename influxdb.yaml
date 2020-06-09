@@ -30,8 +30,10 @@ include:
     - binary_sensor.basement_entry
     - binary_sensor.mainfloor_movement
     - media_player.vardagsrummet
+    - sensor.ssl_certificate_expiry
     - sensor.washing_machine_switch_power
-    - sensor.ssl_certificate_expiry  
+    - sensor.washing_machine_switch_current
+    - sensor.washing_machine_switch_energy
 
 tags_attributes:
   - friendly_name
