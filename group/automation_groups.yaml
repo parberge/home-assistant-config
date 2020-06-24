@@ -1,5 +1,3 @@
-automation_groups:
-
 indoor_lights:
   name: Belysning inomhus
   entities:
@@ -18,7 +16,6 @@ vacation_toggle:
   entities:
     - automation.telegram_washing_responser_reminder
     - automation.tand_nattljus_i_barnens_rum
-    - automation.starta_luftfuktaren_i_barnrummet
 
 guest_toggle:
   entities:
