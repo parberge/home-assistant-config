@@ -108,6 +108,7 @@
             * Låsa källardörren ordentligt
             * Stänga fönster
             * Ta med packningen :)
+            * Aktivera larmet
 
 - alias: 'Deaktivera semesterläge'
   trigger:
