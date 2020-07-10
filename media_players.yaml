@@ -14,7 +14,3 @@
   enable_websocket: 'false'
   timeout: 7
 
-- platform: denonavr
-  host: marantz
-  name: Marantz sr5007
-  scan_interval: 30
