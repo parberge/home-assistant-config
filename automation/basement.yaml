@@ -49,10 +49,9 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: media_player.kodi
-        state: 'off'
-      - condition: state
-        entity_id: media_player.kallaren
+        entity_id:
+          - media_player.kodi
+          - media_player.kallaren
         state: 'off'
       - condition: state
         entity_id: media_player.playstation_4
