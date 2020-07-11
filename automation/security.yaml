@@ -32,17 +32,11 @@
       entity_id: input_boolean.all_asleep
       to: 'off'
   condition:
-    condition: or
+    condition: not
     conditions:
       - condition: state
         entity_id: alarm_control_panel.ha_alarm
-        state: armed_away
-      - condition: state
-        entity_id: alarm_control_panel.ha_alarm
-        state: arming
-      - condition: state
-        entity_id: alarm_control_panel.ha_alarm
-        state: triggering
+        state: disarmed
   action:
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.ha_alarm
@@ -68,13 +62,10 @@
 - alias: 'Trigga larmet när det är larmat'
   trigger:
     - platform: state
-      entity_id: binary_sensor.baksidadorr_sensor
-      to: 'on'
-    - platform: state
-      entity_id: binary_sensor.mainfloor_movement
-      to: 'on'
-    - platform: state
-      entity_id: binary_sensor.basement_entry
+      entity_id: 
+        - binary_sensor.baksidadorr_sensor
+        - binary_sensor.mainfloor_movement
+        - binary_sensor.basement_entry
       to: 'on'
     - platform: state
       entity_id: lock.ytterdorren
