@@ -54,11 +54,9 @@
       entity_id: group.family
       to: 'not_home'
     - platform: state
-      entity_id: input_boolean.vacation_mode
-      to: 'on'
-    - platform: state
-      entity_id: input_boolean.all_asleep
-      to: 'on'
+      entity_id:
+        - input_boolean.vacation_mode
+        - input_boolean.all_asleep
   condition:
     - condition: state
       entity_id: binary_sensor.baksidadorr_sensor
@@ -69,7 +67,6 @@
         target: !secret telegram_par_chat_id
         title: 'Varning'
         message: 'Baksida dörr fortfarande öppen'
-
 
 - alias: 'God morgon'
   trigger:
@@ -123,8 +120,6 @@
     platform: state
     entity_id: input_boolean.all_asleep
     to: 'off'
-    for:
-      minutes: 5
   condition:
     - condition: state
       entity_id: device_tracker.par_telefon

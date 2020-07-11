@@ -160,7 +160,6 @@
       data:
         message: "Gästläget deaktiverat"
 
-
 - alias: Update OpenUV every 20 minutes while the sun is at least 10 degrees above the horizon
   trigger:
     platform: time_pattern
