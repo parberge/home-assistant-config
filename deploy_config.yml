@@ -1,7 +1,9 @@
 - hosts: home_assistant
   remote_user: "{{ hass_remote_user|default('root') }}"
   
-
+  vars:
+    home_assistant_container: "home_assistant"
+    restart_home_assistant_enabled: yes
   tasks:
 
   - name: "Deploy home assistant group templates"
@@ -21,6 +23,7 @@
       - hass_deploy_groups
     notify:
       - Check homeassistant config
+      - Restart home assistant
 
   - name: "Deploy home assistant automation templates"
     become: yes
@@ -39,6 +42,7 @@
       - hass_deploy_automations
     notify:
       - Check homeassistant config
+      - Restart home assistant
 
   - name: "Deploy home assistant customization and config templates"
     become: yes
@@ -56,6 +60,7 @@
       - hass_deploy_cfg
     notify:
       - Check homeassistant config
+      - Restart home assistant
 
   - name: "Deploy home assistant secrets template"
     become: yes
@@ -68,6 +73,7 @@
       - hass_deploy_secrets
     notify:
       - Check homeassistant config
+      - Restart home assistant
 
   handlers:
     - name: Check homeassistant config
@@ -81,3 +87,9 @@
         that:
           - "'ERROR' not in hass_config_check.stdout"
         msg: "Config check reported error"
+
+    - name: Restart home assistant
+      become: yes
+      shell: "docker restart {{ home_assistant_container }}"
+      when:
+        - restart_home_assistant_enabled|bool
