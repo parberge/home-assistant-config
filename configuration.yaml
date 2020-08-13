@@ -106,10 +106,6 @@ telegram_bot:
       - !secret telegram_par_chat_id
       - !secret telegram_malena_chat_id
 
-transmission:
-  host: localhost
-  username: !secret transmission_user
-  password: !secret transmission_password
 
 alarm_control_panel:
   - platform: manual
