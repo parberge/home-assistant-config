@@ -1,9 +1,3 @@
-- platform: rfxtrx
-  devices:
-    0820031eb5a3000670:
-      name: brandvarnare_2
-      fire_event: True
-
 - platform: cert_expiry
   host: peers.se
 

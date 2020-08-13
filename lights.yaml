@@ -1,6 +1,3 @@
-- platform: rfxtrx
-  automatic_add: True
-
 - platform: group
   name: Baksida altan
   entities:
