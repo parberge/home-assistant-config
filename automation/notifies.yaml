@@ -96,6 +96,10 @@
     entity_id: sensor.washing_machine
     from: 'on'
     to: 'standby'
+  condition:
+    - condition: state
+      entity_id: group.family
+      state: "home"
   action:
     - service: telegram_bot.send_message
       data_template:
@@ -122,7 +126,7 @@
     to: 'off'
   condition:
     - condition: state
-      entity_id: device_tracker.par_telefon
+      entity_id: person.par
       state: "home"
   action:
     - service: notify.telegram
@@ -173,3 +177,26 @@
       data:
         message: |
           Tänkte bara säga att Pär lämnade jobbet precis. Förmodligen är han på väg hem!
+
+- alias: "Glöm inte tvätten"
+  trigger:
+    - platform: state
+      entity_id: group.family
+      from: "home"
+      to: 'not_home'
+    - platform: state
+      entity_id: group.family
+      from: "not_home"
+      to: 'home'
+  condition:
+    condition: not
+    conditions:
+      - condition: state
+        entity_id:
+          - sensor.washing_machine
+        state: "off"
+  action:
+    - service: notify.telegram
+      data:
+        message: |
+          Vill bara påminna om att tvättmaskinen är fortfarande igång.
