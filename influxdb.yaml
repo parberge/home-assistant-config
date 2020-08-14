@@ -19,13 +19,13 @@ include:
     - sensor.netatmo_solleftegatan_80_badrum_kallare_temperature
     - sensor.netatmo_solleftegatan_80_badrum_kallare_humidity
     - sensor.netatmo_solleftegatan_80_badrum_kallare_co2
-    - sensor.netatmo_solleftegatan_80_barnrummet_temperature
-    - sensor.netatmo_solleftegatan_80_barnrummet_humidity
-    - sensor.netatmo_solleftegatan_80_barnrummet_co2
-    - sensor.netatmo_solleftegatan_80_barnrummet_noise
+    - sensor.netatmo_solleftegatan_80_overvaningen_temperature
+    - sensor.netatmo_solleftegatan_80_overvaningen_humidity
+    - sensor.netatmo_solleftegatan_80_overvaningen_co2
     - sensor.netatmo_solleftegatan_80_vardagsrummet_temperature
     - sensor.netatmo_solleftegatan_80_vardagsrummet_humidity
     - sensor.netatmo_solleftegatan_80_vardagsrummet_co2
+    - sensor.netatmo_solleftegatan_80_vardagsrummet_noise
     - sensor.netatmo_solleftegatan_80_regnmatare_rain
     - binary_sensor.basement_entry
     - binary_sensor.mainfloor_movement
