@@ -51,13 +51,16 @@ verisure:
 
 google_assistant:
   project_id: !secret google_project_id
+  service_account: !include google_service_account.json
   secure_devices_pin: !secret google_secure_device_pin
+  report_state: true
   exposed_domains:
     - switch
     - light
     - lock
     - media_player
     - input_boolean
+    - sensor
 
 logger:
   default: warning
