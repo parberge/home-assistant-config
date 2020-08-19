@@ -1,6 +1,6 @@
 - hosts: home_assistant
   remote_user: "{{ hass_remote_user|default('root') }}"
-  
+
   vars:
     home_assistant_container: "home_assistant"
     restart_home_assistant_enabled: yes
@@ -58,6 +58,7 @@
     with_fileglob: "*.yaml"
     tags:
       - hass_deploy_cfg
+      - hass_deploy_core
     notify:
       - Check homeassistant config
       - Restart home assistant
@@ -74,6 +75,15 @@
     notify:
       - Check homeassistant config
       - Restart home assistant
+
+  - name: "Copy google service account file"
+    copy:
+      src: google_service_account.json
+      dest: "{{ home_assistant_cfg_dir }}/google_service_account.json"
+    notify:
+      - Check homeassistant config
+      - Restart home assistant
+
 
   handlers:
     - name: Check homeassistant config
