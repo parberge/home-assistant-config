@@ -39,7 +39,11 @@
 - alias: 'Batteristatus på netatmo'
   trigger:
     platform: state
-    entity_id: sensor.netatmo_solleftegatan_80_vardagsrummet_battery, sensor.netatmo_solleftegatan_80_badrum_kallare_battery, sensor.netatmo_solleftegatan_80_utomhus_battery, sensor.netatmo_solleftegatan_80_regnmatare_battery
+    entity_id:
+      - sensor.netatmo_solleftegatan_80_overvaningen_battery
+      - sensor.netatmo_solleftegatan_80_badrum_kallare_battery
+      - sensor.netatmo_solleftegatan_80_utomhus_battery
+      - sensor.netatmo_solleftegatan_80_regnmatare_battery
     to: 'Low'
   action:
     - service: notify.telegram
