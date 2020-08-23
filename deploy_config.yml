@@ -77,6 +77,7 @@
       - Restart home assistant
 
   - name: "Copy google service account file"
+    become: yes
     copy:
       src: google_service_account.json
       dest: "{{ home_assistant_cfg_dir }}/google_service_account.json"
