@@ -66,6 +66,7 @@
         - binary_sensor.baksidadorr_sensor
         - binary_sensor.mainfloor_movement
         - binary_sensor.basement_entry
+        - binary_sensor.philips_hue_1_motion
       to: 'on'
     - platform: state
       entity_id: lock.ytterdorren

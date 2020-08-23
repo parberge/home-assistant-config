@@ -96,11 +96,20 @@
         entity_id: light.dimmer_1_level
         transition: 120
 
-- alias: "Tänd lampa när projector stängs av"
+- alias: "Tänd lampa i biorummet"
   trigger:
     - platform: state
       entity_id: switch.projector
       to: 'off'
+    - platform: state
+      entity_id:
+        - binary_sensor.philips_hue_1_motion
+      to: "on"
+  condition:
+    - condition: state
+      entity_id:
+        - switch.projector
+      state: 'off'
   action:
     - service: light.turn_on
       data:
