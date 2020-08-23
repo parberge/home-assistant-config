@@ -11,6 +11,9 @@ light.dimmer_2_level:
   friendly_name: 'Dimmer Hall'
 
 binary_sensor.basement_entry:
+  friendly_name: 'Rörelsesensor källaringång'
+
+binary_sensor.philips_hue_1_motion:
   friendly_name: 'Rörelsesensor källare'
 
 light.light_5:
