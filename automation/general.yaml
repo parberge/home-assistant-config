@@ -19,8 +19,6 @@
   action:
     - service: light.turn_on
       entity_id: light.utomhusbelysning
-    - service: switch.turn_on
-      entity_id: switch.ikea_switch_2
     - service: light.turn_on
       entity_id: light.light_12
       data:
@@ -125,7 +123,6 @@
         message: "Semesterläge deaktiverat!"
 
 - alias: 'Toggle sleep mode'
-  initial_state: 'on'
   trigger:
     platform: event
     event_type: deconz_event
