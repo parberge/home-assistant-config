@@ -8,22 +8,41 @@
     - platform: state
       entity_id: input_boolean.all_asleep
       to: 'on'
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: alarm_control_panel.ha_alarm
-        state: disarmed
   action:
-    - service: alarm_control_panel.alarm_arm_away
-      entity_id: alarm_control_panel.ha_alarm
-    - service: notify.telegram
-      data_template:
-        target: !secret telegram_par_chat_id
-        title: 'Aktiverar larmet'
-        message: "Larmet aktiverades {{ now().strftime('%H:%M') }} av `{{ trigger.entity_id }}`"
-    - service: homeassistant.turn_off
-      entity_id: group.indoor_lights
+    - choose:
+      - conditions:
+          condition: not
+          conditions:
+            - condition: state
+              entity_id:
+                - group.family
+              state: "home"
+            - condition: state
+              entity_id:
+                - alarm_control_panel.ha_alarm
+              state: armed
+        sequence:
+          - service: homeassistant.turn_off
+            entity_id: group.indoor_lights
+          - service: alarm_control_panel.alarm_arm_away
+            entity_id: alarm_control_panel.ha_alarm
+      - conditions:
+          condition: not
+          conditions:
+            - condition: state
+              entity_id:
+                - input_boolean.all_asleep
+              state: "off"
+            - condition: state
+              entity_id:
+                - alarm_control_panel.ha_alarm
+              state: armed
+        sequence:
+          - service: homeassistant.turn_off
+            entity_id: group.indoor_lights
+          - service: alarm_control_panel.alarm_arm_home
+            entity_id: alarm_control_panel.ha_alarm
+
 
 - alias: 'Deaktivera larmet'
   trigger:
@@ -61,10 +80,10 @@
         topic: 'emqtt/noreplypeers.se'
         payload: 'OFF'
 
-- alias: 'Trigga larmet när det är larmat'
+- alias: 'Trigga larmet i bortaläge'
   trigger:
     - platform: state
-      entity_id: 
+      entity_id:
         - binary_sensor.baksidadorr_sensor
         - binary_sensor.mainfloor_movement
         - binary_sensor.basement_entry
@@ -77,6 +96,28 @@
     - condition: state
       entity_id: alarm_control_panel.ha_alarm
       state: armed_away
+  action:
+    - service: alarm_control_panel.alarm_trigger
+      entity_id: alarm_control_panel.ha_alarm
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.triggered_alarm_entities
+        value: "{{ trigger.entity_id }}"
+
+- alias: 'Trigga larmet i hemmaläge'
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.baksidadorr_sensor
+        - binary_sensor.basement_entry
+      to: 'on'
+    - platform: state
+      entity_id: lock.ytterdorren
+      to: 'unlocked'
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: armed_home
   action:
     - service: alarm_control_panel.alarm_trigger
       entity_id: alarm_control_panel.ha_alarm
