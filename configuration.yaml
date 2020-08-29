@@ -32,6 +32,7 @@ default_config:
 
 tts:
   platform: google_translate
+  language: 'sv'
 
 netatmo:
   client_id: !secret netatmo_api
