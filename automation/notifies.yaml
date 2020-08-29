@@ -109,6 +109,10 @@
         message: "tvätten är klar!"
         inline_keyboard:
           - "Påminn mig senare:/washing_reminder"
+    - service: tts.google_translate_say
+      entity_id: media_player.kok
+      data:
+        message: "Tvätten är klar!"
 
 - alias: "Tvätten är fortfarande kvar"
   trigger:
