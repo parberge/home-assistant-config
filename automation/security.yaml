@@ -22,6 +22,8 @@
         target: !secret telegram_par_chat_id
         title: 'Aktiverar larmet'
         message: "Larmet aktiverades {{ now().strftime('%H:%M') }} av `{{ trigger.entity_id }}`"
+    - service: homeassistant.turn_off
+      entity_id: group.indoor_lights
 
 - alias: 'Deaktivera larmet'
   trigger:
