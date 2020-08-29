@@ -83,13 +83,12 @@
         title: 'God morgon!'
         message: |
           Ännu en härlig dag att se fram emot.
-          Prognos just nu:
-          {{ states.weather.smhi_home.state }}
+          Vädret just nu:
+          {{ states.weather.smhi_home.state }} {{ states.sensor.netatmo_solleftegatan_80_utomhus_temperature.state_with_unit }}
           {% if states.weather.smhi_home.attributes.forecast[0].precipitation|float > 0 %}
           Förväntad mängd regn idag:
           {{ states.weather.smhi_home.attributes.forecast[0].precipitation }} mm
           {% endif %}
-          Temperaturen just nu: {{ states.sensor.netatmo_solleftegatan_80_utomhus_temperature.state_with_unit }}
           {% if states.sensor.netatmo_solleftegatan_80_regnmatare_sum_rain_24.state|float > 0 %}
           Det har regnat {{ states.sensor.netatmo_solleftegatan_80_regnmatare_sum_rain_24.state_with_unit }} sedan midnatt
           {% endif %}
