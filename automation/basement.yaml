@@ -31,12 +31,9 @@
 - alias: 'Marantz auto off'
   trigger:
     - platform: state
-      entity_id: media_player.kodi
-      to: 'off'
-      for:
-        minutes: 3
-    - platform: state
-      entity_id: media_player.kallaren
+      entity_id:
+        - media_player.kodi
+        - media_player.kallaren
       to: 'off'
       for:
         minutes: 1
@@ -94,7 +91,7 @@
     - service: light.turn_off
       data:
         entity_id: light.dimmer_1_level
-        transition: 120
+        transition: 60
 
 - alias: "Tänd lampa i biorummet"
   trigger:
@@ -140,7 +137,7 @@
     event_data:
       entity_id: zwave.the_button
       scene_id: 1
-      scene_data: 7860
+      scene_data: 7800
   action:
     - service: switch.turn_off
       entity_id: switch.projector
@@ -161,7 +158,7 @@
     event_data:
       entity_id: zwave.the_button
       scene_id: 1
-      scene_data: 7800
+      scene_data: 7860
   action:
     - service: media_player.media_play_pause
       entity_id: media_player.kodi
