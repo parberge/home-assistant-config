@@ -8,7 +8,7 @@
     - service: light.turn_off
       entity_id: light.utomhusbelysning
     - service: light.turn_off
-      entity_id: light.light_12
+      entity_id: light.trappa_1
 
 - alias: "Tänd lampor när solen går ned"
   trigger:
@@ -20,7 +20,7 @@
     - service: light.turn_on
       entity_id: light.utomhusbelysning
     - service: light.turn_on
-      entity_id: light.light_12
+      entity_id: light.trappa_1
       data:
         brightness: 1
 
