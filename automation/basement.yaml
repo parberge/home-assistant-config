@@ -18,7 +18,7 @@
       data_template:
         entity_id: media_player.marantz_sr5007
         source: >
-          {% if trigger.entity_id == 'media_player.kodi' %}
+          {% if trigger.entity_id == 'media_player.kodi_basement' %}
           MEDIA PLAYER
           {% elif trigger.entity_id == 'media_player.kallaren' %}
           CBL/SAT
@@ -32,7 +32,7 @@
   trigger:
     - platform: state
       entity_id:
-        - media_player.kodi
+        - media_player.kodi_basement
         - media_player.kallaren
       to: 'off'
       for:
@@ -47,7 +47,7 @@
     conditions:
       - condition: state
         entity_id:
-          - media_player.kodi
+          - media_player.kodi_basement
           - media_player.kallaren
         state: 'off'
       - condition: state
@@ -62,7 +62,7 @@
 - alias: "Tänd lampa när kodi pausar"
   trigger:
     - platform: state
-      entity_id: media_player.kodi
+      entity_id: media_player.kodi_basement
       to: 'paused'
   action:
     - service: light.turn_on
@@ -74,7 +74,7 @@
 - alias: "Släck lampa när kodi spelar"
   trigger:
     - platform: state
-      entity_id: media_player.kodi
+      entity_id: media_player.kodi_basement
       to: 'playing'
   action:
     - service: light.turn_off
@@ -124,7 +124,7 @@
       scene_data: 7680
   action:
     - service: media_player.turn_on
-      entity_id: media_player.kodi
+      entity_id: media_player.kodi_basement
     - service: media_player.turn_on
       entity_id: media_player.marantz_sr5007
     - service: switch.turn_on
@@ -149,7 +149,7 @@
     - service: media_player.turn_off
       entity_id: media_player.marantz_sr5007
     - service: media_player.turn_off
-      entity_id: media_player.kodi
+      entity_id: media_player.kodi_basement
 
 - alias: "Pausa/starta uppspelning med knapp"
   trigger:
@@ -161,7 +161,7 @@
       scene_data: 7860
   action:
     - service: media_player.media_play_pause
-      entity_id: media_player.kodi
+      entity_id: media_player.kodi_basement
     - delay:
         seconds: 5
     - service: notify.kodi
@@ -170,3 +170,28 @@
         data:
           icon: "info"
           displaytime: 10000
+
+- alias: "Turn on kodi"
+  trigger:
+    platform: device
+    device_id: 374ad60bfdc711eaac0e798c8efa0e80
+    domain: kodi
+    entity_id: media_player.kodi_basement
+    type: turn_on
+  action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: e0:69:95:53:23:67
+
+- alias: "Turn off kodi"
+  trigger:
+    platform: device
+    device_id: 374ad60bfdc711eaac0e798c8efa0e80
+    domain: kodi
+    entity_id: media_player.kodi_basement
+    type: turn_off
+  action:
+    service: kodi.call_method
+    data:
+      entity_id: media_player.kodi_basement
+      method: System.Shutdown
