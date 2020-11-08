@@ -35,6 +35,7 @@ include:
     - sensor.washing_machine_switch_current
     - sensor.washing_machine_switch_energy
     - sensor.withings_weight_kg_parberge_2
+    - sensor.withings_weight_kg_malena
 
 tags_attributes:
   - friendly_name
