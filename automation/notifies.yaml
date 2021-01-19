@@ -126,21 +126,6 @@
       data:
         message: "Tvätten är fortfarande klar. Om den är urplockad har ni glömt stänga av maskinen"
 
-- alias: 'Väg dig påminnelse'
-  trigger:
-    platform: state
-    entity_id: input_boolean.all_asleep
-    to: 'off'
-  condition:
-    - condition: state
-      entity_id: person.par
-      state: "home"
-  action:
-    - service: notify.telegram
-      data_template:
-        target: !secret telegram_par_chat_id
-        message: Glöm inte väga dig.
-
 - alias: 'Dåligt väder'
   trigger:
     - platform: numeric_state
