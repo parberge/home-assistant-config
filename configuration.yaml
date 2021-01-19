@@ -116,7 +116,7 @@ telegram_bot:
 
 alarm_control_panel:
   - platform: manual
-  
+
 withings:
   client_id: !secret withings_client_id
   client_secret: !secret withings_secret_id
@@ -127,7 +127,6 @@ automation: !include_dir_merge_list automation/
 media_player: !include media_players.yaml
 binary_sensor: !include binary_sensors.yaml
 sensor: !include sensors.yaml
-switch: !include switches.yaml
 notify: !include notifiers.yaml
 script: !include scripts.yaml
 light: !include lights.yaml
