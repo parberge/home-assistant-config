@@ -25,8 +25,6 @@
           {% elif trigger.entity_id == 'media_player.playstation_4' %}
           GAME
           {% endif %}
-    - service: switch.turn_on
-      entity_id: switch.projector
 
 - alias: 'Marantz auto off'
   trigger:
@@ -56,8 +54,6 @@
   action:
     - service: homeassistant.turn_off
       entity_id: media_player.marantz_sr5007
-    - service: switch.turn_off
-      entity_id: switch.projector
 
 - alias: "Tänd lampa när kodi pausar"
   trigger:
@@ -82,31 +78,12 @@
         entity_id: light.dimmer_1_level
         transition: 5
 
-- alias: "Släck lampa när projector är igång"
-  trigger:
-    - platform: state
-      entity_id: switch.projector
-      to: 'on'
-  action:
-    - service: light.turn_off
-      data:
-        entity_id: light.dimmer_1_level
-        transition: 60
-
 - alias: "Tänd lampa i biorummet"
   trigger:
-    - platform: state
-      entity_id: switch.projector
-      to: 'off'
     - platform: state
       entity_id:
         - binary_sensor.philips_hue_1_motion
       to: "on"
-  condition:
-    - condition: state
-      entity_id:
-        - switch.projector
-      state: 'off'
   action:
     - service: light.turn_on
       data:
@@ -127,8 +104,6 @@
       entity_id: media_player.kodi_basement
     - service: media_player.turn_on
       entity_id: media_player.marantz_sr5007
-    - service: switch.turn_on
-      entity_id: switch.projector
 
 - alias: "Stäng av hembio"
   trigger:
@@ -139,8 +114,6 @@
       scene_id: 1
       scene_data: 7800
   action:
-    - service: switch.turn_off
-      entity_id: switch.projector
     - service: light.turn_on
       data:
         entity_id: light.dimmer_1_level

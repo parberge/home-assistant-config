@@ -1,6 +1,3 @@
-switch.projector:
-  icon: mdi:projector
-
 sun.sun:
   friendly_name: Solståndet
 
