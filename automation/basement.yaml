@@ -2,10 +2,6 @@
 - alias: 'Marantz auto on'
   trigger:
     - platform: state
-      entity_id: media_player.kodi
-      from: 'off'
-      to: 'idle'
-    - platform: state
       entity_id: media_player.playstation_4
       to: 'idle'
   action:
@@ -15,61 +11,20 @@
       data_template:
         entity_id: media_player.marantz_sr5007
         source: >
-          {% if trigger.entity_id == 'media_player.kodi_basement' %}
-          MEDIA PLAYER
-          {% elif trigger.entity_id == 'media_player.playstation_4' %}
+          {% if trigger.entity_id == 'media_player.playstation_4' %}
           GAME
           {% endif %}
 
 - alias: 'Marantz auto off'
   trigger:
     - platform: state
-      entity_id:
-        - media_player.kodi_basement
-      to: 'off'
-      for:
-        minutes: 1
-    - platform: state
       entity_id: media_player.playstation_4
       to: 'standby'
       for:
         minutes: 1
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id:
-          - media_player.kodi_basement
-        state: 'off'
-      - condition: state
-        entity_id: media_player.playstation_4
-        state: 'standby'
   action:
-    - service: homeassistant.turn_off
+    - service: media_player.turn_off
       entity_id: media_player.marantz_sr5007
-
-- alias: "Tänd lampa när kodi pausar"
-  trigger:
-    - platform: state
-      entity_id: media_player.kodi_basement
-      to: 'paused'
-  action:
-    - service: light.turn_on
-      data:
-        entity_id: light.dimmer_1_level
-        brightness: 120
-        transition: 5
-
-- alias: "Släck lampa när kodi spelar"
-  trigger:
-    - platform: state
-      entity_id: media_player.kodi_basement
-      to: 'playing'
-  action:
-    - service: light.turn_off
-      data:
-        entity_id: light.dimmer_1_level
-        transition: 5
 
 - alias: "Tänd lampa i biorummet"
   trigger:
@@ -94,8 +49,6 @@
       scene_data: 7680
   action:
     - service: media_player.turn_on
-      entity_id: media_player.kodi_basement
-    - service: media_player.turn_on
       entity_id: media_player.marantz_sr5007
 
 - alias: "Stäng av hembio"
@@ -114,50 +67,3 @@
         brightness: 120
     - service: media_player.turn_off
       entity_id: media_player.marantz_sr5007
-    - service: media_player.turn_off
-      entity_id: media_player.kodi_basement
-
-- alias: "Pausa/starta uppspelning med knapp"
-  trigger:
-    platform: event
-    event_type: zwave.scene_activated
-    event_data:
-      entity_id: zwave.the_button
-      scene_id: 1
-      scene_data: 7860
-  action:
-    - service: media_player.media_play_pause
-      entity_id: media_player.kodi_basement
-    - delay:
-        seconds: 5
-    - service: notify.kodi
-      data:
-        message: "Aktiverad av röda knappen"
-        data:
-          icon: "info"
-          displaytime: 10000
-
-- alias: "Turn on kodi"
-  trigger:
-    platform: device
-    device_id: 374ad60bfdc711eaac0e798c8efa0e80
-    domain: kodi
-    entity_id: media_player.kodi_basement
-    type: turn_on
-  action:
-    service: wake_on_lan.send_magic_packet
-    data:
-      mac: e0:69:95:53:23:67
-
-- alias: "Turn off kodi"
-  trigger:
-    platform: device
-    device_id: 374ad60bfdc711eaac0e798c8efa0e80
-    domain: kodi
-    entity_id: media_player.kodi_basement
-    type: turn_off
-  action:
-    service: kodi.call_method
-    data:
-      entity_id: media_player.kodi_basement
-      method: System.Shutdown

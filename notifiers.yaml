@@ -9,12 +9,6 @@
   vapid_prv_key: !secret vapid_prv_key
   vapid_email: !secret vapid_email
 
-- name: kodi
-  platform: kodi
-  host: peerhtpc
-  username: peer
-  password: !secret kodi_password
-
 - name: telegram
   platform: telegram
   chat_id: !secret telegram_chat_id
