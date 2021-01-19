@@ -4,6 +4,7 @@
   vars:
     home_assistant_container: "home_assistant"
     restart_home_assistant_enabled: yes
+    deploy_gcp_cfg: true
   tasks:
 
   - name: "Deploy home assistant group templates"
@@ -81,6 +82,8 @@
     copy:
       src: google_service_account.json
       dest: "{{ home_assistant_cfg_dir }}/google_service_account.json"
+    when:
+      - deploy_gcp_cfg|bool
     notify:
       - Check homeassistant config
       - Restart home assistant
