@@ -10,7 +10,10 @@
       entity_id:
         - media_player.tv_kallare
         - media_player.marantz_sr5007
-      to: "off"
+        - media_player.shield_2
+      to:
+        - "off"
+        - "paused"
   action:
     - service: light.turn_on
       data:
@@ -23,6 +26,7 @@
     - platform: state
       entity_id:
         - media_player.playstation_4
+        - media_player.shield_2
       to:
         - "playing"
   action:
