@@ -1,32 +1,4 @@
 ---
-- alias: 'Marantz auto on'
-  trigger:
-    - platform: state
-      entity_id: media_player.playstation_4
-      to:
-        - 'idle'
-        - 'playing'
-  action:
-    - service: media_player.turn_on
-      entity_id: media_player.marantz_sr5007
-    - service: media_player.select_source
-      data_template:
-        entity_id: media_player.marantz_sr5007
-        source: >
-          {% if trigger.entity_id == 'media_player.playstation_4' %}
-          GAME
-          {% endif %}
-
-- alias: 'Marantz auto off'
-  trigger:
-    - platform: state
-      entity_id: media_player.playstation_4
-      to: 'standby'
-      for:
-        minutes: 1
-  action:
-    - service: media_player.turn_off
-      entity_id: media_player.marantz_sr5007
 
 - alias: "Tänd lampa i biorummet"
   trigger:
@@ -34,6 +6,11 @@
       entity_id:
         - binary_sensor.philips_hue_1_motion
       to: "on"
+    - platform: state
+      entity_id:
+        - media_player.tv_kallare
+        - media_player.marantz_sr5007
+      to: "off"
   action:
     - service: light.turn_on
       data:
@@ -41,17 +18,18 @@
         transition: 5
         brightness: 120
 
-- alias: "Starta hembio"
+- alias: "Släck lampa i biorummet"
   trigger:
-    platform: event
-    event_type: zwave.scene_activated
-    event_data:
-      entity_id: zwave.the_button
-      scene_id: 1
-      scene_data: 7680
+    - platform: state
+      entity_id:
+        - media_player.playstation_4
+      to:
+        - "playing"
   action:
-    - service: media_player.turn_on
-      entity_id: media_player.marantz_sr5007
+    - service: light.turn_off
+      data:
+        entity_id: light.dimmer_1_level
+        transition: 5
 
 - alias: "Stäng av hembio"
   trigger:
@@ -68,4 +46,4 @@
         transition: 5
         brightness: 120
     - service: media_player.turn_off
-      entity_id: media_player.marantz_sr5007
+      entity_id: media_player.tv_kallare
