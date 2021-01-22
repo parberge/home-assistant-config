@@ -6,6 +6,7 @@
       entity_id:
         - binary_sensor.philips_hue_1_motion
       to: "on"
+
     - platform: state
       entity_id:
         - media_player.tv_kallare
@@ -14,6 +15,7 @@
       to:
         - "off"
         - "paused"
+
   action:
     - service: light.turn_on
       data:
@@ -51,3 +53,34 @@
         brightness: 120
     - service: media_player.turn_off
       entity_id: media_player.tv_kallare
+
+
+- alias: "Toggla ljus och media"
+  trigger:
+    - platform: event
+      event_type: zwave.scene_activated
+      event_data:
+        entity_id: zwave.the_button
+        scene_id: 1
+        scene_data: 7680
+
+  action:
+  - service: light.toggle
+    data:
+      entity_id: light.dimmer_1_level
+      transition: 5
+      brightness: 120
+  - choose:
+      - conditions:
+        - condition: state
+          entity_id:
+            - media_player.basement_media
+          state: "playing"
+        sequence:
+          - service: media_player.media_pause
+            entity_id:
+              - media_player.basement_media
+    default:
+      - service: media_player.media_play
+        entity_id:
+          - media_player.basement_media
