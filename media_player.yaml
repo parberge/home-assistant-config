@@ -1,0 +1,5 @@
+- platform: universal
+  name: basement_media
+  children:
+    - media_player.shield_cast
+    - media_player.kodi
