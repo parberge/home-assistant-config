@@ -100,7 +100,7 @@
       assert:
         that:
           - "'ERROR' not in hass_config_check.stdout"
-        msg: "Config check reported error"
+        msg: "Config check reported error: {{ hass_config_check.stdout }}"
 
     - name: Restart home assistant
       become: yes
