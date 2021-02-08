@@ -1,0 +1,8 @@
+night_time:
+  name: "Nattläge börjar"
+  has_date: false
+  has_time: true
+morning_time:
+  name: "Nattläge slutar"
+  has_date: false
+  has_time: true
