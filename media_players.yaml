@@ -3,3 +3,5 @@
   children:
     - media_player.shield_cast
     - media_player.kodi
+    - media_player.tv_kallare
+    - media_player.marantz_sr5007
