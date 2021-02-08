@@ -1,21 +1,17 @@
 ---
 
-- alias: "Tänd lampa i biorummet"
+- alias: "Tänd lampa i biorummet vid rörelse"
   trigger:
     - platform: state
       entity_id:
         - binary_sensor.philips_hue_1_motion
       to: "on"
-
-    - platform: state
-      entity_id:
-        - media_player.tv_kallare
-        - media_player.marantz_sr5007
-        - media_player.shield_cast
-      to:
-        - "off"
-        - "paused"
-
+  condition:
+      - condition: state
+        entity_id:
+          - media_player.basement_media
+        state:
+          - "off"
   action:
     - service: light.turn_on
       data:
@@ -28,7 +24,7 @@
     - platform: state
       entity_id:
         - media_player.playstation_4
-        - media_player.shield_cast
+        - media_player.basement_media
       to:
         - "playing"
   action:
@@ -52,7 +48,7 @@
         transition: 5
         brightness: 120
     - service: media_player.turn_off
-      entity_id: media_player.tv_kallare
+      entity_id: media_player.basement_media
 
 
 - alias: "Toggla ljus och media"
