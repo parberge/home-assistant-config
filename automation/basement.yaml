@@ -71,7 +71,8 @@
         - condition: state
           entity_id:
             - media_player.basement_media
-          state: "playing"
+          state:
+            - "playing"
         sequence:
           - service: media_player.media_pause
             entity_id:
