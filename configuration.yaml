@@ -38,18 +38,6 @@ netatmo:
   client_id: !secret netatmo_api
   client_secret: !secret netatmo_api_secret
 
-verisure:
-  username: !secret verisure_user
-  password: !secret verisure_password
-  alarm: 0
-  hygrometers: 0
-  smartplugs: 0
-  thermometers: 0
-  mouse: 0
-  door_window: 0
-  code_digits: 6
-  default_lock_code: !secret verisure_door_pin
-
 google_assistant:
   project_id: !secret google_project_id
   service_account: !include google_service_account.json
