@@ -5,94 +5,94 @@
     home_assistant_container: "home_assistant"
     restart_home_assistant_enabled: yes
     deploy_gcp_cfg: true
+    deploy_google_account: false
   tasks:
+    - name: "Deploy home assistant group templates"
+      become: yes
+      template:
+        src: "{{ item.src }}"
+        dest: "{{ home_assistant_cfg_dir }}/group/{{ item.path }}"
+        owner: "{{ home_assistant_user|default('homeassistant') }}"
+        group: "{{ home_assistant_user|default('homeassistant') }}"
+        block_start_string: "{{ item.block_start | default('<%') }}"
+        block_end_string: "{{ item.block_end | default('%>') }}"
+        variable_start_string: "{{ item.variable_start | default('<<') }}"
+        variable_end_string: "{{ item.variable_end | default('>>') }}"
+      with_filetree: "group"
+      tags:
+        - hass_deploy_cfg
+        - hass_deploy_groups
+      notify:
+        - Check homeassistant config
+        - Restart home assistant
 
-  - name: "Deploy home assistant group templates"
-    become: yes
-    template:
-      src: "{{ item.src }}"
-      dest: "{{ home_assistant_cfg_dir }}/group/{{ item.path }}"
-      owner: "{{ home_assistant_user|default('homeassistant') }}"
-      group: "{{ home_assistant_user|default('homeassistant') }}"
-      block_start_string: "{{ item.block_start | default('<%') }}"
-      block_end_string: "{{ item.block_end | default('%>') }}"
-      variable_start_string: "{{ item.variable_start | default('<<') }}"
-      variable_end_string: "{{ item.variable_end | default('>>') }}"
-    with_filetree: "group"
-    tags:
-      - hass_deploy_cfg
-      - hass_deploy_groups
-    notify:
-      - Check homeassistant config
-      - Restart home assistant
+    - name: "Deploy home assistant automation templates"
+      become: yes
+      template:
+        src: "{{ item.src }}"
+        dest: "{{ home_assistant_cfg_dir }}/automation/{{ item.path }}"
+        owner: "{{ home_assistant_user }}"
+        group: "{{ home_assistant_user }}"
+        block_start_string: "{{ item.block_start | default('<%') }}"
+        block_end_string: "{{ item.block_end | default('%>') }}"
+        variable_start_string: "{{ item.variable_start | default('<<') }}"
+        variable_end_string: "{{ item.variable_end | default('>>') }}"
+      with_filetree: "automation"
+      tags:
+        - hass_deploy_cfg
+        - hass_deploy_automations
+      notify:
+        - Check homeassistant config
+        - Restart home assistant
 
-  - name: "Deploy home assistant automation templates"
-    become: yes
-    template:
-      src: "{{ item.src }}"
-      dest: "{{ home_assistant_cfg_dir }}/automation/{{ item.path }}"
-      owner: "{{ home_assistant_user }}"
-      group: "{{ home_assistant_user }}"
-      block_start_string: "{{ item.block_start | default('<%') }}"
-      block_end_string: "{{ item.block_end | default('%>') }}"
-      variable_start_string: "{{ item.variable_start | default('<<') }}"
-      variable_end_string: "{{ item.variable_end | default('>>') }}"
-    with_filetree: "automation"
-    tags:
-      - hass_deploy_cfg
-      - hass_deploy_automations
-    notify:
-      - Check homeassistant config
-      - Restart home assistant
+    - name: "Deploy home assistant customization and config templates"
+      become: yes
+      template:
+        src: "{{ item }}"
+        dest: "{{ home_assistant_cfg_dir }}/{{ item | basename }}"
+        owner: "{{ home_assistant_user }}"
+        group: "{{ home_assistant_user }}"
+        block_start_string: "{{ item.block_start | default('<%') }}"
+        block_end_string: "{{ item.block_end | default('%>') }}"
+        variable_start_string: "{{ item.variable_start | default('<<') }}"
+        variable_end_string: "{{ item.variable_end | default('>>') }}"
+      with_fileglob: "*.yaml"
+      tags:
+        - hass_deploy_cfg
+        - hass_deploy_core
+      notify:
+        - Check homeassistant config
+        - Restart home assistant
 
-  - name: "Deploy home assistant customization and config templates"
-    become: yes
-    template:
-      src: "{{ item }}"
-      dest: "{{ home_assistant_cfg_dir }}/{{ item | basename }}"
-      owner: "{{ home_assistant_user }}"
-      group: "{{ home_assistant_user }}"
-      block_start_string: "{{ item.block_start | default('<%') }}"
-      block_end_string: "{{ item.block_end | default('%>') }}"
-      variable_start_string: "{{ item.variable_start | default('<<') }}"
-      variable_end_string: "{{ item.variable_end | default('>>') }}"
-    with_fileglob: "*.yaml"
-    tags:
-      - hass_deploy_cfg
-      - hass_deploy_core
-    notify:
-      - Check homeassistant config
-      - Restart home assistant
+    - name: "Deploy home assistant secrets template"
+      become: yes
+      template:
+        src: "secrets.yaml.j2"
+        dest: "{{ home_assistant_cfg_dir }}/secrets.yaml"
+      no_log: True
+      tags:
+        - hass_deploy_cfg
+        - hass_deploy_secrets
+      notify:
+        - Check homeassistant config
+        - Restart home assistant
 
-  - name: "Deploy home assistant secrets template"
-    become: yes
-    template:
-      src: "secrets.yaml.j2"
-      dest: "{{ home_assistant_cfg_dir }}/secrets.yaml"
-    no_log: True
-    tags:
-      - hass_deploy_cfg
-      - hass_deploy_secrets
-    notify:
-      - Check homeassistant config
-      - Restart home assistant
-
-  - name: "Copy google service account file"
-    become: yes
-    copy:
-      src: google_service_account.json
-      dest: "{{ home_assistant_cfg_dir }}/google_service_account.json"
-    when:
-      - deploy_gcp_cfg|bool
-    notify:
-      - Check homeassistant config
-      - Restart home assistant
-
+    - name: "Copy google service account file"
+      become: yes
+      copy:
+        src: google_service_account.json
+        dest: "{{ home_assistant_cfg_dir }}/google_service_account.json"
+      when:
+        - deploy_gcp_cfg|bool
+        - deploy_google_account|bool
+      notify:
+        - Check homeassistant config
+        - Restart home assistant
 
   handlers:
     - name: Check homeassistant config
       become: yes
-      command: 'docker exec {{ hass_docker_name }} python -m homeassistant --script check_config -c /config'
+      command: "docker exec {{ hass_docker_name }} python -m homeassistant --script check_config -c /config"
       register: hass_config_check
       notify: Assert config
 
