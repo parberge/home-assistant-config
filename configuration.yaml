@@ -19,6 +19,13 @@ recorder:
     domains:
       - automation
 
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 127.0.0.1
+    - ::1
+    - 192.168.0.0/16
+
 discovery:
 conversation:
 history:
@@ -29,7 +36,7 @@ default_config:
 
 tts:
   platform: google_translate
-  language: 'sv'
+  language: "sv"
 
 netatmo:
   client_id: !secret netatmo_api
@@ -68,7 +75,6 @@ rfxtrx:
     0820031eb5a3000670:
       fire_event: True
 
-
 zwave:
   usb_path: /dev/serial/by-id/usb-0658_0200-if00
   debug: True
@@ -97,7 +103,6 @@ telegram_bot:
       - !secret telegram_chat_id
       - !secret telegram_par_chat_id
       - !secret telegram_malena_chat_id
-
 
 alarm_control_panel:
   - platform: manual
