@@ -1,19 +1,3 @@
-- alias: "Brandlarmet notis"
-  trigger:
-    - platform: event
-      event_type: signal_received
-      event_data: {"entity_id": "sensor.brandvarnare_2_sensor_status"}
-  action:
-    - service: notify.html5
-      data:
-        message: 'Brandlarmet utlöst!'
-    - service: notify.pushover
-      data:
-        message: 'Brandlarmet utlöst!'
-    - service: notify.telegram
-      data:
-        message: "Verkar som brandlarmet har utlösts klockan {{ now().strftime('%H:%M') }}!"
-
 - alias: "Ny enhet hittad notis"
   trigger:
     platform: event
@@ -28,15 +12,15 @@
   trigger:
     platform: state
     entity_id: sensor.kamera_kallare
-    to: 'Offline'
+    to: "Offline"
   action:
     - service: notify.telegram
       data:
         target: !secret telegram_par_chat_id
-        title: 'Varning'
+        title: "Varning"
         message: "Kameran i källaren är offline"
 
-- alias: 'Batteristatus på netatmo'
+- alias: "Batteristatus på netatmo"
   trigger:
     platform: state
     entity_id:
@@ -44,19 +28,19 @@
       - sensor.netatmo_solleftegatan_80_badrum_kallare_battery
       - sensor.netatmo_solleftegatan_80_utomhus_battery
       - sensor.netatmo_solleftegatan_80_regnmatare_battery
-    to: 'Low'
+    to: "Low"
   action:
     - service: notify.telegram
       data_template:
         target: !secret telegram_par_chat_id
-        title: 'Varning'
-        message: 'Sensor {{ trigger.to_state.attributes.friendly_name }} har lågt batteri'
+        title: "Varning"
+        message: "Sensor {{ trigger.to_state.attributes.friendly_name }} har lågt batteri"
 
-- alias: 'Baksida dörr öppen'
+- alias: "Baksida dörr öppen"
   trigger:
     - platform: state
       entity_id: group.family
-      to: 'not_home'
+      to: "not_home"
     - platform: state
       entity_id:
         - input_boolean.vacation_mode
@@ -64,23 +48,23 @@
   condition:
     - condition: state
       entity_id: binary_sensor.baksidadorr_sensor
-      state: 'on'
+      state: "on"
   action:
     - service: notify.telegram
       data_template:
         target: !secret telegram_par_chat_id
-        title: 'Varning'
-        message: 'Baksida dörr fortfarande öppen'
+        title: "Varning"
+        message: "Baksida dörr fortfarande öppen"
 
-- alias: 'God morgon'
+- alias: "God morgon"
   trigger:
     platform: state
     entity_id: input_boolean.all_asleep
-    to: 'off'
+    to: "off"
   action:
     - service: notify.telegram
       data:
-        title: 'God morgon!'
+        title: "God morgon!"
         message: |
           Ännu en härlig dag att se fram emot.
           Vädret just nu:
@@ -97,8 +81,8 @@
   trigger:
     platform: state
     entity_id: sensor.washing_machine
-    from: 'on'
-    to: 'standby'
+    from: "on"
+    to: "standby"
   condition:
     - condition: state
       entity_id: group.family
@@ -118,7 +102,7 @@
   trigger:
     platform: state
     entity_id: sensor.washing_machine
-    to: 'standby'
+    to: "standby"
     for:
       hours: 1
   action:
@@ -126,7 +110,7 @@
       data:
         message: "Tvätten är fortfarande klar. Om den är urplockad har ni glömt stänga av maskinen"
 
-- alias: 'Dåligt väder'
+- alias: "Dåligt väder"
   trigger:
     - platform: numeric_state
       entity_id: weather.smhi_home
@@ -148,7 +132,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.updater
-      to: 'on'
+      to: "on"
   action:
     - service: notify.telegram
       data_template:
@@ -162,8 +146,8 @@
     zone: zone.par_jobb
     event: leave
   condition:
-      condition: time
-      after: '16:00'
+    condition: time
+    after: "16:00"
   action:
     - service: notify.telegram
       data:
@@ -175,11 +159,11 @@
     - platform: state
       entity_id: group.family
       from: "home"
-      to: 'not_home'
+      to: "not_home"
     - platform: state
       entity_id: group.family
       from: "not_home"
-      to: 'home'
+      to: "home"
   condition:
     condition: not
     conditions:

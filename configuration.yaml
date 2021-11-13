@@ -60,7 +60,6 @@ logger:
   logs:
     homeassistant.components.withings: critical
     #homeassistant.components.webhook: debug
-    #homeassistant.components.rfxtrx: debug
     #homeassistant.components.zwave: debug
     #homeassistant.components.sensor.netatmo: debug
     #pydeconz: debug
@@ -68,12 +67,6 @@ logger:
 
 mqtt:
   broker: !secret mqtt_broker
-
-rfxtrx:
-  device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
-  devices:
-    0820031eb5a3000670:
-      fire_event: True
 
 zwave:
   usb_path: /dev/serial/by-id/usb-0658_0200-if00
