@@ -38,10 +38,6 @@ tts:
   platform: google_translate
   language: "sv"
 
-netatmo:
-  client_id: !secret netatmo_api
-  client_secret: !secret netatmo_api_secret
-
 google_assistant:
   project_id: !secret google_project_id
   service_account: !include google_service_account.json
