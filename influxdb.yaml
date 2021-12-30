@@ -2,31 +2,31 @@
 host: !secret influxdb_host
 default_measurement: state
 component_config_glob:
-  'sensor.*temperature':
-    override_measurement: 'temperature'
-  'sensor.*humidity':
-    override_measurement: 'humidity'
-  'sensor.*co2':
-    override_measurement: 'co2'
-  'sensor.*noise':
-    override_measurement: 'noise_level'
-  'sensor.*rain':
-    override_measurement: 'mm'
+  "sensor.*temperature":
+    override_measurement: "temperature"
+  "sensor.*humidity":
+    override_measurement: "humidity"
+  "sensor.*co2":
+    override_measurement: "co2"
+  "sensor.*noise":
+    override_measurement: "noise_level"
+  "sensor.*rain":
+    override_measurement: "mm"
 include:
   entities:
-    - sensor.netatmo_solleftegatan_80_utomhus_humidity
-    - sensor.netatmo_solleftegatan_80_utomhus_temperature
-    - sensor.netatmo_solleftegatan_80_badrum_kallare_temperature
-    - sensor.netatmo_solleftegatan_80_badrum_kallare_humidity
-    - sensor.netatmo_solleftegatan_80_badrum_kallare_co2
-    - sensor.netatmo_solleftegatan_80_overvaningen_temperature
-    - sensor.netatmo_solleftegatan_80_overvaningen_humidity
-    - sensor.netatmo_solleftegatan_80_overvaningen_co2
+    - sensor.netatmo_solleftegatan_80_vardagsrummet_utomhus_humidity
+    - sensor.netatmo_solleftegatan_80_vardagsrummet_utomhus_temperature
+    - sensor.netatmo_solleftegatan_80_vardagsrummet_badrum_kallare_temperature
+    - sensor.netatmo_solleftegatan_80_vardagsrummet_badrum_kallare_humidity
+    - sensor.netatmo_solleftegatan_80_vardagsrummet_badrum_kallare_co2
+    - sensor.netatmo_solleftegatan_80_vardagsrummet_overvaningen_temperature
+    - sensor.netatmo_solleftegatan_80_vardagsrummet_overvaningen_humidity
+    - sensor.netatmo_solleftegatan_80_vardagsrummet_overvaningen_co2
     - sensor.netatmo_solleftegatan_80_vardagsrummet_temperature
     - sensor.netatmo_solleftegatan_80_vardagsrummet_humidity
     - sensor.netatmo_solleftegatan_80_vardagsrummet_co2
     - sensor.netatmo_solleftegatan_80_vardagsrummet_noise
-    - sensor.netatmo_solleftegatan_80_regnmatare_rain
+    - sensor.netatmo_solleftegatan_80_vardagsrummet_regnmatare_rain
     - binary_sensor.basement_entry
     - binary_sensor.mainfloor_movement
     - media_player.vardagsrummet

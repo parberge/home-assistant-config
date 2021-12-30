@@ -4,29 +4,29 @@
       entity_id:
         - binary_sensor.tradfri_motion_sensor
         - binary_sensor.kallartrapp_rorelse
-      to: 'on'
+      to: "on"
   action:
     - service: light.turn_on
       data:
-        entity_id: light.dimmer_2_level
+        entity_id: light.dimmer_2_3
         brightness: 120
 
 - alias: "Släck lampor hallen"
   trigger:
     - platform: state
       entity_id: binary_sensor.tradfri_motion_sensor
-      to: 'off'
+      to: "off"
       for:
         minutes: 2
   action:
     - service: light.turn_off
-      entity_id: light.dimmer_2_level
+      entity_id: light.dimmer_2_3
 
 - alias: "Tänd lampor källartrapp"
   trigger:
     - platform: state
       entity_id: binary_sensor.kallartrapp_rorelse
-      to: 'on'
+      to: "on"
   action:
     - service: light.turn_on
       data:
@@ -36,7 +36,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.kallartrapp_rorelse
-      to: 'off'
+      to: "off"
       for:
         minutes: 2
   action:

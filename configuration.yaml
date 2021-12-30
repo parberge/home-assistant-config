@@ -64,27 +64,6 @@ logger:
 mqtt:
   broker: !secret mqtt_broker
 
-zwave:
-  usb_path: /dev/serial/by-id/usb-0658_0200-if00
-  debug: True
-  device_config_glob:
-    "sensor.dimmer_*_alarm_level":
-      ignored: true
-    "sensor.dimmer_*_heat":
-      ignored: true
-    "sensor.dimmer_*_alarm_type":
-      ignored: true
-    "sensor.dimmer_*_exporting":
-      ignored: true
-    "sensor.dimmer_*_system":
-      ignored: true
-    "sensor.dimmer_*_power_management":
-      ignored: true
-    "sensor.dimmer_*_sourcenodeid":
-      ignored: true
-    "sensor.baksidadorr_*":
-      ignored: true
-
 telegram_bot:
   - platform: polling
     api_key: !secret telegram_api_key

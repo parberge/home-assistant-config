@@ -1,24 +1,4 @@
 ---
-
-- alias: "Tänd lampa i biorummet vid rörelse"
-  trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.philips_hue_1_motion
-      to: "on"
-  condition:
-      - condition: state
-        entity_id:
-          - media_player.basement_media
-        state:
-          - "off"
-  action:
-    - service: light.turn_on
-      data:
-        entity_id: light.dimmer_1_level
-        transition: 5
-        brightness: 120
-
 - alias: "Släck lampa i biorummet"
   trigger:
     - platform: state
@@ -30,7 +10,7 @@
   action:
     - service: light.turn_off
       data:
-        entity_id: light.dimmer_1_level
+        entity_id: light.dimmer_2
         transition: 5
 
 - alias: "Stäng av hembio"
@@ -44,12 +24,11 @@
   action:
     - service: light.turn_on
       data:
-        entity_id: light.dimmer_1_level
+        entity_id: light.dimmer_2
         transition: 5
         brightness: 120
     - service: media_player.turn_off
       entity_id: media_player.basement_media
-
 
 - alias: "Toggla ljus och media"
   trigger:
@@ -61,41 +40,40 @@
         scene_data: 7680
 
   action:
-  - service: light.toggle
-    data:
-      entity_id: light.dimmer_1_level
-      transition: 5
-      brightness: 120
-  - choose:
-      - conditions:
-        - condition: state
+    - service: light.toggle
+      data:
+        entity_id: light.dimmer_2
+        transition: 5
+        brightness: 120
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id:
+                - media_player.basement_media
+              state:
+                - "playing"
+          sequence:
+            - service: media_player.media_pause
+              entity_id:
+                - media_player.basement_media
+      default:
+        - service: media_player.media_play
           entity_id:
             - media_player.basement_media
-          state:
-            - "playing"
-        sequence:
-          - service: media_player.media_pause
-            entity_id:
-              - media_player.basement_media
-    default:
-      - service: media_player.media_play
-        entity_id:
-          - media_player.basement_media
-
 
 - alias: "Släck lampor källare"
   trigger:
     - platform: state
       entity_id: binary_sensor.philips_hue_1_motion
-      to: 'off'
+      to: "off"
       for:
         minutes: 30
   condition:
     - condition: state
       entity_id:
-          - media_player.basement_media
+        - media_player.basement_media
       state:
         - "off"
   action:
     - service: light.turn_off
-      entity_id: light.dimmer_1_level
+      entity_id: light.dimmer_2

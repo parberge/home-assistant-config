@@ -1,20 +1,14 @@
 sun.sun:
   friendly_name: Solståndet
 
-light.dimmer_1_level:
-  friendly_name: 'Dimmer källare 1'
-
-light.dimmer_2_level:
-  friendly_name: 'Dimmer Hall'
-
 binary_sensor.basement_entry:
-  friendly_name: 'Rörelsesensor källaringång'
+  friendly_name: "Rörelsesensor källaringång"
 
 binary_sensor.philips_hue_1_motion:
-  friendly_name: 'Rörelsesensor källare'
+  friendly_name: "Rörelsesensor källare"
 
 light.light_5:
-  friendly_name: 'Lampa källaringång'
+  friendly_name: "Lampa källaringång"
 
 light.light_9:
-  friendly_name: 'Lampa ytterdörren'
+  friendly_name: "Lampa ytterdörren"
