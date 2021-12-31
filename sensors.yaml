@@ -4,10 +4,10 @@
 - platform: template
   sensors:
     kamera_kallare:
-      friendly_name: 'Kamera källare'
+      friendly_name: "Kamera källare"
       value_template: "{{ 'Online' if is_state('device_tracker.kamera_kallare', 'home') else 'Offline' }}"
     baksida_dorr:
-      friendly_name: 'Baksida dörr status'
+      friendly_name: "Baksida dörr status"
       value_template: >-
         {% if is_state('binary_sensor.baksidadorr_sensor', 'on') %}
           Öppen
@@ -17,10 +17,10 @@
     washing_machine:
       friendly_name: "Tvättmaskinen"
       value_template: >-
-        {% if states('sensor.washing_machine_switch_power')| float > 5 %}
+        {% if states('sensor.telldus_socket_and_energy_meter_electric_consumption_a')| float > 5 %}
           on
-        {% elif states('sensor.washing_machine_switch_power')| float > 0.0 %}
+        {% elif states('sensor.telldus_socket_and_energy_meter_electric_consumption_a')| float > 0.0 %}
           standby
-        {% elif is_state('sensor.washing_machine_switch_power', '0.0') %}
+        {% elif is_state('sensor.telldus_socket_and_energy_meter_electric_consumption_a', '0.0') %}
           off
         {% endif %}
