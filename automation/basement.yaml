@@ -13,44 +13,18 @@
         entity_id: light.dimmer_2
         transition: 5
 
-- alias: "Stäng av hembio"
-  use_blueprint:
-    path: gsemet/zwave-js-fibaro-the-button-fgpb-101-v2021-12-08.yaml
-    input:
-      fibaro_thebutton: b0e5270339df8d4400f9ad56dd8638b6
-      key_held_down:
-        - service: media_player.turn_off
-          target:
-            entity_id: media_player.basement_media
-        - service: light.turn_on
-          target:
-            entity_id: light.dimmer_2
-          data:
-            transition: 5
-            brightness: 120
-
-- alias: "Toggla ljus och media"
-  use_blueprint:
-    path: gsemet/zwave-js-fibaro-the-button-fgpb-101-v2021-12-08.yaml
-    input:
-      fibaro_thebutton: b0e5270339df8d4400f9ad56dd8638b6
-      key_pressed_1x:
-        - choose:
-            - conditions:
-                - condition: state
-                  entity_id: media_player.basement_media
-                  state: playing
-              sequence:
-                - service: media_player.media_pause
-                  target:
-                    entity_id: media_player.basement_media
-                - service: light.turn_on
-                  target:
-                    entity_id: light.dimmer_2
-                  data:
-                    transition: 5
-                    brightness: 120
-          default:
-            - service: media_player.media_play
-              target:
-                entity_id: media_player.basement_media
+- alias: "Tänd lampa i biorummet"
+  trigger:
+    - platform: state
+      entity_id:
+        - media_player.playstation_4
+        - media_player.basement_media
+      to:
+        - "paused"
+        - "standby"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.dimmer_2
+        transition: 5
+        brightness: 120
