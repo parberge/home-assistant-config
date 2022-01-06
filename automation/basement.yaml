@@ -14,52 +14,51 @@
         transition: 5
 
 - alias: "Stäng av hembio"
-  trigger:
-    platform: event
-    event_type: zwave.scene_activated
-    event_data:
-      entity_id: zwave.the_button
-      scene_id: 1
-      scene_data: 7800
-  action:
-    - service: light.turn_on
-      data:
-        entity_id: light.dimmer_2
-        transition: 5
-        brightness: 120
-    - service: media_player.turn_off
-      entity_id: media_player.basement_media
+  use_blueprint:
+    path: gsemet/zwave-js-fibaro-the-button-fgpb-101-v2021-12-08.yaml
+    input:
+      fibaro_thebutton: b0e5270339df8d4400f9ad56dd8638b6
+      key_held_down:
+        - service: media_player.turn_off
+          target:
+            entity_id: media_player.basement_media
+        - service: light.turn_on
+          target:
+            entity_id: light.dimmer_2
+          data:
+            transition: 5
+            brightness: 120
 
 - alias: "Toggla ljus och media"
-  trigger:
-    - platform: event
-      event_type: zwave.scene_activated
-      event_data:
-        entity_id: zwave.the_button
-        scene_id: 1
-        scene_data: 7680
-
-  action:
-    - service: light.toggle
-      data:
-        entity_id: light.dimmer_2
-        transition: 5
-        brightness: 120
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id:
-                - media_player.basement_media
-              state:
-                - "playing"
-          sequence:
-            - service: media_player.media_pause
-              entity_id:
-                - media_player.basement_media
-      default:
-        - service: media_player.media_play
-          entity_id:
-            - media_player.basement_media
+  use_blueprint:
+    path: gsemet/zwave-js-fibaro-the-button-fgpb-101-v2021-12-08.yaml
+    input:
+      fibaro_thebutton: b0e5270339df8d4400f9ad56dd8638b6
+      key_pressed_1x:
+        - choose:
+            - conditions:
+                - condition: state
+                  entity_id: media_player.basement_media
+                  state: playing
+              sequence:
+                - service: media_player.media_pause
+                  target:
+                    entity_id: media_player.basement_media
+                - service: light.turn_on
+                  target:
+                    entity_id: light.dimmer_2
+                  data:
+                    transition: 5
+                    brightness: 120
+          default:
+            - service: media_player.media_play
+              target:
+                entity_id: media_player.basement_media
+            - service: light.turn_off
+              target:
+                entity_id: light.dimmer_2
+              data:
+                transition: 5
 
 - alias: "Släck lampor källare"
   trigger:
