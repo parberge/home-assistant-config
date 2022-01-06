@@ -54,25 +54,3 @@
             - service: media_player.media_play
               target:
                 entity_id: media_player.basement_media
-            - service: light.turn_off
-              target:
-                entity_id: light.dimmer_2
-              data:
-                transition: 5
-
-- alias: "Släck lampor källare"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.philips_hue_1_motion
-      to: "off"
-      for:
-        minutes: 30
-  condition:
-    - condition: state
-      entity_id:
-        - media_player.basement_media
-      state:
-        - "off"
-  action:
-    - service: light.turn_off
-      entity_id: light.dimmer_2
