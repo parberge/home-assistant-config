@@ -17,10 +17,10 @@
     washing_machine:
       friendly_name: "Tvättmaskinen"
       value_template: >-
-        {% if states('sensor.telldus_socket_and_energy_meter_electric_consumption_a')| float > 5 %}
+        {% if states('sensor.telldus_socket_and_energy_meter_electric_consumption_w')| float > 5 %}
           on
-        {% elif states('sensor.telldus_socket_and_energy_meter_electric_consumption_a')| float > 0.0 %}
+        {% elif states('sensor.telldus_socket_and_energy_meter_electric_consumption_w')| float > 0.0 %}
           standby
-        {% elif is_state('sensor.telldus_socket_and_energy_meter_electric_consumption_a', '0.0') %}
+        {% elif is_state('sensor.telldus_socket_and_energy_meter_electric_consumption_w', '0.0') %}
           off
         {% endif %}
