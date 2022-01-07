@@ -19,6 +19,7 @@
       entity_id:
         - media_player.playstation_4
         - media_player.basement_media
+        - media_player.marantz_sr5007
       to:
         - "paused"
         - "standby"
