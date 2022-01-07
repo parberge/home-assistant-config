@@ -37,6 +37,9 @@ include:
     - sensor.telldus_socket_and_energy_meter_electric_consumption_kwh
     - sensor.withings_weight_kg_parberge_2
     - sensor.withings_weight_kg_malena
+    - binary_sensor.rorelse_overvaningen
+    - sensor.dimmer_1_energy
+    - sensor.dimmer_2_energy
 
 tags_attributes:
   - friendly_name
