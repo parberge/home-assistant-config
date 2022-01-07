@@ -176,3 +176,19 @@
       data:
         message: |
           Vill bara påminna om att tvättmaskinen är fortfarande igång.
+
+- alias: Barnvakt
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.rorelse_overvaningen
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: input_boolean.kids_asleep
+      state: "on"
+  action:
+    - service: notify.telegram
+      data:
+        target: !secret telegram_par_chat_id
+        message: "Rörelse övervåningen. Ett barn kanske är vaken?"

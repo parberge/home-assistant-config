@@ -9,3 +9,6 @@ vacation_mode:
 kids_away:
     name: Barnen borta
     initial: off
+kids_asleep:
+    name: Barnen sover
+    initial: off
