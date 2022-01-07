@@ -83,10 +83,10 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.baksidadorr_sensor
+        - binary_sensor.dorr_baksidan
         - binary_sensor.mainfloor_movement
         - binary_sensor.basement_entry
-        - binary_sensor.philips_hue_1_motion
+        - binary_sensor.rorelse_overvaningen
       to: "on"
     - platform: state
       entity_id: lock.ytterdorren
@@ -107,7 +107,7 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.baksidadorr_sensor
+        - binary_sensor.dorr_baksidan
         - binary_sensor.basement_entry
       to: "on"
     - platform: state
