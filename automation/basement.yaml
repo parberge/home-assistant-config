@@ -22,6 +22,7 @@
       to:
         - "paused"
         - "standby"
+        - "off"
   action:
     - service: light.turn_on
       data:
