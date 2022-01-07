@@ -1,4 +1,4 @@
-- alias: 'Aktivera larmet'
+- alias: "Aktivera larmet"
   trigger:
     - platform: state
       entity_id: group.family
@@ -7,51 +7,50 @@
         minutes: 10
     - platform: state
       entity_id: input_boolean.all_asleep
-      to: 'on'
+      to: "on"
   action:
     - choose:
-      - conditions:
-          condition: not
-          conditions:
-            - condition: state
-              entity_id:
-                - group.family
-              state: "home"
-            - condition: state
-              entity_id:
-                - alarm_control_panel.ha_alarm
-              state: armed
-        sequence:
-          - service: homeassistant.turn_off
-            entity_id: group.indoor_lights
-          - service: alarm_control_panel.alarm_arm_away
-            entity_id: alarm_control_panel.ha_alarm
-      - conditions:
-          condition: not
-          conditions:
-            - condition: state
-              entity_id:
-                - input_boolean.all_asleep
-              state: "off"
-            - condition: state
-              entity_id:
-                - alarm_control_panel.ha_alarm
-              state: armed
-        sequence:
-          - service: homeassistant.turn_off
-            entity_id: group.indoor_lights
-          - service: alarm_control_panel.alarm_arm_home
-            entity_id: alarm_control_panel.ha_alarm
+        - conditions:
+            condition: not
+            conditions:
+              - condition: state
+                entity_id:
+                  - group.family
+                state: "home"
+              - condition: state
+                entity_id:
+                  - alarm_control_panel.ha_alarm
+                state: armed
+          sequence:
+            - service: homeassistant.turn_off
+              entity_id: group.indoor_lights
+            - service: alarm_control_panel.alarm_arm_away
+              entity_id: alarm_control_panel.ha_alarm
+        - conditions:
+            condition: not
+            conditions:
+              - condition: state
+                entity_id:
+                  - input_boolean.all_asleep
+                state: "off"
+              - condition: state
+                entity_id:
+                  - alarm_control_panel.ha_alarm
+                state: armed
+          sequence:
+            - service: homeassistant.turn_off
+              entity_id: group.indoor_lights
+            - service: alarm_control_panel.alarm_arm_home
+              entity_id: alarm_control_panel.ha_alarm
 
-
-- alias: 'Deaktivera larmet'
+- alias: "Deaktivera larmet"
   trigger:
     - platform: state
       entity_id: group.family
       to: home
     - platform: state
       entity_id: input_boolean.all_asleep
-      to: 'off'
+      to: "off"
   condition:
     condition: not
     conditions:
@@ -62,25 +61,25 @@
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.ha_alarm
     - service: notify.telegram
-      data_template:
+      data:
         target: !secret telegram_par_chat_id
-        title: 'Deaktiverar larmet'
+        title: "Deaktiverar larmet"
         message: "Deaktiverat klockan {{ now().strftime('%H:%M') }} av `{{ trigger.entity_id }}`"
 
-- alias: 'Sätt rörelse till av i källaren'
+- alias: "Sätt rörelse till av i källaren"
   trigger:
     - platform: state
       entity_id: binary_sensor.basement_entry
-      to: 'on'
+      to: "on"
       for:
         minutes: 5
   action:
     service: mqtt.publish
     data:
-        topic: 'emqtt/noreplypeers.se'
-        payload: 'OFF'
+      topic: "emqtt/noreplypeers.se"
+      payload: "OFF"
 
-- alias: 'Trigga larmet i bortaläge'
+- alias: "Trigga larmet i bortaläge"
   trigger:
     - platform: state
       entity_id:
@@ -88,10 +87,10 @@
         - binary_sensor.mainfloor_movement
         - binary_sensor.basement_entry
         - binary_sensor.philips_hue_1_motion
-      to: 'on'
+      to: "on"
     - platform: state
       entity_id: lock.ytterdorren
-      to: 'unlocked'
+      to: "unlocked"
   condition:
     - condition: state
       entity_id: alarm_control_panel.ha_alarm
@@ -100,20 +99,20 @@
     - service: alarm_control_panel.alarm_trigger
       entity_id: alarm_control_panel.ha_alarm
     - service: input_text.set_value
-      data_template:
+      data:
         entity_id: input_text.triggered_alarm_entities
         value: "{{ trigger.entity_id }}"
 
-- alias: 'Trigga larmet i hemmaläge'
+- alias: "Trigga larmet i hemmaläge"
   trigger:
     - platform: state
       entity_id:
         - binary_sensor.baksidadorr_sensor
         - binary_sensor.basement_entry
-      to: 'on'
+      to: "on"
     - platform: state
       entity_id: lock.ytterdorren
-      to: 'unlocked'
+      to: "unlocked"
   condition:
     - condition: state
       entity_id: alarm_control_panel.ha_alarm
@@ -122,31 +121,31 @@
     - service: alarm_control_panel.alarm_trigger
       entity_id: alarm_control_panel.ha_alarm
     - service: input_text.set_value
-      data_template:
+      data:
         entity_id: input_text.triggered_alarm_entities
         value: "{{ trigger.entity_id }}"
 
-- alias: 'Skicka notis när larmet triggas'
+- alias: "Skicka notis när larmet triggas"
   trigger:
     - platform: state
       entity_id: alarm_control_panel.ha_alarm
-      to: 'triggered'
+      to: "triggered"
   action:
     - service: notify.telegram
-      data_template:
+      data:
         target: !secret telegram_par_chat_id
         title: "ALARM!"
         message: "Larmet utlöst! Klockan {{ now().strftime('%H:%M') }}. Triggat av `{{ states('input_text.triggered_alarm_entities') }}`"
     - service: input_text.set_value
       data:
         entity_id: input_text.triggered_alarm_entities
-        value: ''
+        value: ""
 
-- alias: 'Lås dörren automatiskt'
+- alias: "Lås dörren automatiskt"
   trigger:
     - platform: state
       entity_id: group.family
-      to: 'not_home'
+      to: "not_home"
       for:
         minutes: 5
   condition:
@@ -154,12 +153,11 @@
     conditions:
       - condition: state
         entity_id: lock.ytterdorren
-        state: 'unlocked'
+        state: "unlocked"
   action:
     - service: lock.lock
       entity_id: lock.ytterdorren
     - service: notify.telegram
-      data_template:
-        title: 'Dörren låst'
-        message: 'Jag låste dörren för ni är inte hemma längre'
-
+      data:
+        title: "Dörren låst"
+        message: "Jag låste dörren för ni är inte hemma längre"

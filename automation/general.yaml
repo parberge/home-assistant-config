@@ -32,11 +32,11 @@
       data: "/washing_reminder"
   action:
     - service: telegram_bot.answer_callback_query
-      data_template:
+      data:
         callback_query_id: "{{ trigger.event.data.id }}"
         message: "OK"
     - service: telegram_bot.edit_replymarkup
-      data_template:
+      data:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
         inline_keyboard: []
@@ -89,7 +89,7 @@
     - service: homeassistant.turn_off
       entity_id: group.vacation_toggle
     - service: notify.telegram
-      data_template:
+      data:
         message: |
           Semesterläge aktiverat!
           ```
@@ -109,7 +109,7 @@
     - service: homeassistant.turn_on
       entity_id: group.vacation_toggle
     - service: notify.telegram
-      data_template:
+      data:
         message: "Semesterläge deaktiverat!"
 
 - alias: "Toggle sleep mode"
