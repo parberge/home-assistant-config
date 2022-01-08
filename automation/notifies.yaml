@@ -4,7 +4,7 @@
     event_type: device_tracker_new_device
   action:
     - service: notify.telegram
-      data_template:
+      data:
         target: !secret telegram_par_chat_id
         message: "Ny enhet spåras: {{ trigger.event.data }}"
 
@@ -52,9 +52,7 @@
   action:
     - service: notify.telegram
       data_template:
-        target: !secret telegram_par_chat_id
-        title: "Varning"
-        message: "Baksida dörr fortfarande öppen"
+        message: "Tänkte bara nämna att dörren till baksidan är fortfarande öppen"
 
 - alias: "God morgon"
   trigger:
@@ -89,7 +87,7 @@
       state: "home"
   action:
     - service: telegram_bot.send_message
-      data_template:
+      data:
         message: "tvätten är klar!"
         inline_keyboard:
           - "Påminn mig senare:/washing_reminder"
