@@ -1,14 +1,10 @@
 guest_mode:
     name: Gästläge
-    initial: off
 all_asleep:
     name: God natt
-    initial: off
 vacation_mode:
     name: Semesterläge
 kids_away:
     name: Barnen borta
-    initial: off
 kids_asleep:
     name: Barnen sover
-    initial: off
