@@ -1,7 +1,7 @@
 - alias: "Tänd nattljus i barnens rum"
   trigger:
     - platform: time
-      at: '22:00:00'
+      at: "22:00:00"
     - platform: event
       event_type: deconz_event
       event_data:
@@ -14,19 +14,19 @@
   action:
     - service: light.turn_on
       data:
-        entity_id: light.light_2
+        entity_id:
+          - light.light_2
+          - light.samuels_nattlampa
         color_name: red
         brightness: 50
-    - service: switch.turn_on
-      entity_id: switch.ikea_switch_1
 
 - alias: "Släck nattljus i barnens rum"
   trigger:
     platform: time
-    at: '07:00:00'
+    at: "07:00:00"
   action:
     - service: light.turn_off
       data:
-        entity_id: light.light_2
-    - service: switch.turn_off
-      entity_id: switch.ikea_switch_1
+        entity_id:
+          - light.light_2
+          - light.samuels_nattlampa
