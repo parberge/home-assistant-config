@@ -51,6 +51,8 @@
     - platform: state
       entity_id: binary_sensor.kallartrapp_rorelse
       to: "off"
+      for:
+        minutes: 1
   action:
     - service: light.turn_off
       entity_id: light.kallartrappsbelysning
