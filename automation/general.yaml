@@ -159,46 +159,34 @@
   action:
     service: openuv.update_uv_index_data
 
-- alias: "Slå på nattläge"
+- alias: "Slå på nattläge?"
   trigger:
-    platform: state
-    entity_id:
-      - binary_sensor.sm_g981b_laddar
-    to: "on"
-    for:
-      minutes: 5
+    platform: time
+    at: input_datetime.night_time
   condition:
-    - condition: time
-      after: input_datetime.night_time
     - condition: state
-      entity_id: group.family
+      entity_id: person.par
       state: "home"
+    - condition: state
+      entity_id: input_boolean.all_asleep
+      state: "off"
   action:
     - service: notify.mobile_app_sm_g981b
       data:
-        message: "Aktiverade sovläge"
-    - service: input_boolean.turn_on
-      entity_id:
-        - input_boolean.all_asleep
+        message: "Dags att slå på sovläge?"
 
-- alias: "Slå av nattläge"
+- alias: "Slå av nattläge?"
   trigger:
-    platform: state
-    entity_id:
-      - binary_sensor.sm_g981b_laddar
-    to: "off"
-    for:
-      minutes: 5
+    platform: time
+    at: input_datetime.morning_time
   condition:
-    - condition: time
-      after: input_datetime.morning_time
     - condition: state
-      entity_id: group.family
+      entity_id: person.par
       state: "home"
+    - condition: state
+      entity_id: input_boolean.all_asleep
+      state: "on"
   action:
     - service: notify.mobile_app_sm_g981b
       data:
-        message: "Avaktivera sovläge"
-    - service: input_boolean.turn_off
-      entity_id:
-        - input_boolean.all_asleep
+        message: "Dags att slå av sovläge?"
