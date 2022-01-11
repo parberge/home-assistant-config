@@ -66,13 +66,13 @@
         message: |
           Ännu en härlig dag att se fram emot.
           Vädret just nu:
-          {{ states.weather.smhi_home.state }} {{ states.sensor.netatmo_solleftegatan_80_utomhus_temperature.state_with_unit }}
+          {{ states.weather.smhi_home.state }} {{ states.sensor.netatmo_solleftegatan_80_vardagsrummet_utomhus_temperature.state_with_unit }}
           {% if states.weather.smhi_home.attributes.forecast[0].precipitation|float > 0 %}
           Förväntad mängd regn idag:
           {{ states.weather.smhi_home.attributes.forecast[0].precipitation }} mm
           {% endif %}
-          {% if states.sensor.netatmo_solleftegatan_80_regnmatare_sum_rain_24.state|float > 0 %}
-          Det har regnat {{ states.sensor.netatmo_solleftegatan_80_regnmatare_sum_rain_24.state_with_unit }} sedan midnatt
+          {% if states.sensor.netatmo_solleftegatan_80_vardagsrummet_regnmatare_rain.state|float > 0 %}
+          Det har regnat {{ states.sensor.netatmo_solleftegatan_80_vardagsrummet_regnmatare_rain.state_with_unit }}
           {% endif %}
 
 - alias: "Tvätten klar"
