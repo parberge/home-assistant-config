@@ -188,5 +188,4 @@
   action:
     - service: notify.telegram
       data:
-        target: !secret telegram_par_chat_id
         message: "Rörelse övervåningen. Ett barn kanske är vaken?"
