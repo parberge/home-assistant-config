@@ -77,6 +77,8 @@ spotify:
   client_id: !secret spotify_client_id
   client_secret: !secret spotify_client_secret
 
+prometheus:
+
 influxdb: !include influxdb.yaml
 group: !include_dir_merge_named group/
 automation: !include_dir_merge_list automation/
