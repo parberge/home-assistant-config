@@ -66,19 +66,6 @@
         title: "Deaktiverar larmet"
         message: "Deaktiverat klockan {{ now().strftime('%H:%M') }} av `{{ trigger.entity_id }}`"
 
-- alias: "Sätt rörelse till av i källaren"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.basement_entry
-      to: "on"
-      for:
-        minutes: 5
-  action:
-    service: mqtt.publish
-    data:
-      topic: "emqtt/noreplypeers.se"
-      payload: "OFF"
-
 - alias: "Trigga larmet i bortaläge"
   trigger:
     - platform: state

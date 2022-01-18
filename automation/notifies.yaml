@@ -8,34 +8,6 @@
         target: !secret telegram_par_chat_id
         message: "Ny enhet spåras: {{ trigger.event.data }}"
 
-- alias: "Enhet offline"
-  trigger:
-    platform: state
-    entity_id: sensor.kamera_kallare
-    to: "Offline"
-  action:
-    - service: notify.telegram
-      data:
-        target: !secret telegram_par_chat_id
-        title: "Varning"
-        message: "Kameran i källaren är offline"
-
-- alias: "Batteristatus på netatmo"
-  trigger:
-    platform: state
-    entity_id:
-      - sensor.netatmo_solleftegatan_80_overvaningen_battery
-      - sensor.netatmo_solleftegatan_80_badrum_kallare_battery
-      - sensor.netatmo_solleftegatan_80_utomhus_battery
-      - sensor.netatmo_solleftegatan_80_regnmatare_battery
-    to: "Low"
-  action:
-    - service: notify.telegram
-      data_template:
-        target: !secret telegram_par_chat_id
-        title: "Varning"
-        message: "Sensor {{ trigger.to_state.attributes.friendly_name }} har lågt batteri"
-
 - alias: "Baksida dörr öppen"
   trigger:
     - platform: state

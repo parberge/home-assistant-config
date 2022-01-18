@@ -3,9 +3,6 @@
 
 - platform: template
   sensors:
-    kamera_kallare:
-      friendly_name: "Kamera källare"
-      value_template: "{{ 'Online' if is_state('device_tracker.kamera_kallare', 'home') else 'Offline' }}"
     washing_machine:
       friendly_name: "Tvättmaskinen"
       value_template: >-

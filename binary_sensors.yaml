@@ -1,13 +1,3 @@
-- platform: mqtt
-  name: basement_entry
-  state_topic: "emqtt/noreplypeers.se"
-  device_class: motion
-
-- platform: mqtt
-  name: mainfloor_camera
-  state_topic: "emqtt/camera_mainfloorno.where"
-  device_class: motion
-
 - platform: template
   sensors:
     mainfloor_movement:
