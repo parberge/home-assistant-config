@@ -161,8 +161,12 @@
 
 - alias: "Slå på nattläge?"
   trigger:
-    platform: time
-    at: input_datetime.night_time
+    - platform: time
+      at: input_datetime.night_time
+    - platform: state
+      entity_id:
+        - binary_sensor.par_asleep
+      to: "on"
   condition:
     - condition: state
       entity_id: person.par
@@ -177,8 +181,12 @@
 
 - alias: "Slå av nattläge?"
   trigger:
-    platform: time
-    at: input_datetime.morning_time
+    - platform: time
+      at: input_datetime.morning_time
+    - platform: state
+      entity_id:
+        - binary_sensor.par_asleep
+      to: "off"
   condition:
     - condition: state
       entity_id: person.par
