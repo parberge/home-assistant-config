@@ -44,6 +44,7 @@ google_assistant:
     - media_player
     - input_boolean
     - sensor
+    - alarm_control_panel
 
 logger:
   default: warning
@@ -78,6 +79,11 @@ spotify:
   client_secret: !secret spotify_client_secret
 
 prometheus:
+
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+  project_id: !secret nest_project_id
 
 influxdb: !include influxdb.yaml
 group: !include_dir_merge_named group/
