@@ -11,3 +11,6 @@
   name: par_asleep
   state_topic: "SleepAsAndroid"
   device_class: occupancy
+  value_template: "{{ value_json.event }}"
+  payload_on: "sleep_tracking_started"
+  payload_off: "sleep_tracking_stopped"
