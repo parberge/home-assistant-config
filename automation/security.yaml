@@ -85,12 +85,16 @@
       entity_id:
         - binary_sensor.dorr_baksidan
         - binary_sensor.mainfloor_movement
-        - binary_sensor.basement_entry
         - binary_sensor.rorelse_overvaningen
       to: "on"
     - platform: state
       entity_id: lock.ytterdorren
       to: "unlocked"
+    - platform: state
+      entity_id:
+        - camera.basement
+        - camera.uvc_g3_flex
+      to: "recording"
   condition:
     - condition: state
       entity_id: alarm_control_panel.ha_alarm
