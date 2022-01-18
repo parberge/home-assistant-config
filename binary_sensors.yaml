@@ -16,3 +16,8 @@
       value_template: >-
         {{ is_state('binary_sensor.tradfri_motion_sensor', 'on')
             or is_state('binary_sensor.kallartrapp_rorelse', 'on') }}
+
+- platform: mqtt
+  name: par_asleep
+  state_topic: "SleepAsAndroid"
+  device_class: occupancy
