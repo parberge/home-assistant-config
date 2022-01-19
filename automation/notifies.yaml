@@ -161,3 +161,21 @@
     - service: notify.telegram
       data:
         message: "Rörelse övervåningen. Ett barn kanske är vaken?"
+
+- alias: "Ringklockan"
+  trigger:
+    - platform: event
+      event_type: nest_event
+      event_data:
+        device_id: efff89e264a037b0981bd2ecdb78cdf6
+        type: doorbell_chime
+  condition:
+    - condition: state
+      entity_id: group.family
+      state: "home"
+  action:
+    - service: notify.telegram
+      data:
+        title: motion detected
+        message: front door motion detected
+        target: !secret telegram_par_chat_id
