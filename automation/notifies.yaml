@@ -179,3 +179,13 @@
         title: motion detected
         message: front door motion detected
         target: !secret telegram_par_chat_id
+
+- alias: "Notis om barnvaktläge"
+  trigger:
+    - platform: state
+      entity_id: input_boolean.kids_asleep
+  action:
+    - service: tts.google_translate_say
+      entity_id: media_player.kok
+      data:
+        message: "Barnvaktläge är nu {{ states.input_boolean.kids_asleep.state }}"
