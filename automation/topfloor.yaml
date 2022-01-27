@@ -16,8 +16,13 @@
       data:
         entity_id:
           - light.light_2
-          - light.samuels_nattlampa
         color_name: red
+        brightness: 50
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.samuels_nattlampa
+        color_name: green
         brightness: 50
 
 - alias: "Släck nattljus i barnens rum"
