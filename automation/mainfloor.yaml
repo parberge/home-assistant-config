@@ -56,3 +56,17 @@
   action:
     - service: light.turn_off
       entity_id: light.kallartrappsbelysning
+
+- alias: "Slå på/av barnen sover"
+  mode: single
+  trigger:
+    - platform: device
+      domain: mqtt
+      device_id: 8362a880fabe0828688c53783efad326
+      type: click
+      subtype: single
+      discovery_id: 0x00158d0002901693 click_single
+  action:
+    - service: input_boolean.toggle
+      target:
+        entity_id: input_boolean.kids_asleep
