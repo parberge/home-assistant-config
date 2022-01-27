@@ -112,13 +112,14 @@
       data:
         message: "Semesterläge deaktiverat!"
 
-- alias: "Toggle sleep mode"
+- alias: "Slå på/av sömnläge"
   trigger:
-    platform: event
-    event_type: deconz_event
-    event_data:
-      id: tradfri_remote_control
-      event: 1002
+    - platform: device
+      domain: mqtt
+      device_id: be97d2becd2837f0e41a135762554abe
+      type: action
+      subtype: toggle
+      discovery_id: 0xd0cf5efffef942f0 action_toggle
   action:
     service: input_boolean.toggle
     entity_id: input_boolean.all_asleep
