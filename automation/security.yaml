@@ -72,7 +72,7 @@
       entity_id:
         - binary_sensor.dorr_baksidan
         - binary_sensor.mainfloor_movement
-        - binary_sensor.rorelse_overvaningen
+        - binary_sensor.rorelsesensor_overvaningen_occupancy
       to: "on"
     - platform: state
       entity_id: lock.ytterdorren

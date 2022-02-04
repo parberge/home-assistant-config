@@ -151,7 +151,7 @@
   mode: single
   trigger:
     - platform: state
-      entity_id: binary_sensor.rorelse_overvaningen
+      entity_id: binary_sensor.rorelsesensor_overvaningen_occupancy
       to: "on"
   condition:
     - condition: state
