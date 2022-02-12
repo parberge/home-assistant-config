@@ -19,7 +19,7 @@
         - input_boolean.all_asleep
   condition:
     - condition: state
-      entity_id: binary_sensor.dorr_baksidan
+      entity_id: binary_sensor.altandorren_contact
       state: "on"
   action:
     - service: notify.telegram

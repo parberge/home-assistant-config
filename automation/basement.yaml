@@ -33,3 +33,17 @@
         entity_id: light.dimmer_2
         transition: 5
         brightness: 120
+
+- alias: Pausa media barnvakt
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.rorelsesensor_overvaningen_occupancy
+  condition:
+    - condition: state
+      entity_id: input_boolean.kids_asleep
+      state: "on"
+  action:
+    - service: media_player.media_pause
+      target:
+        entity_id: media_player.basement_media

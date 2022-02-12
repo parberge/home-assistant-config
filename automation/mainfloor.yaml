@@ -2,8 +2,8 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.tradfri_motion_sensor
-        - binary_sensor.kallartrapp_rorelse
+        - binary_sensor.rorelsesensor_hallen_occupancy
+        - binary_sensor.rorelsesensor_kallartrappen_occupancy
       to: "on"
   action:
     - service: light.turn_on
@@ -15,7 +15,7 @@
   mode: single
   trigger:
     - platform: state
-      entity_id: binary_sensor.tradfri_motion_sensor
+      entity_id: binary_sensor.rorelsesensor_hallen_occupancy
       to: "off"
   action:
     - service: light.turn_on
@@ -28,7 +28,7 @@
 - alias: "Släck lampor hallen"
   trigger:
     - platform: state
-      entity_id: binary_sensor.tradfri_motion_sensor
+      entity_id: binary_sensor.rorelsesensor_hallen_occupancy
       to: "off"
       for:
         minutes: 1
@@ -37,10 +37,14 @@
       entity_id: light.dimmer_2_3
 
 - alias: "Tänd lampor källartrapp"
+
+  mode: single
   trigger:
-    - platform: state
-      entity_id: binary_sensor.kallartrapp_rorelse
-      to: "on"
+    - type: motion
+      platform: device
+      device_id: 54c1cc3ec619dbc2ed3e18f0222124f1
+      entity_id: binary_sensor.rorelsesensor_kallartrappen_occupancy
+      domain: binary_sensor
   action:
     - service: light.turn_on
       data:
@@ -49,7 +53,7 @@
 - alias: "Släck lampor källartrapp"
   trigger:
     - platform: state
-      entity_id: binary_sensor.kallartrapp_rorelse
+      entity_id: binary_sensor.rorelsesensor_kallartrappen_occupancy
       to: "off"
       for:
         minutes: 1

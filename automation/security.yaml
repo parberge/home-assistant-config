@@ -70,7 +70,7 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.dorr_baksidan
+        - binary_sensor.altandorren_contact
         - binary_sensor.mainfloor_movement
         - binary_sensor.rorelsesensor_overvaningen_occupancy
       to: "on"
@@ -98,7 +98,7 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.dorr_baksidan
+        - binary_sensor.altandorren_contact
         - binary_sensor.basement_entry
       to: "on"
     - platform: state
