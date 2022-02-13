@@ -38,7 +38,9 @@
         message: |
           Ännu en härlig dag att se fram emot.
           Vädret just nu:
-          {{ states.weather.smhi_home.state }} {{ states.sensor.netatmo_solleftegatan_80_vardagsrummet_utomhus_temperature.state_with_unit }}
+          {{ states.weather.smhi_home.state }} och {{ states.weather.smhi_home.attributes.temperature }} grader.
+          Prognos för dagen:
+          {{ states.weather.smhi_home.attributes.forecast[0].condition }} och som lägst {{ states.weather.smhi_home.attributes.forecast[0].templow }} grader.
           {% if states.weather.smhi_home.attributes.forecast[0].precipitation|float > 0 %}
           Förväntad mängd regn idag:
           {{ states.weather.smhi_home.attributes.forecast[0].precipitation }} mm
