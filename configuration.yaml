@@ -56,9 +56,6 @@ logger:
     #pydeconz: debug
     #homeassistant.components.deconz: debug
 
-mqtt:
-  broker: !secret mqtt_broker
-
 telegram_bot:
   - platform: polling
     api_key: !secret telegram_api_key
