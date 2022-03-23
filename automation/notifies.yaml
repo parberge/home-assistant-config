@@ -103,13 +103,13 @@
 - alias: Update Available Notification
   trigger:
     - platform: state
-      entity_id: binary_sensor.updater
+      entity_id: binary_sensor.home_assistant_website_update_available
       to: "on"
   action:
     - service: notify.telegram
       data:
         target: !secret telegram_par_chat_id
-        message: "New hass version available: {{ state_attr('binary_sensor.updater', 'newest_version') }}"
+        message: "New hass version available: {{ states.sensor.home_assistant_website.state }}"
 
 - alias: "leaving work"
   trigger:
