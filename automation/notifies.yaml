@@ -109,7 +109,9 @@
     - service: notify.telegram
       data:
         target: !secret telegram_par_chat_id
-        message: "New hass version available: {{ states.sensor.home_assistant_website.state }}"
+        message: |
+          New hass version available: {{ states.sensor.home_assistant_website.state }}
+          {{ states.sensor.home_assistant_website.attributes.release_notes }}
 
 - alias: "leaving work"
   trigger:
