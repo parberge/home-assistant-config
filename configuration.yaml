@@ -47,14 +47,7 @@ google_assistant:
     - alarm_control_panel
 
 logger:
-  default: warning
-  logs:
-    homeassistant.components.withings: critical
-    #homeassistant.components.webhook: debug
-    #homeassistant.components.zwave: debug
-    #homeassistant.components.sensor.netatmo: debug
-    #pydeconz: debug
-    #homeassistant.components.deconz: debug
+  default: info
 
 telegram_bot:
   - platform: polling

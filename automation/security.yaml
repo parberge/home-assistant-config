@@ -1,10 +1,8 @@
 - alias: "Aktivera larmet"
   trigger:
     - platform: state
-      entity_id: group.family
-      to: not_home
-      for:
-        minutes: 10
+      entity_id: zone.home
+      to: "0"
     - platform: state
       entity_id: input_boolean.all_asleep
       to: "on"
@@ -13,10 +11,10 @@
         - conditions:
             condition: not
             conditions:
-              - condition: state
+              - condition: numeric_state
                 entity_id:
-                  - group.family
-                state: "home"
+                  - zone.home
+                above: "0"
               - condition: state
                 entity_id:
                   - alarm_control_panel.ha_alarm
@@ -45,9 +43,9 @@
 
 - alias: "Deaktivera larmet"
   trigger:
-    - platform: state
-      entity_id: group.family
-      to: home
+    - platform: numeric_state
+      entity_id: zone.home
+      above: "0"
     - platform: state
       entity_id: input_boolean.all_asleep
       to: "off"
@@ -99,7 +97,6 @@
     - platform: state
       entity_id:
         - binary_sensor.altandorren_contact
-        - binary_sensor.basement_entry
       to: "on"
     - platform: state
       entity_id: lock.ytterdorren
@@ -131,24 +128,3 @@
       data:
         entity_id: input_text.triggered_alarm_entities
         value: ""
-
-- alias: "Lås dörren automatiskt"
-  trigger:
-    - platform: state
-      entity_id: group.family
-      to: "not_home"
-      for:
-        minutes: 5
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: lock.ytterdorren
-        state: "unlocked"
-  action:
-    - service: lock.lock
-      entity_id: lock.ytterdorren
-    - service: notify.telegram
-      data:
-        title: "Dörren låst"
-        message: "Jag låste dörren för ni är inte hemma längre"

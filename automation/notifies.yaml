@@ -11,8 +11,8 @@
 - alias: "Baksida dörr öppen"
   trigger:
     - platform: state
-      entity_id: group.family
-      to: "not_home"
+      entity_id: zone.home
+      to: "0"
     - platform: state
       entity_id:
         - input_boolean.vacation_mode
@@ -56,9 +56,10 @@
     from: "on"
     to: "standby"
   condition:
-    - condition: state
-      entity_id: group.family
-      state: "home"
+    - condition: numeric_state
+      entity_id:
+        - zone.home
+      above: "0"
   action:
     - service: telegram_bot.send_message
       data:
@@ -89,9 +90,10 @@
       value_template: "{{ states.weather.smhi_home.attributes.forecast[1].precipitation|float }}"
       above: 0.0
   condition:
-    - condition: state
-      entity_id: group.family
-      state: "home"
+    - condition: numeric_state
+      entity_id:
+        - zone.home
+      above: "0"
   action:
     - service: notify.telegram
       data:
@@ -131,13 +133,11 @@
 - alias: "Glöm inte tvätten"
   trigger:
     - platform: state
-      entity_id: group.family
-      from: "home"
-      to: "not_home"
-    - platform: state
-      entity_id: group.family
-      from: "not_home"
-      to: "home"
+      entity_id: zone.home
+      to: "0"
+    - platform: numeric_state
+      entity_id: zone.home
+      above: "0"
   condition:
     condition: not
     conditions:
@@ -175,13 +175,12 @@
         type: doorbell_chime
   condition:
     - condition: state
-      entity_id: group.family
+      entity_id: person.par
       state: "home"
   action:
     - service: notify.telegram
       data:
-        title: motion detected
-        message: front door motion detected
+        message: Någon ringer på dörren
         target: !secret telegram_par_chat_id
 
 - alias: "Notis om barnvaktläge"

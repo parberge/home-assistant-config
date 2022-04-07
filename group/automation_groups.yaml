@@ -5,13 +5,6 @@ indoor_lights:
     - light.kallartrappsbelysning
     - light.dimmer_2_3
 
-family:
-  name: Familjen
-  entities:
-    - person.malena
-    - person.par
-  icon: mdi:account-group
-
 vacation_toggle:
   entities:
     - automation.telegram_washing_responser_reminder
