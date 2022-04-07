@@ -46,17 +46,6 @@
     - service: timer.start
       entity_id: timer.laundry_reminder
 
-- alias: "Aktivera sovläge"
-  trigger:
-    platform: state
-    entity_id: input_boolean.all_asleep
-    to: "on"
-  action:
-    - service: homeassistant.turn_off
-      entity_id: group.indoor_lights
-    - service: lock.lock
-      entity_id: lock.ytterdorren
-
 - alias: "tvätten påminnelse"
   trigger:
     platform: event
@@ -84,9 +73,9 @@
 
 - alias: "Aktivera semesterläge"
   trigger:
-    platform: state
-    entity_id: input_boolean.vacation_mode
-    to: "on"
+    - platform: state
+      entity_id: input_boolean.vacation_mode
+      to: "on"
   action:
     - service: homeassistant.turn_off
       entity_id: group.vacation_toggle

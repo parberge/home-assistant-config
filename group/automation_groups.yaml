@@ -1,10 +1,3 @@
-indoor_lights:
-  name: Belysning inomhus
-  entities:
-    - light.dimmer_2
-    - light.kallartrappsbelysning
-    - light.dimmer_2_3
-
 vacation_toggle:
   entities:
     - automation.telegram_washing_responser_reminder

@@ -20,8 +20,9 @@
                   - alarm_control_panel.ha_alarm
                 state: armed
           sequence:
-            - service: homeassistant.turn_off
-              entity_id: group.indoor_lights
+            - service: light.turn_off
+              entity_id:
+                - light.inomhus
             - service: alarm_control_panel.alarm_arm_away
               entity_id: alarm_control_panel.ha_alarm
         - conditions:
@@ -36,8 +37,9 @@
                   - alarm_control_panel.ha_alarm
                 state: armed
           sequence:
-            - service: homeassistant.turn_off
-              entity_id: group.indoor_lights
+            - service: light.turn_off
+              entity_id:
+                - light.inomhus
             - service: alarm_control_panel.alarm_arm_home
               entity_id: alarm_control_panel.ha_alarm
 
