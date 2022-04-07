@@ -6,7 +6,6 @@ homeassistant:
   unit_system: metric
   time_zone: Europe/Stockholm
   external_url: !secret base_url
-  customize: !include customizations.yaml
   auth_mfa_modules:
     - type: totp
 frontend:
