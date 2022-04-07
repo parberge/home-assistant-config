@@ -1,7 +1,7 @@
 - alias: "Tänd nattljus i barnens rum"
   trigger:
     - platform: time
-      at: "22:00:00"
+      at: input_datetime.night_time
     - platform: event
       event_type: deconz_event
       event_data:
@@ -28,7 +28,7 @@
 - alias: "Släck nattljus i barnens rum"
   trigger:
     platform: time
-    at: "07:00:00"
+    at: input_datetime.morning_time
   action:
     - service: light.turn_off
       data:
