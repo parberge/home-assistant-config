@@ -61,10 +61,6 @@
     - platform: state
       entity_id: zone.home
       to: "0"
-  condition:
-    - condition: state
-      entity_id: input_boolean.guest_mode
-      state: "off"
   action:
     - service: light.turn_off
       entity_id:
@@ -157,3 +153,40 @@
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.all_asleep
+
+- id: automation_guest_toggle
+  alias: "Slå på/av automationer under gästläge"
+  description: "Automationer som inte ska vara på när vi har gäster och inte är hemma"
+  variables:
+    entities:
+      - automation.aktivera_larmet
+      - automation.baksida_dorr_oppen
+      - automation.slacker_lampor_nar_ingen_ar_hemma
+  trigger:
+    - platform: state
+      entity_id: input_boolean.guest_mode
+      id: guest_mode_on
+      to: "on"
+    - platform: state
+      entity_id: input_boolean.guest_mode
+      id: guest_mode_off
+  action:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: guest_mode_on
+          sequence:
+            - service: automation.turn_off
+              data: {}
+              target:
+                entity_id: "{{ entities }}"
+        - conditions:
+            - condition: trigger
+              id: guest_mode_off
+          sequence:
+            - service: automation.turn_on
+              data: {}
+              target:
+                entity_id: "{{ entities }}"
+      default: []
+  mode: single
