@@ -1,5 +1,6 @@
 ---
-- alias: "Släck lampa i biorummet"
+- id: lights_cinema_off
+  alias: "Släck lampa i biorummet"
   trigger:
     - platform: state
       entity_id:
@@ -13,7 +14,8 @@
         entity_id: light.dimmer_2
         transition: 5
 
-- alias: "Tänd lampa i biorummet"
+- id: lights_cinema_on
+  alias: "Tänd lampa i biorummet"
   trigger:
     - platform: state
       entity_id:
@@ -34,7 +36,8 @@
         transition: 5
         brightness: 120
 
-- alias: Pausa media barnvakt
+- id: media_cinema_pause
+  alias: Pausa media barnvakt
   mode: single
   trigger:
     - platform: state
