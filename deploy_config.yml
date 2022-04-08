@@ -45,7 +45,7 @@
         - Check homeassistant config
         - Restart home assistant
 
-    - name: "Deploy home assistant customization and config templates"
+    - name: "Deploy home assistant config templates"
       become: yes
       template:
         src: "{{ item }}"
@@ -100,7 +100,7 @@
       assert:
         that:
           - "'ERROR' not in hass_config_check.stdout"
-        msg: "Config check reported error: {{ hass_config_check.stdout }}"
+        msg: "Config check reported error: {{ hass_config_check.stdout }}"
 
     - name: Restart home assistant
       become: yes
