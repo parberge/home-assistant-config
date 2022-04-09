@@ -36,30 +36,40 @@
     - service: light.turn_off
       entity_id: light.dimmer_2_3
 
-- alias: "Tänd lampor källartrapp"
-
-  mode: single
-  trigger:
-    - type: motion
-      platform: device
-      device_id: 54c1cc3ec619dbc2ed3e18f0222124f1
-      entity_id: binary_sensor.rorelsesensor_kallartrappen_occupancy
-      domain: binary_sensor
-  action:
-    - service: light.turn_on
-      data:
-        entity_id: light.kallartrappsbelysning
-
-- alias: "Släck lampor källartrapp"
+- id: lights_basement_stairs_toggle
+  alias: "Tänd/släck lampor källartrapp"
   trigger:
     - platform: state
       entity_id: binary_sensor.rorelsesensor_kallartrappen_occupancy
       to: "off"
       for:
         minutes: 1
+      id: turn_off
+    - type: motion
+      platform: device
+      device_id: 54c1cc3ec619dbc2ed3e18f0222124f1
+      entity_id: binary_sensor.rorelsesensor_kallartrappen_occupancy
+      domain: binary_sensor
+      id: turn_on
   action:
-    - service: light.turn_off
-      entity_id: light.kallartrappsbelysning
+  - alias: "Turn on/off basement stairs light"
+    choose:
+    - conditions:
+      - condition: trigger
+        id: turn_on
+      sequence:
+        - service: light.turn_on
+          target:
+            entity_id:
+              - light.kallartrapp
+    - conditions:
+      - condition: trigger
+        id: turn_off
+      sequence:
+        - service: light.turn_off
+          target:
+            entity_id:
+              - light.kallartrapp
 
 - alias: "Slå på/av barnen sover"
   mode: single
