@@ -1,37 +1,42 @@
-- alias: "Tänd nattljus i barnens rum"
+- id: kids_light_automation
+  alias: "Tänd/släck nattljus i barnens rum"
   trigger:
     - platform: time
       at: input_datetime.night_time
-    - platform: event
-      event_type: deconz_event
-      event_data:
-        id: tradfri_remote_control
-        event: 2002
+      id: "on"
+    - platform: time
+      at: input_datetime.morning_time
+      id: "off"
   condition:
     - condition: state
       entity_id: input_boolean.kids_away
       state: "off"
   action:
-    - service: light.turn_on
-      data:
-        entity_id:
-          - light.light_2
-        color_name: red
-        brightness: 50
-    - service: light.turn_on
-      data:
-        entity_id:
-          - light.samuels_nattlampa
-        color_name: green
-        brightness: 50
-
-- alias: "Släck nattljus i barnens rum"
-  trigger:
-    platform: time
-    at: input_datetime.morning_time
-  action:
-    - service: light.turn_off
-      data:
-        entity_id:
-          - light.light_2
-          - light.samuels_nattlampa
+    - alias: "Kids light toggle"
+      choose:
+      - conditions:
+        - condition: trigger
+          id: on
+        sequence:
+          - service: light.turn_on
+            data:
+              entity_id:
+                - light.0x001788010449a649
+              color_name: red
+              brightness: 50
+          - service: light.turn_on
+            data:
+              entity_id:
+                - light.samuels_nattlampa
+              color_name: green
+              brightness: 51
+      - conditions:
+        - condition: trigger
+          id: off
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id:
+                - light.0x001788010449a649
+                - light.samuels_nattlampa
+      default: []
