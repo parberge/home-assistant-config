@@ -1,71 +1,39 @@
-- alias: "Släck lampor när solen går upp"
+- id: lights_secondary_toggle
+  alias: "Släck/tänd lampor när solen går upp & ned"
+  variables:
+    entities:
+      - light.utomhus
+      - light.trappa_1
   trigger:
-    platform: numeric_state
-    entity_id: sun.sun
-    value_template: "{{ state.attributes.elevation }}"
-    above: -2.0
+    - platform: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ state.attributes.elevation }}"
+      above: -2.0
+      id: "sun_up"
+    - platform: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ state.attributes.elevation }}"
+      below: -2.0
+      id: "sun_down"
   action:
-    - service: light.turn_off
-      entity_id: light.utomhusbelysning
-    - service: light.turn_off
-      entity_id: light.trappa_1
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: "sun_up"
+          sequence:
+            - service: light.turn_off
+              target:
+                entity_id: "{{ entities }}"
+        - conditions:
+            - condition: trigger
+              id: "sun_down"
+          sequence:
+            - service: light.turn_on
+              target:
+                entity_id: "{{ entities }}"
+      default: []
+  mode: single
 
-- alias: "Tänd lampor när solen går ned"
-  trigger:
-    platform: numeric_state
-    entity_id: sun.sun
-    value_template: "{{ state.attributes.elevation }}"
-    below: -2.0
-  action:
-    - service: light.turn_on
-      entity_id: light.utomhusbelysning
-    - service: light.turn_on
-      entity_id: light.trappa_1
-      data:
-        brightness: 1
-
-- alias: "Telegram washing responser reminder"
-  trigger:
-    platform: event
-    event_type: telegram_callback
-    event_data:
-      data: "/washing_reminder"
-  action:
-    - service: telegram_bot.answer_callback_query
-      data:
-        callback_query_id: "{{ trigger.event.data.id }}"
-        message: "OK"
-    - service: telegram_bot.edit_replymarkup
-      data:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        inline_keyboard: []
-    - service: notify.telegram
-      data:
-        message: "Okej, påminner igen om 20 min"
-    - service: timer.start
-      entity_id: timer.laundry_reminder
-
-- alias: "tvätten påminnelse"
-  trigger:
-    platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.laundry_reminder
-  action:
-    - service: automation.trigger
-      entity_id: automation.tvatten_klar
-
-- alias: "Släcker lampor när ingen är hemma"
-  trigger:
-    - platform: state
-      entity_id: zone.home
-      to: "0"
-  action:
-    - service: light.turn_off
-      entity_id:
-        - light.dimmer_2_3
-        - light.dimmer_2
 
 - alias: "Aktivera semesterläge"
   trigger:
@@ -98,18 +66,6 @@
     - service: notify.telegram
       data:
         message: "Semesterläge deaktiverat!"
-
-- alias: "Slå på/av sömnläge"
-  trigger:
-    - platform: device
-      domain: mqtt
-      device_id: be97d2becd2837f0e41a135762554abe
-      type: action
-      subtype: toggle
-      discovery_id: 0xd0cf5efffef942f0 action_toggle
-  action:
-    service: input_boolean.toggle
-    entity_id: input_boolean.all_asleep
 
 - alias: Update OpenUV every 20 minutes while the sun is at least 10 degrees above the horizon
   trigger:

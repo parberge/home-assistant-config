@@ -30,6 +30,7 @@
   trigger:
     platform: state
     entity_id: input_boolean.all_asleep
+    from: "on"
     to: "off"
   action:
     - service: notify.telegram
@@ -39,8 +40,10 @@
           Ännu en härlig dag att se fram emot.
           Vädret just nu:
           {{ states.weather.smhi_home.state }} och {{ states.weather.smhi_home.attributes.temperature }} grader.
-          Prognos för dagen:
-          {{ states.weather.smhi_home.attributes.forecast[0].condition }} och som lägst {{ states.weather.smhi_home.attributes.forecast[0].templow }} grader.
+          Prognos för dagen: 
+          {{ states.weather.smhi_home.attributes.forecast[0].condition }} 
+          Temperatur: 
+          {{ states.weather.smhi_home.attributes.forecast[0].temperature }} / {{ states.weather.smhi_home.attributes.forecast[0].templow }} grader.
           {% if states.weather.smhi_home.attributes.forecast[0].precipitation|float > 0 %}
           Förväntad mängd regn idag:
           {{ states.weather.smhi_home.attributes.forecast[0].precipitation }} mm
@@ -61,11 +64,10 @@
         - zone.home
       above: "0"
   action:
-    - service: telegram_bot.send_message
+    - service: notify.telegram
       data:
-        message: "tvätten är klar!"
-        inline_keyboard:
-          - "Påminn mig senare:/washing_reminder"
+        message: |
+          Tvätten är klar!
     - service: tts.google_translate_say
       entity_id: media_player.kok
       data:
@@ -156,6 +158,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.rorelsesensor_overvaningen_occupancy
+      from: "off"
       to: "on"
   condition:
     - condition: state

@@ -3,10 +3,10 @@
   trigger:
     - platform: time
       at: input_datetime.night_time
-      id: "on"
+      id: "light_on"
     - platform: time
       at: input_datetime.morning_time
-      id: "off"
+      id: "light_off"
   condition:
     - condition: state
       entity_id: input_boolean.kids_away
@@ -14,29 +14,75 @@
   action:
     - alias: "Kids light toggle"
       choose:
-      - conditions:
-        - condition: trigger
-          id: on
-        sequence:
-          - service: light.turn_on
-            data:
-              entity_id:
-                - light.0x001788010449a649
-              color_name: red
-              brightness: 50
-          - service: light.turn_on
-            data:
-              entity_id:
-                - light.samuels_nattlampa
-              color_name: green
-              brightness: 51
-      - conditions:
-        - condition: trigger
-          id: off
-        sequence:
-          - service: light.turn_off
-            target:
-              entity_id:
-                - light.0x001788010449a649
-                - light.samuels_nattlampa
+        - conditions:
+            - condition: trigger
+              id: "light_on"
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.0x001788010449a649
+                color_name: red
+                brightness: 50
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.samuels_nattlampa
+                color_name: green
+                brightness: 51
+        - conditions:
+            - condition: trigger
+              id: "light_off"
+          sequence:
+            - service: light.turn_off
+              target:
+                entity_id:
+                  - light.0x001788010449a649
+                  - light.samuels_nattlampa
       default: []
+
+- id: lights_master_bedroom_toggle
+  alias: "Slå på/av fönsterlampa"
+  trigger:
+    - platform: device
+      domain: mqtt
+      device_id: be97d2becd2837f0e41a135762554abe
+      type: action
+      subtype: toggle
+      discovery_id: 0xd0cf5efffef942f0 action_toggle
+    - platform: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ state.attributes.elevation }}"
+      above: -2.0
+      id: "sun_up"
+    - platform: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ state.attributes.elevation }}"
+      below: -2.0
+      id: "sun_down"
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: input_boolean.all_asleep
+              state: 'off'
+            - condition: trigger
+              id: "sun_down"
+            - condition: time
+              before: input_datetime.night_time
+          sequence:
+            - service: light.turn_on
+              data: {}
+              target:
+                entity_id: light.strombrytare_fonsterlampa
+        - conditions:
+            - condition: trigger
+              id: "sun_up"
+          sequence:
+            - service: light.turn_off
+              target:
+                entity_id: light.strombrytare_fonsterlampa
+      default:
+        - service: light.toggle
+          target:
+            entity_id: light.strombrytare_fonsterlampa
