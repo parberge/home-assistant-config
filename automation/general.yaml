@@ -41,8 +41,6 @@
       entity_id: input_boolean.vacation_mode
       to: "on"
   action:
-    - service: homeassistant.turn_off
-      entity_id: group.vacation_toggle
     - service: notify.telegram
       data:
         message: |
@@ -54,18 +52,6 @@
             * Ta med packningen :)
             * Aktivera larmet
           ```
-
-- alias: "Deaktivera semesterläge"
-  trigger:
-    platform: state
-    entity_id: input_boolean.vacation_mode
-    to: "off"
-  action:
-    - service: homeassistant.turn_on
-      entity_id: group.vacation_toggle
-    - service: notify.telegram
-      data:
-        message: "Semesterläge deaktiverat!"
 
 - alias: Update OpenUV every 20 minutes while the sun is at least 10 degrees above the horizon
   trigger:

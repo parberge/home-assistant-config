@@ -42,6 +42,8 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.rorelsesensor_overvaningen_occupancy
+      from: "off"
+      to: "on"
   condition:
     - condition: state
       entity_id: input_boolean.kids_asleep

@@ -17,6 +17,8 @@
       entity_id:
         - input_boolean.vacation_mode
         - input_boolean.all_asleep
+      from: "off"
+      to: "on"
   condition:
     - condition: state
       entity_id: binary_sensor.altandorren_contact
@@ -140,6 +142,11 @@
     - platform: numeric_state
       entity_id: zone.home
       above: "0"
+    - platform: state
+      entity_id:
+        - input_boolean.guest_mode
+      from: "off"
+      to: "on"
   condition:
     condition: not
     conditions:

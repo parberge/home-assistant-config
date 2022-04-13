@@ -11,6 +11,10 @@
     - condition: state
       entity_id: input_boolean.kids_away
       state: "off"
+    - condition: state
+      entity_id:
+        - input_boolean.vacation_mode
+      state: "off"
   action:
     - alias: "Kids light toggle"
       choose:
