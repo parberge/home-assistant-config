@@ -7,25 +7,6 @@
     deploy_gcp_cfg: true
     deploy_google_account: false
   tasks:
-    - name: "Deploy home assistant group templates"
-      become: yes
-      template:
-        src: "{{ item.src }}"
-        dest: "{{ home_assistant_cfg_dir }}/group/{{ item.path }}"
-        owner: "{{ home_assistant_user|default('homeassistant') }}"
-        group: "{{ home_assistant_user|default('homeassistant') }}"
-        block_start_string: "{{ item.block_start | default('<%') }}"
-        block_end_string: "{{ item.block_end | default('%>') }}"
-        variable_start_string: "{{ item.variable_start | default('<<') }}"
-        variable_end_string: "{{ item.variable_end | default('>>') }}"
-      with_filetree: "group"
-      tags:
-        - hass_deploy_cfg
-        - hass_deploy_groups
-      notify:
-        - Check homeassistant config
-        - Restart home assistant
-
     - name: "Deploy home assistant automation templates"
       become: yes
       template:
