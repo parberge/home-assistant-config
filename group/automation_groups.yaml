@@ -1,4 +1,0 @@
-vacation_toggle:
-  entities:
-    - automation.telegram_washing_responser_reminder
-    - automation.tand_nattljus_i_barnens_rum
