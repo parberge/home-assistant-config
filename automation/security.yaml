@@ -5,6 +5,7 @@
       to: "0"
     - platform: state
       entity_id: input_boolean.all_asleep
+      from: "off"
       to: "on"
   action:
     - choose:
@@ -50,6 +51,7 @@
       above: "0"
     - platform: state
       entity_id: input_boolean.all_asleep
+      from: "on"
       to: "off"
   condition:
     condition: not
@@ -73,14 +75,17 @@
         - binary_sensor.altandorren_contact
         - binary_sensor.mainfloor_movement
         - binary_sensor.rorelsesensor_overvaningen_occupancy
+      from: "off"
       to: "on"
     - platform: state
       entity_id: lock.ytterdorren
+      from: "locked"
       to: "unlocked"
     - platform: state
       entity_id:
         - camera.basement
         - camera.uvc_g3_flex
+      from: "idle"
       to: "recording"
   condition:
     - condition: state
@@ -99,9 +104,11 @@
     - platform: state
       entity_id:
         - binary_sensor.altandorren_contact
+      from: "off"
       to: "on"
     - platform: state
       entity_id: lock.ytterdorren
+      from: "locked"
       to: "unlocked"
   condition:
     - condition: state
@@ -119,6 +126,7 @@
   trigger:
     - platform: state
       entity_id: alarm_control_panel.ha_alarm
+      from: "disarmed"
       to: "triggered"
   action:
     - service: notify.telegram

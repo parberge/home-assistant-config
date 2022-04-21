@@ -79,6 +79,7 @@
   trigger:
     platform: state
     entity_id: sensor.washing_machine
+    from: "on"
     to: "standby"
     for:
       hours: 1
@@ -110,6 +111,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.home_assistant_website_update_available
+      from: "off"
       to: "on"
   action:
     - service: notify.telegram

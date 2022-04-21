@@ -4,6 +4,7 @@
       entity_id:
         - binary_sensor.rorelsesensor_hallen_occupancy
         - binary_sensor.rorelsesensor_kallartrappen_occupancy
+      from: "off"
       to: "on"
   action:
     - service: light.turn_on
@@ -16,6 +17,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.rorelsesensor_hallen_occupancy
+      from: "on"
       to: "off"
   action:
     - service: light.turn_on
@@ -29,6 +31,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.rorelsesensor_hallen_occupancy
+      from: "on"
       to: "off"
       for:
         minutes: 1
@@ -41,6 +44,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.rorelsesensor_kallartrappen_occupancy
+      from: "on"
       to: "off"
       for:
         minutes: 1
@@ -52,24 +56,24 @@
       domain: binary_sensor
       id: turn_on
   action:
-  - alias: "Turn on/off basement stairs light"
-    choose:
-    - conditions:
-      - condition: trigger
-        id: turn_on
-      sequence:
-        - service: light.turn_on
-          target:
-            entity_id:
-              - light.kallartrapp
-    - conditions:
-      - condition: trigger
-        id: turn_off
-      sequence:
-        - service: light.turn_off
-          target:
-            entity_id:
-              - light.kallartrapp
+    - alias: "Turn on/off basement stairs light"
+      choose:
+        - conditions:
+            - condition: trigger
+              id: turn_on
+          sequence:
+            - service: light.turn_on
+              target:
+                entity_id:
+                  - light.kallartrapp
+        - conditions:
+            - condition: trigger
+              id: turn_off
+          sequence:
+            - service: light.turn_off
+              target:
+                entity_id:
+                  - light.kallartrapp
 
 - alias: "Slå på/av barnen sover"
   mode: single
