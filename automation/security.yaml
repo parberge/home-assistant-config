@@ -1,4 +1,5 @@
-- alias: "Aktivera larmet"
+- id: security_activate_alarm
+  alias: "Aktivera larmet"
   trigger:
     - platform: state
       entity_id: zone.home
@@ -24,8 +25,12 @@
             - service: light.turn_off
               entity_id:
                 - light.inomhus
+            - service: lock.lock
+              entity_id:
+                - lock.ytterdorren
             - service: alarm_control_panel.alarm_arm_away
               entity_id: alarm_control_panel.ha_alarm
+
         - conditions:
             condition: not
             conditions:
@@ -41,10 +46,14 @@
             - service: light.turn_off
               entity_id:
                 - light.inomhus
+            - service: lock.lock
+              entity_id:
+                - lock.ytterdorren
             - service: alarm_control_panel.alarm_arm_home
               entity_id: alarm_control_panel.ha_alarm
 
-- alias: "Deaktivera larmet"
+- id: security_deactivate_alarm
+  alias: "Deaktivera larmet"
   trigger:
     - platform: numeric_state
       entity_id: zone.home
@@ -68,7 +77,8 @@
         title: "Deaktiverar larmet"
         message: "Deaktiverat klockan {{ now().strftime('%H:%M') }} av `{{ trigger.entity_id }}`"
 
-- alias: "Trigga larmet i bortaläge"
+- id: security_trigger_alarm
+  alias: "Trigga larmet i bortaläge"
   trigger:
     - platform: state
       entity_id:
@@ -122,7 +132,8 @@
         entity_id: input_text.triggered_alarm_entities
         value: "{{ trigger.entity_id }}"
 
-- alias: "Skicka notis när larmet triggas"
+- id: security_notify_alarm
+  alias: "Skicka notis när larmet triggas"
   trigger:
     - platform: state
       entity_id: alarm_control_panel.ha_alarm
