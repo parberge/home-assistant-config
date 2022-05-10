@@ -75,7 +75,7 @@
                 entity_id:
                   - light.kallartrapp
 
-- alias: "Slå på/av barnen sover"
+- alias: "Slå på/av barnenvaktsläge"
   mode: single
   trigger:
     - platform: device
@@ -87,4 +87,4 @@
   action:
     - service: input_boolean.toggle
       target:
-        entity_id: input_boolean.kids_asleep
+        entity_id: input_boolean.barnvaktslage

@@ -6,7 +6,6 @@
       to: "0"
     - platform: state
       entity_id: input_boolean.all_asleep
-      from: "off"
       to: "on"
   action:
     - choose:
