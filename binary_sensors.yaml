@@ -9,6 +9,7 @@
 
 - platform: mqtt
   name: par_asleep
+  unique_id: par_asleep
   state_topic: "SleepAsAndroid"
   device_class: occupancy
   value_template: "{{ value_json.event }}"
