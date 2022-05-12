@@ -50,10 +50,10 @@
   trigger:
     - platform: device
       domain: mqtt
-      device_id: be97d2becd2837f0e41a135762554abe
+      device_id: d9aabda798181930e5798ef20691fbcf
       type: action
-      subtype: toggle
-      discovery_id: 0xd0cf5efffef942f0 action_toggle
+      subtype: single
+      discovery_id: 0x00158d00028f466f action_single
     - platform: numeric_state
       entity_id: sun.sun
       value_template: "{{ state.attributes.elevation }}"
@@ -69,7 +69,7 @@
         - conditions:
             - condition: state
               entity_id: input_boolean.all_asleep
-              state: 'off'
+              state: "off"
             - condition: trigger
               id: "sun_down"
             - condition: time
