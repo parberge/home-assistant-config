@@ -31,7 +31,7 @@
             - service: light.turn_on
               data:
                 entity_id:
-                  - light.samuels_nattlampa
+                  - light.0x84fd27fffe8ebae4
                 color_name: green
                 brightness: 51
         - conditions:
@@ -42,7 +42,7 @@
               target:
                 entity_id:
                   - light.0x001788010449a649
-                  - light.samuels_nattlampa
+                  - light.0x84fd27fffe8ebae4
       default: []
 
 - id: lights_master_bedroom_toggle

@@ -46,7 +46,7 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: input_boolean.kids_asleep
+      entity_id: input_boolean.barnvaktslage
       state: "on"
   action:
     - service: media_player.media_pause
