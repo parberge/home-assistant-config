@@ -52,3 +52,7 @@
     - service: media_player.media_pause
       target:
         entity_id: media_player.basement_media
+    - service: tts.google_translate_say
+      entity_id: media_player.googlehome6483
+      data:
+        message: "Rörelse på övervåningen. Ett barn kanske är vaken?"
