@@ -6,12 +6,3 @@
       value_template: >-
         {{ is_state('binary_sensor.rorelsesensor_hallen_occupancy', 'on')
             or is_state('binary_sensor.rorelsesensor_kallartrappen_occupancy', 'on') }}
-
-- platform: mqtt
-  name: par_asleep
-  unique_id: par_asleep
-  state_topic: "SleepAsAndroid"
-  device_class: occupancy
-  value_template: "{{ value_json.event }}"
-  payload_on: "sleep_tracking_started"
-  payload_off: "sleep_tracking_stopped"

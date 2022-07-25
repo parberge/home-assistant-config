@@ -1,0 +1,8 @@
+binary_sensor:
+  - state_topic: "SleepAsAndroid"
+    name: par_asleep
+    unique_id: par_asleep
+    device_class: occupancy
+    value_template: "{{ value_json.event }}"
+    payload_on: "sleep_tracking_started"
+    payload_off: "sleep_tracking_stopped"
