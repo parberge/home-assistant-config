@@ -59,14 +59,6 @@ telegram_bot:
 alarm_control_panel:
   - platform: manual
 
-withings:
-  client_id: !secret withings_client_id
-  client_secret: !secret withings_secret_id
-
-spotify:
-  client_id: !secret spotify_client_id
-  client_secret: !secret spotify_client_secret
-
 prometheus:
 
 nest:
@@ -86,3 +78,4 @@ timer: !include timers.yaml
 camera: !include cameras.yaml
 input_text: !include input_text.yaml
 input_datetime: !include input_datetime.yaml
+mqtt: !include mqtt.yaml
