@@ -61,11 +61,6 @@ alarm_control_panel:
 
 prometheus:
 
-nest:
-  client_id: !secret nest_client_id
-  client_secret: !secret nest_client_secret
-  project_id: !secret nest_project_id
-
 automation: !include_dir_merge_list automation/
 media_player: !include media_players.yaml
 binary_sensor: !include binary_sensors.yaml
