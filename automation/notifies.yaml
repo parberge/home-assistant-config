@@ -178,7 +178,8 @@
       data:
         message: "Rörelse övervåningen. Ett barn kanske är vaken?"
 
-- alias: "Ringklockan"
+- id: notify_doorbell
+  alias: "Ringklockan"
   trigger:
     - platform: event
       event_type: nest_event
@@ -190,10 +191,13 @@
       entity_id: person.par
       state: "home"
   action:
-    - service: notify.telegram
+    - service: notify.mobile_app_par_ha_companion
       data:
         message: Någon ringer på dörren
-        target: !secret telegram_par_chat_id
+        title: Dörrklockan
+        data:
+          image: >-
+            /api/nest/event_media/{{ trigger.event.data.device_id }}/{{ trigger.event.data.nest_event_id }}/thumbnail
 
 - alias: "Notis om barnvaktläge"
   trigger:
