@@ -19,6 +19,10 @@
       entity_id: binary_sensor.rorelsesensor_hallen_occupancy
       from: "on"
       to: "off"
+  condition:
+    - condition: state
+      entity_id: light.dimmer_2_3
+      state: "on"
   action:
     - service: light.turn_on
       target:
