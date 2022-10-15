@@ -3,7 +3,7 @@
   variables:
     entities:
       - light.utomhus
-      - light.trappa_1
+      - light.lampa_i_trappan_pa_overvaningen
   trigger:
     - platform: numeric_state
       entity_id: sun.sun
