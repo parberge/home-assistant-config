@@ -84,6 +84,7 @@
         - binary_sensor.altandorren_contact
         - binary_sensor.mainfloor_movement
         - binary_sensor.rorelsesensor_overvaningen_occupancy
+        - binary_sensor.rorelse_biorummet_occupancy
       from: "off"
       to: "on"
     - platform: state
@@ -136,7 +137,9 @@
   trigger:
     - platform: state
       entity_id: alarm_control_panel.ha_alarm
-      from: "disarmed"
+      from:
+        - armed_away
+        - armed_home
       to: "triggered"
   action:
     - service: notify.telegram
