@@ -45,7 +45,7 @@
         - "on"
       to:
         - "off"
-      id: turn_off
+      id: turn_on
 
     - platform: state
       entity_id: binary_sensor.rorelse_biorummet_occupancy
