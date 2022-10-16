@@ -85,7 +85,7 @@
         - binary_sensor.mainfloor_movement
         - binary_sensor.rorelsesensor_overvaningen_occupancy
         - binary_sensor.rorelse_biorummet_occupancy
-      from: "off"
+        - binary_sensor.balkongdorr_contact
       to: "on"
     - platform: state
       entity_id: lock.ytterdorren
