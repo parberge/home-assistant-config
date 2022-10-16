@@ -1,22 +1,40 @@
-- alias: "Baksida dörr öppen"
+- id: notify_open_door
+  alias: "Dörr öppen notis"
   trigger:
     - platform: state
       entity_id: zone.home
       to: "0"
+
     - platform: state
       entity_id:
         - input_boolean.vacation_mode
         - input_boolean.all_asleep
-      from: "off"
       to: "on"
-  condition:
-    - condition: state
-      entity_id: binary_sensor.altandorren_contact
-      state: "on"
   action:
-    - service: notify.telegram
-      data_template:
-        message: "Tänkte bara nämna att dörren till baksidan är fortfarande öppen"
+    - choose:
+        - conditions:
+            - condition: or
+              conditions:
+                - condition: state
+                  entity_id: binary_sensor.balkongdorr_contact
+                  attribute: contact
+                  state: open
+                - condition: state
+                  entity_id: binary_sensor.altandorren_contact
+                  attribute: contact
+                  state: open
+          sequence:
+            - service: notify.telegram
+              data:
+                title: "Dörr öppen"
+                message: |
+                  Följande dörr(ar) är öppna:
+                  {% if is_state('binary_sensor.balkongdorr_contact', 'open') %}
+                    - Balkongdörren
+                  {% endif %}
+                  {% if is_state('binary_sensor.altandorren_contact', 'open') %}
+                    - Altandörren
+                  {% endif %}
 
 - alias: "God morgon"
   trigger:
