@@ -78,6 +78,9 @@
             - condition: state
               entity_id: media_player.tv_kallare
               state: "off"
+            - condition: state
+              entity_id: light.dimmer_2
+              state: "off"
           sequence:
             - service: light.turn_on
               data:
