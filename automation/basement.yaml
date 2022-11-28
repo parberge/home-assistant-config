@@ -52,7 +52,7 @@
       from: "on"
       to: "off"
       for:
-        minutes: 20
+        minutes: 5
       id: dim
 
     - platform: state
@@ -60,7 +60,7 @@
       from: "on"
       to: "off"
       for:
-        minutes: 25
+        minutes: 10
       id: turn_off
 
     - type: motion
