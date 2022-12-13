@@ -86,7 +86,6 @@
     platform: state
     entity_id:
       - binary_sensor.par_asleep
-    from: "on"
     to: "off"
   condition:
     - condition: state

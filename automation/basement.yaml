@@ -93,6 +93,10 @@
             - condition: state
               entity_id: light.dimmer_2
               state: "on"
+            - condition: state
+              entity_id:
+                - person.malena
+              state: "not_home"
           sequence:
             - service: light.turn_on
               target:
@@ -103,22 +107,12 @@
         - conditions:
             - condition: trigger
               id: turn_off
+            - condition: state
+              entity_id:
+                - person.malena
+              state: "not_home"
           sequence:
             - service: light.turn_off
               data:
                 entity_id: light.dimmer_2
                 transition: 5
-
-- id: basement_turn_off_light_automation
-  alias: "Stäng av automatisk belysning i källaren"
-  trigger:
-    - platform: event
-      event_type: zwave_js_value_notification
-  action:
-    - service: automation.toggle
-      target:
-        entity_id: automation.kontrollera_lampan_i_biorummet
-    - service: tts.google_translate_say
-      entity_id: media_player.googlehome6483
-      data:
-        message: "Biorummet automatiska tändning är nu: {{ states.automation.kontrollera_lampan_i_biorummet.state }}"

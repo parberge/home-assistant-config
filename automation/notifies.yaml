@@ -40,7 +40,6 @@
   trigger:
     platform: state
     entity_id: input_boolean.all_asleep
-    from: "on"
     to: "off"
   action:
     - service: notify.telegram
