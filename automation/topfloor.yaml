@@ -25,13 +25,13 @@
             - service: light.turn_on
               data:
                 entity_id:
-                  - light.0x001788010449a649
+                  - light.nattlampa_vendela
                 color_name: red
                 brightness: 50
             - service: light.turn_on
               data:
                 entity_id:
-                  - light.0x84fd27fffe8ebae4
+                  - light.samuels_nattlampa
                 color_name: green
                 brightness: 51
         - conditions:
@@ -41,8 +41,8 @@
             - service: light.turn_off
               target:
                 entity_id:
-                  - light.0x001788010449a649
-                  - light.0x84fd27fffe8ebae4
+                  - light.samuels_nattlampa
+                  - light.nattlampa_vendela
       default: []
 
 - id: lights_master_bedroom_toggle

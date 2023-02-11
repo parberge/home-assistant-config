@@ -57,8 +57,8 @@
           Förväntad mängd regn idag:
           {{ states.weather.smhi_home.attributes.forecast[0].precipitation }} mm
           {% endif %}
-          {% if states.sensor.netatmo_solleftegatan_80_vardagsrummet_regnmatare_rain.state|float > 0 %}
-          Det har regnat {{ states.sensor.netatmo_solleftegatan_80_vardagsrummet_regnmatare_rain.state_with_unit }}
+          {% if states.sensor.netatmo_solleftegatan_80_regnmatare_rain.state|float > 0 %}
+          Det har regnat {{ states.sensor.netatmo_solleftegatan_80_regnmatare_rain.state_with_unit }}
           {% endif %}
 
 - alias: "Tvätten klar"
@@ -121,7 +121,7 @@
       from: "off"
       to: "on"
   action:
-    - service: notify.mobile_app_par_ha_companion
+    - service: notify.mobile_app_sm_g981b
       data:
         message: |
           Ny hass version: {{ states.sensor.home_assistant_website.state }}
@@ -197,7 +197,7 @@
       entity_id: person.par
       state: "home"
   action:
-    - service: notify.mobile_app_par_ha_companion
+    - service: notify.mobile_app_sm_g981b
       data:
         message: Någon ringer på dörren
         title: Dörrklockan
