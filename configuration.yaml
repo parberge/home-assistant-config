@@ -8,6 +8,7 @@ homeassistant:
   external_url: !secret base_url
   auth_mfa_modules:
     - type: totp
+  country: SE
 frontend:
 config:
 system_health:
