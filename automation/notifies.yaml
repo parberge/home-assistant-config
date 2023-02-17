@@ -16,7 +16,7 @@
             - condition: or
               conditions:
                 - condition: state
-                  entity_id: binary_sensor.balkongdorr_contact
+                  entity_id: binary_sensor.sovrummet_contact
                   attribute: contact
                   state: open
                 - condition: state
@@ -29,7 +29,7 @@
                 title: "Dörr öppen"
                 message: |
                   Följande dörr(ar) är öppna:
-                  {% if is_state('binary_sensor.balkongdorr_contact', 'open') %}
+                  {% if is_state('binary_sensor.sovrummet_contact', 'open') %}
                     - Balkongdörren
                   {% endif %}
                   {% if is_state('binary_sensor.altandorren_contact', 'open') %}

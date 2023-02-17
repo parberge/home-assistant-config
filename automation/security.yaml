@@ -27,6 +27,8 @@
             - service: lock.lock
               entity_id:
                 - lock.ytterdorren
+              data:
+                code: !secret verisure_door_pin
             - service: alarm_control_panel.alarm_arm_away
               entity_id: alarm_control_panel.ha_alarm
 
@@ -48,6 +50,8 @@
             - service: lock.lock
               entity_id:
                 - lock.ytterdorren
+              data:
+                code: !secret verisure_door_pin
             - service: alarm_control_panel.alarm_arm_home
               entity_id: alarm_control_panel.ha_alarm
 
@@ -84,7 +88,7 @@
         - binary_sensor.mainfloor_movement
         - binary_sensor.rorelsesensor_overvaningen_occupancy
         - binary_sensor.rorelse_biorummet_occupancy
-        - binary_sensor.balkongdorr_contact
+        - binary_sensor.sovrummet_contact
       to: "on"
     - platform: state
       entity_id: lock.ytterdorren

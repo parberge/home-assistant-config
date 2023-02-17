@@ -52,20 +52,6 @@
             * Aktivera larmet
           ```
 
-- alias: Update OpenUV every 20 minutes while the sun is at least 10 degrees above the horizon
-  trigger:
-    platform: time_pattern
-    minutes: "/20"
-  condition:
-    condition: numeric_state
-    entity_id: sun.sun
-    value_template: "{{ state.attributes.elevation }}"
-    above: 10
-  action:
-    service: homeassistant.update_entity
-    target:
-      entity_id: sensor.current_uv_index
-
 - alias: "Slå på nattläge"
   trigger:
     platform: state
