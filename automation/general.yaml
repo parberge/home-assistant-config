@@ -4,6 +4,7 @@
     entities:
       - light.utomhus
       - light.lampa_i_trappan_pa_overvaningen
+      - light.dimmer_vardagsrummet
   trigger:
     - platform: numeric_state
       entity_id: sun.sun

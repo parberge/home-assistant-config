@@ -140,9 +140,6 @@
   trigger:
     - platform: state
       entity_id: alarm_control_panel.ha_alarm
-      from:
-        - armed_away
-        - armed_home
       to: "triggered"
   action:
     - service: notify.telegram
