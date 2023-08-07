@@ -3,7 +3,7 @@
 
   vars:
     home_assistant_container: "home_assistant"
-    restart_home_assistant_enabled: yes
+    restart_home_assistant_enabled: no
     deploy_gcp_cfg: true
     deploy_google_account: false
   tasks:
