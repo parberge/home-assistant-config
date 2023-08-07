@@ -30,6 +30,9 @@
               id: "sun_down"
           sequence:
             - service: light.turn_on
+              data:
+                brightness_pct: 30
+                transition: 10
               target:
                 entity_id: "{{ entities }}"
       default: []
