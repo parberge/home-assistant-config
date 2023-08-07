@@ -5,6 +5,7 @@ homeassistant:
   elevation: 19
   unit_system: metric
   time_zone: Europe/Stockholm
+  language: sv
   external_url: !secret base_url
   auth_mfa_modules:
     - type: totp
@@ -20,7 +21,6 @@ http:
     - ::1
     - 192.168.0.0/16
 
-discovery:
 conversation:
 history:
 logbook:
