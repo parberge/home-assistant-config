@@ -94,12 +94,6 @@
       entity_id: lock.ytterdorren
       from: "locked"
       to: "unlocked"
-    - platform: state
-      entity_id:
-        - camera.basement
-        - camera.uvc_g3_flex
-      from: "idle"
-      to: "recording"
   condition:
     - condition: state
       entity_id: alarm_control_panel.ha_alarm
