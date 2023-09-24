@@ -58,14 +58,24 @@
 
 - alias: "Slå på nattläge"
   trigger:
-    platform: state
-    entity_id:
-      - binary_sensor.par_asleep
-    to: "on"
+    - platform: state
+      entity_id:
+        - binary_sensor.rorelse_biorummet_occupancy
+        - binary_sensor.rorelsesensor_kallartrappen_occupancy
+        - binary_sensor.rorelsesensor_overvaningen_occupancy
+      from:
+        - "on"
+      to:
+        - "off"
+      for:
+        minutes: 30
   condition:
-    - condition: state
-      entity_id: person.par
-      state: "home"
+    - condition: numeric_state
+      entity_id: zone.home
+      above: "0"
+    - condition: time
+      after: "20:00:00"
+      before: "07:00:00"
   action:
     - service: input_boolean.turn_on
       target:
@@ -73,14 +83,19 @@
 
 - alias: "Slå av nattläge"
   trigger:
-    platform: state
-    entity_id:
-      - binary_sensor.par_asleep
-    to: "off"
+    - platform: state
+      entity_id: binary_sensor.rorelsesensor_overvaningen_occupancy
+      from:
+        - "off"
+      to:
+        - "on"
   condition:
+    - condition: time
+      after: "07:00:00"
+      before: "11:00:00"
     - condition: state
-      entity_id: person.par
-      state: "home"
+      entity_id: input_boolean.all_asleep
+      state: "on"
   action:
     - service: input_boolean.turn_off
       target:
