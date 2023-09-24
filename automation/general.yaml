@@ -68,13 +68,13 @@
       to:
         - "off"
       for:
-        minutes: 30
+        hours: 1
   condition:
     - condition: numeric_state
       entity_id: zone.home
       above: "0"
     - condition: time
-      after: "20:00:00"
+      after: "00:00:00"
       before: "07:00:00"
   action:
     - service: input_boolean.turn_on
