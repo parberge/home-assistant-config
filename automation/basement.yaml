@@ -47,28 +47,6 @@
         - "off"
       id: turn_on
 
-    - platform: state
-      entity_id: binary_sensor.rorelse_biorummet_occupancy
-      from: "on"
-      to: "off"
-      for:
-        minutes: 5
-      id: dim
-
-    - platform: state
-      entity_id: binary_sensor.rorelse_biorummet_occupancy
-      from: "on"
-      to: "off"
-      for:
-        minutes: 10
-      id: turn_off
-
-    - type: motion
-      platform: device
-      device_id: 76fe8da37b3dbca58d30ab0fd1de4d2d
-      entity_id: binary_sensor.rorelse_biorummet_occupancy
-      domain: binary_sensor
-      id: turn_on
   action:
     - alias: "Light actions for cinema room"
       choose:

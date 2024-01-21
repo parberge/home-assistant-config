@@ -59,7 +59,6 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.rorelse_biorummet_occupancy
         - binary_sensor.rorelsesensor_kallartrappen_occupancy
         - binary_sensor.rorelsesensor_overvaningen_occupancy
       from:
