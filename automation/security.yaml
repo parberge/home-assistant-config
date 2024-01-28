@@ -145,3 +145,22 @@
       data:
         entity_id: input_text.triggered_alarm_entities
         value: ""
+
+- id: security_autolock_door
+  alias: "Lås ytterdörren automatiskt"
+  trigger:
+    - platform: state
+      entity_id: lock.ytterdorren
+      to: "unlocked"
+      for:
+        minutes: 10
+  action:
+    - service: lock.lock
+      entity_id: lock.ytterdorren
+      data:
+        code: !secret verisure_door_pin
+    - service: notify.telegram
+      data:
+        target: !secret telegram_par_chat_id
+        title: "Låser ytterdörren"
+        message: "Låser ytterdörren automatiskt klockan {{ now().strftime('%H:%M') }}"
