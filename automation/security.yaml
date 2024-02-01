@@ -159,8 +159,3 @@
       entity_id: lock.ytterdorren
       data:
         code: !secret verisure_door_pin
-    - service: notify.telegram
-      data:
-        target: !secret telegram_par_chat_id
-        title: "Låser ytterdörren"
-        message: "Låser ytterdörren automatiskt klockan {{ now().strftime('%H:%M') }}"
