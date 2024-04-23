@@ -49,14 +49,6 @@
           Ännu en härlig dag att se fram emot.
           Vädret just nu:
           {{ states.weather.smhi_home.state }} och {{ states.weather.smhi_home.attributes.temperature }} grader.
-          Prognos för dagen: 
-          {{ states.weather.smhi_home.attributes.forecast[0].condition }} 
-          Temperatur: 
-          {{ states.weather.smhi_home.attributes.forecast[0].temperature }} / {{ states.weather.smhi_home.attributes.forecast[0].templow }} grader.
-          {% if states.weather.smhi_home.attributes.forecast[0].precipitation|float > 0 %}
-          Förväntad mängd regn idag:
-          {{ states.weather.smhi_home.attributes.forecast[0].precipitation }} mm
-          {% endif %}
           {% if states.sensor.netatmo_solleftegatan_80_regnmatare_rain.state|float > 0 %}
           Det har regnat {{ states.sensor.netatmo_solleftegatan_80_regnmatare_rain.state_with_unit }}
           {% endif %}
@@ -94,25 +86,6 @@
     - service: notify.telegram
       data:
         message: "Tvätten är fortfarande klar. Om den är urplockad har ni glömt stänga av maskinen"
-
-- alias: "Dåligt väder"
-  trigger:
-    - platform: numeric_state
-      entity_id: weather.smhi_home
-      value_template: "{{ states.weather.smhi_home.attributes.forecast[1].precipitation|float }}"
-      above: 0.0
-  condition:
-    - condition: numeric_state
-      entity_id:
-        - zone.home
-      above: "0"
-  action:
-    - service: notify.telegram
-      data:
-        message: |
-          Tänkte bara upplysa er om eventuell nederbörd imorgon.
-          Prognos: {{ states.weather.smhi_home.attributes.forecast[1].condition }}
-          Mängd: {{ states.weather.smhi_home.attributes.forecast[1].precipitation }} mm
 
 - alias: Update Available Notification
   trigger:
