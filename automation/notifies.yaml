@@ -157,27 +157,6 @@
       data:
         message: "Rörelse övervåningen. Ett barn kanske är vaken?"
 
-- id: notify_doorbell
-  alias: "Ringklockan"
-  trigger:
-    - platform: event
-      event_type: nest_event
-      event_data:
-        device_id: efff89e264a037b0981bd2ecdb78cdf6
-        type: doorbell_chime
-  condition:
-    - condition: state
-      entity_id: person.par
-      state: "home"
-  action:
-    - service: notify.mobile_app_sm_g981b
-      data:
-        message: Någon ringer på dörren
-        title: Dörrklockan
-        data:
-          image: >-
-            /api/nest/event_media/{{ trigger.event.data.device_id }}/{{ trigger.event.data.nest_event_id }}/thumbnail
-
 - alias: "Notis om barnvaktläge"
   trigger:
     - platform: state
