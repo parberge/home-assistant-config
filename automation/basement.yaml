@@ -71,10 +71,6 @@
             - condition: state
               entity_id: light.dimmer_biorummet
               state: "on"
-            - condition: state
-              entity_id:
-                - person.malena
-              state: "not_home"
           sequence:
             - service: light.turn_on
               target:
@@ -85,10 +81,6 @@
         - conditions:
             - condition: trigger
               id: turn_off
-            - condition: state
-              entity_id:
-                - person.malena
-              state: "not_home"
           sequence:
             - service: light.turn_off
               data:
