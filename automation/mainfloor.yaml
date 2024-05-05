@@ -47,3 +47,25 @@
     - service: input_boolean.toggle
       target:
         entity_id: input_boolean.barnvaktslage
+
+- id: lights_hallway_on
+  alias: "Tänd lampor i hallen"
+  trigger:
+    - platform: state
+      entity_id:
+        - lock.ytterdorren
+      from: locked
+      to: unlocked
+    - type: motion
+      platform: device
+      device_id: 54c1cc3ec619dbc2ed3e18f0222124f1
+      entity_id: binary_sensor.rorelsesensor_kallartrappen_occupancy
+      domain: binary_sensor
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.dimmer_2
