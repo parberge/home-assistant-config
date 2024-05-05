@@ -14,7 +14,7 @@
   action:
     - service: media_player.media_pause
       target:
-        entity_id: media_player.basement_media
+        entity_id: media_player.shield
     - service: tts.google_translate_say
       entity_id: media_player.googlehome6483
       data:
@@ -26,26 +26,22 @@
   trigger:
     - platform: state
       entity_id:
-        - media_player.basement_media
+        - media_player.shield
+        - media_player.tv_kallare
       to:
         - "paused"
+        - "off"
+        - "idle"
       id: turn_on
 
     - platform: state
       entity_id:
-        - media_player.basement_media
+        - media_player.shield
+        - media_player.tv_kallare
       to:
         - "playing"
-      id: turn_off
-
-    - platform: state
-      entity_id:
-        - media_player.tv_kallare
-      from:
         - "on"
-      to:
-        - "off"
-      id: turn_on
+      id: turn_off
 
   action:
     - alias: "Light actions for cinema room"
@@ -54,30 +50,16 @@
             - condition: trigger
               id: turn_on
             - condition: state
-              entity_id: media_player.tv_kallare
-              state: "off"
-            - condition: state
               entity_id: light.dimmer_biorummet
               state: "off"
+
           sequence:
             - service: light.turn_on
               data:
                 entity_id:
                   - light.dimmer_biorummet
-                brightness: 120
-        - conditions:
-            - condition: trigger
-              id: dim
-            - condition: state
-              entity_id: light.dimmer_biorummet
-              state: "on"
-          sequence:
-            - service: light.turn_on
-              target:
-                entity_id: light.dimmer_biorummet
-              data:
-                transition: 5
-                brightness_pct: 20
+                brightness_pct: 50
+                transition: 10
         - conditions:
             - condition: trigger
               id: turn_off
