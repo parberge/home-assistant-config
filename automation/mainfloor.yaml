@@ -69,3 +69,36 @@
     - service: light.turn_on
       target:
         entity_id: light.dimmer_2
+
+- id: Light_mainfloor_painting
+  alias: "Tänd/släck tavelljus"
+  trigger:
+    - platform: state
+      entity_id: camera.uvc_g3_flex
+      to: "recording"
+      id: turn_on
+    - platform: state
+      entity_id: camera.uvc_g3_flex
+      to: "idle"
+      for:
+        minutes: 30
+      id: turn_off
+  action:
+    - alias: "Turn on/off painting light"
+      choose:
+        - conditions:
+            - condition: trigger
+              id: turn_on
+          sequence:
+            - service: light.turn_on
+              target:
+                entity_id:
+                  - light.strombrytare_vardagsrummet
+        - conditions:
+            - condition: trigger
+              id: turn_off
+          sequence:
+            - service: light.turn_off
+              target:
+                entity_id:
+                  - light.strombrytare_vardagsrummet
