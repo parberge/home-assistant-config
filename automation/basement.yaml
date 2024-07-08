@@ -50,6 +50,14 @@
         - "on"
       id: turn_off
 
+    - platform: state
+      entity_id:
+        - binary_sensor.biorummet_occupancy
+      to: "off"
+      for:
+        minutes: 30
+      id: turn_off
+
   action:
     - alias: "Light actions for cinema room"
       choose:
