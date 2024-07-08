@@ -89,6 +89,7 @@
         - binary_sensor.rorelsesensor_overvaningen_occupancy
         - binary_sensor.rorelse_biorummet_occupancy
         - binary_sensor.sovrummet_contact
+        - binary_sensor.0x842e14fffe435f26_occupancy
       to: "on"
     - platform: state
       entity_id: lock.ytterdorren
