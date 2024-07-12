@@ -34,6 +34,7 @@
     - platform: state
       entity_id:
         - media_player.shield
+        - media_player.android_tv_192_168_7_238
       to:
         - "paused"
         - "idle"
@@ -47,6 +48,7 @@
     - platform: state
       entity_id:
         - media_player.shield
+        - media_player.android_tv_192_168_7_238
         - media_player.tv_kallare
       to:
         - "playing"
@@ -69,6 +71,9 @@
               id: turn_on
             - condition: state
               entity_id: light.dimmer_biorummet
+              state: "off"
+            - condition: state
+              entity_id: media_player.tv_kallare
               state: "off"
 
           sequence:
