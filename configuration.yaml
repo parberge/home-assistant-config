@@ -60,6 +60,7 @@ telegram_bot:
 
 alarm_control_panel:
   - platform: manual
+    code_arm_required: false
 
 prometheus:
 
