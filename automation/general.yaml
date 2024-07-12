@@ -44,16 +44,18 @@
       to: "on"
       id: notify
 
-    - platform: zone
+    - platform: state
       entity_id: zone.home
       to: "0"
       for:
         hours: 24
       id: activate
 
-    - platform: zone
+    - platform: numeric_state
       entity_id: zone.home
       above: "0"
+      for:
+        hours: 1
       id: deactivate
   action:
     - alias: "Vacation mode choises"
@@ -86,6 +88,8 @@
             - condition: state
               entity_id: input_boolean.vacation_mode
               state: "on"
+              for:
+                hours: 24
           sequence:
             - service: input_boolean.turn_off
               target:
@@ -107,6 +111,7 @@
   condition:
     - condition: numeric_state
       entity_id: zone.home
+      above: "0"
     - condition: time
       after: "00:00:00"
       before: "07:00:00"
