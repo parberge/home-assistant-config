@@ -34,11 +34,14 @@
     - platform: state
       entity_id:
         - media_player.shield
-        - media_player.tv_kallare
       to:
         - "paused"
-        - "off"
         - "idle"
+      id: turn_on
+
+    - platform: state
+      entity_id: media_player.tv_kallare
+      to: "off"
       id: turn_on
 
     - platform: state
@@ -55,8 +58,8 @@
         - binary_sensor.biorummet_occupancy
       to: "off"
       for:
-        minutes: 30
-      id: turn_off
+        minutes: 20
+      id: turn_off_2
 
   action:
     - alias: "Light actions for cinema room"
@@ -78,6 +81,17 @@
         - conditions:
             - condition: trigger
               id: turn_off
+          sequence:
+            - service: light.turn_off
+              data:
+                entity_id: light.dimmer_biorummet
+                transition: 5
+        - conditions:
+            - condition: trigger
+              id: turn_off_2
+            - condition: state
+              entity_id: media_player.tv_kallare
+              state: "off"
           sequence:
             - service: light.turn_off
               data:
