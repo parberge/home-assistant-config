@@ -37,23 +37,60 @@
       default: []
   mode: single
 
-- alias: "Aktivera semesterläge"
+- alias: "Semesterläge"
   trigger:
     - platform: state
       entity_id: input_boolean.vacation_mode
       to: "on"
+      id: notify
+
+    - platform: zone
+      entity_id: zone.home
+      to: "0"
+      for:
+        hours: 24
+      id: activate
+
+    - platform: zone
+      entity_id: zone.home
+      above: "0"
+      id: deactivate
   action:
-    - service: notify.telegram
-      data:
-        message: |
-          Semesterläge aktiverat!
-          ```
-            * Slänga sopor
-            * Låsa källardörren ordentligt
-            * Stänga fönster
-            * Ta med packningen :)
-            * Aktivera larmet
-          ```
+    - alias: "Vacation mode choises"
+      choose:
+        - conditions:
+            - condition: trigger
+              id: notify
+          sequence:
+            - service: notify.telegram
+              data:
+                message: |
+                  Semesterläge aktiverat!
+                  ```
+                    * Slänga sopor
+                    * Låsa källardörren ordentligt
+                    * Stänga fönster
+                    * Ta med packningen :)
+                    * Aktivera larmet
+                  ```
+        - conditions:
+            - condition: trigger
+              id: activate
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.vacation_mode
+        - conditions:
+            - condition: trigger
+              id: deactivate
+            - condition: state
+              entity_id: input_boolean.vacation_mode
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.vacation_mode
+      default: []
 
 - alias: "Slå på nattläge"
   trigger:
@@ -70,7 +107,6 @@
   condition:
     - condition: numeric_state
       entity_id: zone.home
-      above: "0"
     - condition: time
       after: "00:00:00"
       before: "07:00:00"
