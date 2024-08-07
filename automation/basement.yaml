@@ -35,15 +35,17 @@
       entity_id:
         - media_player.shield
         - media_player.android_tv_192_168_7_238
+      from:
+        - "playing"
       to:
         - "paused"
         - "idle"
-      id: turn_on
+      id: turn_on_2
 
     - platform: state
       entity_id: media_player.tv_kallare
       to: "off"
-      id: turn_on
+      id: turn_on_2
 
     - platform: state
       entity_id:
@@ -53,6 +55,8 @@
       to:
         - "playing"
         - "on"
+      not_from:
+        - "buffering"
       id: turn_off
 
     - platform: state
@@ -81,7 +85,18 @@
               data:
                 entity_id:
                   - light.dimmer_biorummet
-                brightness_pct: 50
+                brightness_pct: 100
+
+        - conditions:
+            - condition: trigger
+              id: turn_on_2
+
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.dimmer_biorummet
+                brightness_pct: 15
                 transition: 10
         - conditions:
             - condition: trigger
