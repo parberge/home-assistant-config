@@ -46,6 +46,7 @@ google_assistant:
     - input_boolean
     - sensor
     - alarm_control_panel
+    - cover
 
 logger:
   default: info
