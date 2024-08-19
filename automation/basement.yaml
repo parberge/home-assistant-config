@@ -189,3 +189,59 @@
                   - light.kallargangen_5
               data:
                 transition: 10
+
+- id: lights_basement_bathroom
+  alias: "Tänd/släck lampor källarbadrum"
+  mode: restart
+  trigger:
+    - type: occupied
+      platform: device
+      device_id: aa334e01b5ac06268d684a29df3c06fc
+      entity_id: a4ceb169f7b58d68b0ec2c4776d1e6d2
+      domain: binary_sensor
+      id: turn_on
+    - platform: state
+      entity_id:
+        - binary_sensor.badrum_kallaren_occupancy
+      to: "off"
+      for:
+        minutes: 5
+      id: dim
+    - platform: state
+      entity_id:
+        - binary_sensor.badrum_kallaren_occupancy
+      to: "off"
+      for:
+        minutes: 20
+      id: turn_off
+  action:
+    - alias: "Control the lights in the basement bathroom"
+      choose:
+        - conditions:
+            - condition: trigger
+              id: turn_on
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.dimmer_2_7
+                brightness_pct: 100
+        - conditions:
+            - condition: trigger
+              id: dim
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.dimmer_2_7
+                brightness_pct: 25
+                transition: 10
+        - conditions:
+            - condition: trigger
+              id: turn_off
+          sequence:
+            - service: light.turn_off
+              data:
+                entity_id:
+                  - light.dimmer_2_7
+                transition: 10
