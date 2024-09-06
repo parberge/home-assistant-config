@@ -167,16 +167,3 @@
       entity_id: media_player.kok
       data:
         message: "Barnvaktläge är nu {{ states.input_boolean.barnvaktslage.state }}"
-
-- id: notify_reminder_skolplattformen
-  alias: "Påminnelse om veckobrev"
-  trigger:
-    - platform: state
-      entity_id:
-        - schedule.kolla_skolpattformen
-      to: "on"
-  action:
-    - service: notify.telegram
-      data:
-        title: "Skolplattformen"
-        message: "Glöm inte att kolla skolplattformen för veckobrevet"
