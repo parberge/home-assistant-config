@@ -29,10 +29,6 @@ sun:
 wake_on_lan:
 default_config:
 
-tts:
-  platform: google_translate
-  language: "sv"
-
 google_assistant:
   project_id: !secret google_project_id
   service_account: !include google_service_account.json
