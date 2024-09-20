@@ -69,9 +69,11 @@
       data:
         message: |
           Tvätten är klar!
-    - service: tts.google_translate_say
-      entity_id: media_player.kok
+    - action: tts.speak
+      metadata: {}
       data:
+        cache: true
+        media_player_entity_id: media_player.kok
         message: "Tvätten är klar!"
 
 - alias: "Tvätten är fortfarande kvar"
@@ -163,7 +165,7 @@
     - platform: state
       entity_id: input_boolean.barnvaktslage
   action:
-    - service: tts.google_translate_say
+    - service: tts.speak
       entity_id: media_player.kok
       data:
         message: "Barnvaktläge är nu {{ states.input_boolean.barnvaktslage.state }}"

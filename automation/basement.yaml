@@ -1,25 +1,4 @@
 ---
-- id: media_cinema_pause
-  alias: Pausa media barnvakt
-  mode: single
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.rorelsesensor_overvaningen_occupancy
-      from: "off"
-      to: "on"
-  condition:
-    - condition: state
-      entity_id: input_boolean.barnvaktslage
-      state: "on"
-  action:
-    - service: media_player.media_pause
-      target:
-        entity_id: media_player.shield
-    - service: tts.google_translate_say
-      entity_id: media_player.googlehome6483
-      data:
-        message: "Rörelse på övervåningen. Ett barn kanske är vaken?"
-
 - id: cinema_lights_chooser
   alias: "Kontrollera lampan i biorummet"
   mode: single
