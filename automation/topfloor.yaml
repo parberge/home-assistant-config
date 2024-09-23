@@ -48,12 +48,9 @@
 - id: lights_master_bedroom_toggle
   alias: "Slå på/av fönsterlampa"
   trigger:
-    - platform: device
-      domain: mqtt
-      device_id: d9aabda798181930e5798ef20691fbcf
-      type: action
-      subtype: single
-      discovery_id: 0x00158d00028f466f action_single
+    - platform: mqtt
+      topic: zigbee2mqtt/0x00158d00028f466f/action
+      payload: single
     - platform: numeric_state
       entity_id: sun.sun
       value_template: "{{ state.attributes.elevation }}"
