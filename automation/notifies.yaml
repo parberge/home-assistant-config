@@ -70,7 +70,8 @@
         message: |
           Tvätten är klar!
     - action: tts.speak
-      metadata: {}
+      target:
+        entity_id: tts.google_translate_sv_se
       data:
         cache: true
         media_player_entity_id: media_player.kok
@@ -143,29 +144,3 @@
       data:
         message: |
           Vill bara påminna om att tvättmaskinen är fortfarande igång.
-
-- alias: Barnvakt
-  mode: single
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.rorelsesensor_overvaningen_occupancy
-      from: "off"
-      to: "on"
-  condition:
-    - condition: state
-      entity_id: input_boolean.barnvaktslage
-      state: "on"
-  action:
-    - service: notify.telegram
-      data:
-        message: "Rörelse övervåningen. Ett barn kanske är vaken?"
-
-- alias: "Notis om barnvaktläge"
-  trigger:
-    - platform: state
-      entity_id: input_boolean.barnvaktslage
-  action:
-    - service: tts.speak
-      entity_id: media_player.kok
-      data:
-        message: "Barnvaktläge är nu {{ states.input_boolean.barnvaktslage.state }}"
