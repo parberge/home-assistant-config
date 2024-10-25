@@ -37,12 +37,9 @@
 - alias: "Slå på/av barnenvaktsläge"
   mode: single
   trigger:
-    - platform: device
-      domain: mqtt
-      device_id: 8362a880fabe0828688c53783efad326
-      type: click
-      subtype: single
-      discovery_id: 0x00158d0002901693 click_single
+    - platform: mqtt
+      topic: zigbee2mqtt/0x00158d0002901693/action
+      payload: single
   action:
     - service: input_boolean.toggle
       target:
