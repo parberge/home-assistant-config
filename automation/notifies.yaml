@@ -49,9 +49,6 @@
           Ännu en härlig dag att se fram emot.
           Vädret just nu:
           {{ states.weather.smhi_home.state }} och {{ states.weather.smhi_home.attributes.temperature }} grader.
-          {% if states.sensor.netatmo_solleftegatan_80_regnmatare_rain.state|float > 0 %}
-          Det har regnat {{ states.sensor.netatmo_solleftegatan_80_regnmatare_rain.state_with_unit }}
-          {% endif %}
 
 - alias: "Tvätten klar"
   trigger:
