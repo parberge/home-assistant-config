@@ -3,3 +3,4 @@ ansible-inventory
 custom_components
 *.retry
 google_service_account.json
+.env.fish
