@@ -1,6 +1,3 @@
-- platform: cert_expiry
-  host: peers.se
-
 - platform: template
   sensors:
     washing_machine:
