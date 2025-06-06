@@ -45,12 +45,9 @@
                   - light.nattlampa_vendela
       default: []
 
-- id: lights_master_bedroom_toggle
-  alias: "Slå på/av fönsterlampa"
+- id: lights_master_bedroom_sun
+  alias: "Fönsterlampa styrd av solen"
   trigger:
-    - platform: mqtt
-      topic: zigbee2mqtt/0x00158d00028f466f/action
-      payload: single
     - platform: numeric_state
       entity_id: sun.sun
       value_template: "{{ state.attributes.elevation }}"
@@ -61,19 +58,19 @@
       value_template: "{{ state.attributes.elevation }}"
       below: -2.0
       id: "sun_down"
+  condition:
+    - condition: state
+      entity_id: input_boolean.all_asleep
+      state: "off"
   action:
     - choose:
         - conditions:
-            - condition: state
-              entity_id: input_boolean.all_asleep
-              state: "off"
             - condition: trigger
               id: "sun_down"
             - condition: time
               before: input_datetime.night_time
           sequence:
             - service: light.turn_on
-              data: {}
               target:
                 entity_id: light.strombrytare_fonsterlampa
         - conditions:
@@ -83,7 +80,14 @@
             - service: light.turn_off
               target:
                 entity_id: light.strombrytare_fonsterlampa
-      default:
-        - service: light.toggle
-          target:
-            entity_id: light.strombrytare_fonsterlampa
+
+- id: lights_master_bedroom_button
+  alias: "Fönsterlampa styrd av knapp"
+  trigger:
+    - platform: mqtt
+      topic: zigbee2mqtt/0x00158d00028f466f/action
+      payload: single
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.strombrytare_fonsterlampa
