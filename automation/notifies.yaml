@@ -36,20 +36,6 @@
                     - Altandörren
                   {% endif %}
 
-- alias: "God morgon"
-  trigger:
-    platform: state
-    entity_id: input_boolean.all_asleep
-    to: "off"
-  action:
-    - service: notify.telegram
-      data:
-        title: "God morgon!"
-        message: |
-          Ännu en härlig dag att se fram emot.
-          Vädret just nu:
-          {{ states.weather.smhi_home.state }} och {{ states.weather.smhi_home.attributes.temperature }} grader.
-
 - alias: "Tvätten klar"
   trigger:
     platform: state
