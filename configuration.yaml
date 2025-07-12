@@ -47,14 +47,6 @@ google_assistant:
 logger:
   default: info
 
-telegram_bot:
-  - platform: polling
-    api_key: !secret telegram_api_key
-    allowed_chat_ids:
-      - !secret telegram_chat_id
-      - !secret telegram_par_chat_id
-      - !secret telegram_malena_chat_id
-
 alarm_control_panel:
   - platform: manual
     code_arm_required: false
