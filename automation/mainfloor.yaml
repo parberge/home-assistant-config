@@ -58,6 +58,11 @@
       device_id: 54c1cc3ec619dbc2ed3e18f0222124f1
       entity_id: binary_sensor.rorelsesensor_kallartrappen_occupancy
       domain: binary_sensor
+    - type: motion
+      platform: device
+      device_id: 515f6f456330904ff51280b52e74ed86
+      entity_id: binary_sensor.0xec1bbdfffe6fc854_occupancy
+      domain: binary_sensor
   condition:
     - condition: state
       entity_id: sun.sun
