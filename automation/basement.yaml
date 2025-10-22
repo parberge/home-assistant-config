@@ -97,42 +97,6 @@
                 entity_id: light.dimmer_biorummet
                 transition: 5
 
-- id: basement_cinema_climate_control
-  alias: "Höj / sänk temperaturen i biorummet"
-  mode: single
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.netatmo_solleftegatan_80_biorum_temperature
-      above: 19
-      for:
-        minutes: 30
-      id: turn_off
-    - platform: numeric_state
-      entity_id: sensor.netatmo_solleftegatan_80_biorum_temperature
-      below: 16
-      id: turn_on
-  action:
-    - alias: "Control the climate in the cinema room"
-      choose:
-        - conditions:
-            - condition: trigger
-              id: turn_on
-          sequence:
-            - service: climate.set_temperature
-              target:
-                entity_id: climate.biorummet
-              data:
-                temperature: 15
-        - conditions:
-            - condition: trigger
-              id: turn_off
-          sequence:
-            - service: climate.set_temperature
-              target:
-                entity_id: climate.biorummet
-              data:
-                temperature: 8
-
 - id: lights_basement_hall_toggle
   alias: "Tänd/släck lampor källargången"
   trigger:
