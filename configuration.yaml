@@ -59,7 +59,6 @@ media_player: !include media_players.yaml
 binary_sensor: !include binary_sensors.yaml
 sensor: !include sensors.yaml
 notify: !include notifiers.yaml
-script: !include scripts.yaml
 light: !include lights.yaml
 input_boolean: !include input_boolean.yaml
 timer: !include timers.yaml
