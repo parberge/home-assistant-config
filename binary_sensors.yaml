@@ -2,8 +2,7 @@
   sensors:
     mainfloor_movement:
       friendly_name: Rörelse bottenvåning
-      device_class: motion
+      device_class: occupancy
       value_template: >-
-        {{ is_state('binary_sensor.rorelsesensor_kallartrappen_occupancy', 'on') }}
-        or
-        {{ is_state('binary_sensor.0xec1bbdfffe6fc854_occupancy', 'on') }}
+        {{ is_state('binary_sensor.rorelsesensor_hallen_occupancy', 'on')
+            or is_state('binary_sensor.motion_hallen', 'on') }}
