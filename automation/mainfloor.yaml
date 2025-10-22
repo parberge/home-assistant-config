@@ -45,32 +45,71 @@
       target:
         entity_id: input_boolean.barnvaktslage
 
-- id: lights_hallway_on
-  alias: "Tänd lampor i hallen"
+- id: lights_hallway_toggle
+  alias: "Tänd/Släck lampor i hallen"
+  mode: restart
   trigger:
     - platform: state
       entity_id:
         - lock.ytterdorren
       from: locked
       to: unlocked
-    - type: motion
-      platform: device
-      device_id: 54c1cc3ec619dbc2ed3e18f0222124f1
-      entity_id: binary_sensor.rorelsesensor_kallartrappen_occupancy
-      domain: binary_sensor
-    - type: motion
-      platform: device
-      device_id: 515f6f456330904ff51280b52e74ed86
-      entity_id: binary_sensor.0xec1bbdfffe6fc854_occupancy
-      domain: binary_sensor
+
+    - platform: state
+      entity_id:
+        - binary_sensor.mainfloor_movement
+      to: "on"
+      id: turn_on
+
+    - platform: state
+      entity_id:
+        - binary_sensor.mainfloor_movement
+      to: "off"
+      for:
+        minutes: 2
+      id: dim
+
+    - platform: state
+      entity_id:
+        - binary_sensor.mainfloor_movement
+      to: "off"
+      for:
+        minutes: 10
+      id: turn_off
   condition:
     - condition: state
       entity_id: sun.sun
       state: below_horizon
   action:
-    - service: light.turn_on
-      target:
-        entity_id: light.dimmer_2
+    - alias: "Control hallway lights"
+      choose:
+        - conditions:
+            - condition: trigger
+              id: turn_on
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.dimmer_2
+                brightness_pct: 100
+        - conditions:
+            - condition: trigger
+              id: dim
+          sequence:
+            - service: light.turn_on
+              data:
+                entity_id:
+                  - light.dimmer_2
+                brightness_pct: 25
+                transition: 10
+        - conditions:
+            - condition: trigger
+              id: turn_off
+          sequence:
+            - service: light.turn_off
+              target:
+                entity_id:
+                  - light.dimmer_2
 
 - id: Light_mainfloor_painting
   alias: "Tänd/släck tavelljus"
