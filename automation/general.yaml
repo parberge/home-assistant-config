@@ -8,12 +8,12 @@
     - platform: numeric_state
       entity_id: sun.sun
       value_template: "{{ state.attributes.elevation }}"
-      above: -2.0
+      above: 0
       id: "sun_up"
     - platform: numeric_state
       entity_id: sun.sun
       value_template: "{{ state.attributes.elevation }}"
-      below: -2.0
+      below: -1.0
       id: "sun_down"
   action:
     - choose:
@@ -101,12 +101,11 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.rorelsesensor_kallartrappen_occupancy
-        - binary_sensor.rorelsesensor_overvaningen_occupancy
+        - binary_sensor.no_movement_in_house
       from:
-        - "on"
-      to:
         - "off"
+      to:
+        - "on"
       for:
         hours: 1
   condition:
@@ -114,8 +113,8 @@
       entity_id: zone.home
       above: "0"
     - condition: time
-      after: "00:00:00"
-      before: "07:00:00"
+      after: input_datetime.night_time
+      before: input_datetime.morning_time
   action:
     - service: input_boolean.turn_on
       target:
