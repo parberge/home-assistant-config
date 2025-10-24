@@ -4,5 +4,28 @@
       friendly_name: Rörelse bottenvåning
       device_class: occupancy
       value_template: >-
-        {{ is_state('binary_sensor.rorelsesensor_hallen_occupancy', 'on')
-            or is_state('binary_sensor.motion_hallen', 'on') }}
+        {{ is_state('binary_sensor.motion_hallen', 'on') 
+        or is_state('binary_sensor.rorelsesensor_kallartrappen_occupancy', 'on') }}
+
+    basement_movement:
+      friendly_name: Rörelse källaren
+      device_class: occupancy
+      value_template: >-
+        {{ is_state('binary_sensor.0x842e14fffe435f26_occupancy', 'on') 
+        or is_state('binary_sensor.badrum_kallaren_occupancy', 'on') 
+        or is_state('binary_sensor.biorummet_occupancy', 'on')
+        or is_state('camera.basement', 'recording') }}
+
+    topfloor_movement:
+      friendly_name: Rörelse övervåning
+      device_class: occupancy
+      value_template: >-
+        {{ is_state('binary_sensor.rorelsesensor_overvaningen_occupancy', 'on') }}
+
+    no_movement_in_house:
+      friendly_name: Ingen rörelse i huset
+      device_class: occupancy
+      value_template: >-
+        {{ is_state('binary_sensor.mainfloor_movement', 'off')
+        and is_state('binary_sensor.basement_movement', 'off')
+        and is_state('binary_sensor.topfloor_movement', 'off') }}
