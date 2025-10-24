@@ -74,12 +74,8 @@
         - binary_sensor.mainfloor_movement
       to: "off"
       for:
-        minutes: 10
+        minutes: 5
       id: turn_off
-  condition:
-    - condition: state
-      entity_id: sun.sun
-      state: below_horizon
   action:
     - alias: "Control hallway lights"
       choose:
