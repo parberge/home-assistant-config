@@ -80,7 +80,7 @@
       from: "off"
       to: "on"
   action:
-    - service: notify.mobile_app_sm_g981b
+    - service: notify.mobile_app_pixel_6_pro
       data:
         message: |
           Ny hass version: {{ states.sensor.home_assistant_website.state }}
