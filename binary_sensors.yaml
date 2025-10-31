@@ -28,4 +28,5 @@
       value_template: >-
         {{ is_state('binary_sensor.mainfloor_movement', 'off')
         and is_state('binary_sensor.basement_movement', 'off')
-        and is_state('binary_sensor.topfloor_movement', 'off') }}
+        and is_state('binary_sensor.topfloor_movement', 'off')
+        and is_state('media_player.tv_kallaren', 'off') }}
