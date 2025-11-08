@@ -76,7 +76,7 @@
   action:
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.ha_alarm
-    - service: notify.telegram
+    - service: telegram_bot.send_message
       data:
         target: !secret telegram_par_chat_id
         title: "Deaktiverar larmet"
@@ -139,7 +139,7 @@
       entity_id: alarm_control_panel.ha_alarm
       to: "triggered"
   action:
-    - service: notify.telegram
+    - service: telegram_bot.send_message
       data:
         target: !secret telegram_par_chat_id
         title: "ALARM!"

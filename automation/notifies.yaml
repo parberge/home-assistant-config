@@ -24,7 +24,7 @@
                   attribute: contact
                   state: open
           sequence:
-            - service: notify.telegram
+            - service: telegram_bot.send_message
               data:
                 title: "Dörr öppen"
                 message: |
@@ -48,7 +48,7 @@
         - zone.home
       above: "0"
   action:
-    - service: notify.telegram
+    - service: telegram_bot.send_message
       data:
         message: |
           Tvätten är klar!
@@ -69,7 +69,7 @@
     for:
       hours: 1
   action:
-    - service: notify.telegram
+    - service: telegram_bot.send_message
       data:
         message: "Tvätten är fortfarande klar. Om den är urplockad har ni glömt stänga av maskinen"
 
@@ -96,7 +96,7 @@
     condition: time
     after: "16:00"
   action:
-    - service: notify.telegram
+    - service: telegram_bot.send_message
       data:
         message: |
           Tänkte bara säga att Pär lämnade jobbet precis. Förmodligen är han på väg hem!
@@ -123,7 +123,7 @@
           - sensor.washing_machine
         state: "off"
   action:
-    - service: notify.telegram
+    - service: telegram_bot.send_message
       data:
         message: |
           Vill bara påminna om att tvättmaskinen är fortfarande igång.
@@ -139,7 +139,7 @@
       entity_id: input_boolean.barnvaktslage
       state: "on"
   action:
-    - service: notify.telegram
+    - service: telegram_bot.send_message
       data:
         message: "Barn är vaken!"
         target: !secret telegram_par_chat_id

@@ -64,7 +64,7 @@
             - condition: trigger
               id: notify
           sequence:
-            - service: notify.telegram
+            - service: telegram_bot.send_message
               data:
                 message: |
                   Semesterläge aktiverat!
