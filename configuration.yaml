@@ -55,10 +55,8 @@ alarm_control_panel:
 prometheus:
 
 automation: !include_dir_merge_list automation/
-media_player: !include media_players.yaml
 binary_sensor: !include binary_sensors.yaml
 sensor: !include sensors.yaml
-notify: !include notifiers.yaml
 light: !include lights.yaml
 input_boolean: !include input_boolean.yaml
 timer: !include timers.yaml
