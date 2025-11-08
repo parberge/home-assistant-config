@@ -50,7 +50,7 @@
       template:
         src: "secrets.yaml.j2"
         dest: "{{ home_assistant_cfg_dir }}/secrets.yaml"
-      no_log: True
+      no_log: "{{ hass_no_secrets | default(true)}}"
       tags:
         - hass_deploy_cfg
         - hass_deploy_secrets
