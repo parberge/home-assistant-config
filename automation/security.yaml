@@ -168,3 +168,19 @@
       entity_id: lock.ytterdorren
       data:
         code: !secret verisure_door_pin
+
+- id: security_flooding_alert
+  alias: "Skicka notis vid vattenlarm"
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.0x54ef441000b43497_water_leak
+        - binary_sensor.0x54ef441000b46426_water_leak
+      from: "off"
+      to: "on"
+  action:
+    - service: telegram_bot.send_message
+      data:
+        target: !secret telegram_par_chat_id
+        title: "Vattenlarm!"
+        message: "Vattenlarm utlöst klockan {{ now().strftime('%H:%M') }} av `{{ state_attr(trigger.entity_id, 'friendly_name') }}`"
