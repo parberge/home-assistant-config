@@ -46,7 +46,7 @@ google_assistant:
     - cover
 
 logger:
-  default: info
+  default: warning
 
 alarm_control_panel:
   - platform: manual
