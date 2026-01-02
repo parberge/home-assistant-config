@@ -1,32 +1,40 @@
-- platform: template
-  sensors:
-    mainfloor_movement:
-      friendly_name: Rörelse bottenvåning
+- binary_sensor:
+    - name: Rörelse bottenvåning
+      default_entity_id: binary_sensor.mainfloor_movement
       device_class: occupancy
-      value_template: >-
+      state: >-
         {{ is_state('binary_sensor.motion_hallen', 'on') 
         or is_state('binary_sensor.rorelsesensor_kallartrappen_occupancy', 'on') }}
-
-    basement_movement:
-      friendly_name: Rörelse källaren
+    - name: Rörelse källaren
+      default_entity_id: binary_sensor.basement_movement
       device_class: occupancy
-      value_template: >-
+      state: >-
         {{ is_state('binary_sensor.0x842e14fffe435f26_occupancy', 'on') 
         or is_state('binary_sensor.badrum_kallaren_occupancy', 'on') 
         or is_state('binary_sensor.biorummet_occupancy', 'on')
         or is_state('camera.basement', 'recording') }}
-
-    topfloor_movement:
-      friendly_name: Rörelse övervåning
+    - name: Rörelse övervåning
+      default_entity_id: binary_sensor.topfloor_movement
       device_class: occupancy
-      value_template: >-
+      state: >-
         {{ is_state('binary_sensor.rorelsesensor_overvaningen_occupancy', 'on') }}
-
-    no_movement_in_house:
-      friendly_name: Ingen rörelse i huset
+    - name: Ingen rörelse i huset
+      default_entity_id: binary_sensor.no_movement_in_house
       device_class: occupancy
-      value_template: >-
+      state: >-
         {{ is_state('binary_sensor.mainfloor_movement', 'off')
         and is_state('binary_sensor.basement_movement', 'off')
         and is_state('binary_sensor.topfloor_movement', 'off')
         and is_state('media_player.tv_kallaren', 'off') }}
+
+- sensor:
+    - name: "Tvättmaskinen"
+      default_entity_id: sensor.washing_machine
+      state: >-
+        {% if states('sensor.strombrytare_tvattmaskin_electric_consumption_w') | float(0.0) > 5 %}
+          on
+        {% elif states('sensor.strombrytare_tvattmaskin_electric_consumption_w') | float(0.0) > 0.0 %}
+          standby
+        {% else %}
+          off
+        {% endif %}
