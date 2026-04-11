@@ -80,7 +80,7 @@
       from: "off"
       to: "on"
   action:
-    - service: notify.mobile_app_pixel_6_pro
+    - service: telegram_bot.send_message
       data:
         message: |
           Ny hass version: {{ states.sensor.home_assistant_website.state }}
@@ -127,26 +127,3 @@
       data:
         message: |
           Vill bara påminna om att tvättmaskinen är fortfarande igång.
-
-- id: notify_kids_awake
-  alias: "Barnvakts notis"
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.rorelsesensor_overvaningen_occupancy
-      to: "on"
-  condition:
-    - condition: state
-      entity_id: input_boolean.barnvaktslage
-      state: "on"
-  action:
-    - service: telegram_bot.send_message
-      data:
-        message: "Barn är vaken!"
-        target: !secret telegram_par_chat_id
-    - service: tts.speak
-      target:
-        entity_id: tts.google_translate_sv_se
-      data:
-        cache: true
-        media_player_entity_id: media_player.biorummet
-        message: "Barn är vaken!"
