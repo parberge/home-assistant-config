@@ -78,7 +78,7 @@
       entity_id: alarm_control_panel.ha_alarm
     - service: telegram_bot.send_message
       data:
-        entity_id: !secret telegram_par_chat_id
+        chat_id: !secret telegram_par_chat_id
         title: "Deaktiverar larmet"
         message: "Deaktiverat klockan {{ now().strftime('%H:%M') }} av `{{ trigger.entity_id }}`"
 
@@ -141,7 +141,7 @@
   action:
     - service: telegram_bot.send_message
       data:
-        entity_id: !secret telegram_par_chat_id
+        chat_id: !secret telegram_par_chat_id
         title: "ALARM!"
         message: "Larmet utlöst! Klockan {{ now().strftime('%H:%M') }}. Triggat av `{{ states('input_text.triggered_alarm_entities') }}`"
     - service: input_text.set_value
