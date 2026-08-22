@@ -14,15 +14,6 @@ frontend:
 config:
 system_health:
 
-http:
-  use_x_forwarded_for: true
-  trusted_proxies:
-    - 127.0.0.1
-    - ::1
-    - 192.168.0.0/16
-    - 172.17.0.0/16
-    - 13.61.16.71/32
-
 conversation:
 history:
 logbook:
