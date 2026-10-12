@@ -6,7 +6,7 @@
       from: "off"
       to: "on"
       for:
-        hours: 10
+        hours: 2
     - platform: state
       entity_id: input_boolean.all_asleep
       to: "on"
